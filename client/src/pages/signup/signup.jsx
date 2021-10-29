@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import "../signup/signup.css";
-
+import axios from 'axios';
 const signUpSchema = z
   .object({
     email: z.string().email("Please enter a valid email"),
@@ -41,6 +41,15 @@ function Signup() {
   });
 
   function onSubmit(data) {
+
+    const newperson = {
+      email: data.email,
+      password: data.password
+    };
+ 
+    axios
+      .post("http://localhost:5000/record/add", newperson)
+      .then((res) => console.log(res.data));
     console.log(data);
   }
 
