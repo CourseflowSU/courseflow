@@ -34,3 +34,7 @@
 #checkbox {
   margin-right: 3px;
 }
+
+.errorMessage{
+  color:red;
+}

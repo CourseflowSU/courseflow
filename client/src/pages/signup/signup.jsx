@@ -1,15 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from 'axios';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import "../signup/signup.css";
-import axios from 'axios';
 const signUpSchema = z
   .object({
+    username: z.string().nonempty(),
+    university: z.string().nonempty(),
     email: z.string().email("Please enter a valid email"),
 
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 character" })
+      .min(4, { message: "Password must be at least 8 character" })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*';."_)(+,/:>\]<=?@\\^`|[}{~-])/,
         {
@@ -40,17 +43,21 @@ function Signup() {
     mode: "all",
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   function onSubmit(data) {
 
     const newperson = {
+      username: data.username,
+      university: data.university,
       email: data.email,
       password: data.password
     };
  
     axios
-      .post("http://localhost:5000/record/add", newperson)
-      .then((res) => console.log(res.data));
-    console.log(data);
+      .post("http://localhost:5000/users/add", newperson)
+      .then((res) => {setErrorMessage(res.data.message)})
+      .catch(err => console.log(err));
   }
 
   return (
@@ -65,6 +72,27 @@ function Signup() {
                 </h2>
               </div>
               <form onSubmit={handleSubmit(onSubmit)} method={'post'}>
+                <p className="errorMessage">{errorMessage}</p>
+                <div className="mt-4 d-flex flex-column">
+                  <input
+                    {...register("username")}
+                    className="btn-border input-style form-control"
+                    placeholder="Username"
+                    type="text"
+                  ></input>
+                <small className="align-self-start">{errors.username?.message}</small>
+
+                </div>
+                <div className="mt-4 d-flex flex-column">
+                  <input
+                    {...register("university")}
+                    className="btn-border input-style form-control"
+                    placeholder="University"
+                    type="text"
+                  ></input>
+                <small className="align-self-start">{errors.university?.message}</small>
+
+                </div>
                 <div className="mt-4 d-flex flex-column">
                   <input
                     {...register("email")}
