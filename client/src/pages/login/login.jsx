@@ -36,7 +36,7 @@ function Login() {
     };
     console.log(user);
     axios
-      .post(`http://localhost:5000/users/${user.email}`, {data: {user: user}})
+      .post(`http://localhost:5000/users/login/${user.email}`, {data: {user: user}})
       .then((res) => { 
         console.log(res); 
         if(res.status === 200 && res.data.message){

@@ -58,7 +58,7 @@ function Signup() {
     };
   
     axios
-      .post("http://localhost:5000/users/add", newUser)
+      .post("http://localhost:5000/users/signup/add", newUser)
       .then((res) => { 
         console.log(res); 
         if(res.data.message){

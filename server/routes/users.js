@@ -38,7 +38,7 @@ userRoutes.route("/users").get(function (req, res) {
 // });
 
 // This section will help you get a single users by email
-userRoutes.route("/users/:email").post(function (req, res) {
+userRoutes.route("/users/login/:email").post(function (req, res) {
   let db_connect = dbo.getDb("courseflow");
   let myquery = {"email": req.params.email};
   let currUser = req.body.data.user;
@@ -62,7 +62,7 @@ userRoutes.route("/users/:email").post(function (req, res) {
 });
 
 // This section will help you create a new users.
-userRoutes.route("/users/add").post(function (req, response) {
+userRoutes.route("/users/signup/add").post(function (req, response) {
 
   let db_connect = dbo.getDb("courseflow");
   
