@@ -10,6 +10,7 @@ const dbo = require("../db/conn");
 
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
+const { request } = require("express");
 
 
 // This section will help you get a list of all the users.
@@ -25,9 +26,21 @@ userRoutes.route("/users").get(function (req, res) {
 });
 
 // This section will help you get a single users by id
-userRoutes.route("/users/:id").get(function (req, res) {
+// userRoutes.route("/users/:id").get(function (req, res) {
+//   let db_connect = dbo.getDb("courseflow");
+//   let myquery = { _id: ObjectId(req.params.id) };
+//   db_connect
+//     .collection("users")
+//     .findOne(myquery, function (err, result) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+// });
+
+// This section will help you get a single users by email
+userRoutes.route("/users/:email").get(function (req, res) {
   let db_connect = dbo.getDb("courseflow");
-  let myquery = { _id: ObjectId(req.params.id) };
+  let myquery = {"email": req.params.email};
   db_connect
     .collection("users")
     .findOne(myquery, function (err, result) {

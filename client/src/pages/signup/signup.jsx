@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import "../signup/signup.css";
 
@@ -169,7 +170,7 @@ function Signup() {
 
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
-                   <a href="#"> Already have an account? </a>
+                   <Link to="/login"> <p> Already have an account? </p> </Link>
                   </div>
                 </div>
               </form>
