@@ -26,7 +26,7 @@ const signUpSchema = z
     privacyAgreement: z
       .boolean()
       .refine((val) => val, {
-        message: 'You have to accept privay policy'
+        message: 'You have to accept privacy policy'
       })
   })
   .refine((data) => data.password === data.passwordConfirm, {
