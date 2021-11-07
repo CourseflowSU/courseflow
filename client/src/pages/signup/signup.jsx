@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import "../signup/signup.css";
 
@@ -71,8 +72,10 @@ function Signup() {
           setErrorMessage(`Error! Please try again.`)
         }
       })
-      .catch(err => console.log(err));
-   
+      .catch(err => {
+        console.log("Error:",err);
+        setErrorMessage(`Error! Please try again.`)
+      });
   
   },[reset]);
 
@@ -82,7 +85,7 @@ function Signup() {
         <div className="col-4 justify-content-start">
           <div className="card p-1 mb-0">
             <div className="card-body">
-              <div className="text-left">
+              <div className="text-center">
                 <h2 className="mt-2">
                   <b>SIGN UP</b>
                 </h2>
@@ -169,7 +172,7 @@ function Signup() {
 
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
-                   <a href="#"> Already have an account? </a>
+                   <Link to="/login"> <p> Already have an account? </p> </Link>
                   </div>
                 </div>
               </form>
