@@ -1,11 +1,10 @@
-import '../login/login.css';
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import '../login/login.css';
 
 const loginSchema = z
   .object({
@@ -26,7 +25,8 @@ function Login() {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const history = useNavigate();
+  const navigate = useNavigate();
+
 
   const onSubmit = useCallback((data) => {
    
@@ -39,29 +39,33 @@ function Login() {
       .get(`http://localhost:5000/users/${user.email}`, user)
       .then((res) => { 
         console.log(res); 
-        if(res.data.message){
+        if(res.status === 200 && res.data.message){
           setErrorMessage(res.data.message)
         }
         else if(res.status === 200){
           setErrorMessage(`You logged in succesfully`);
-          history.push("/");
+          console.log("login:", res.data);
+          navigate(`/home`, {state: res.data})
         }else{
           setErrorMessage(`Error! Please try again.`)
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log("Error:",err);
+        setErrorMessage(`Error! Please try again.`)
+      });
    
   
-  },[history]);
+  },[navigate]);
   return (
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">
         <div className="col-4 justify-content-start">
           <div className="card p-1 mb-0">
             <div className="card-body">
-              <div className="text-left">
+              <div className="text-center">
                 <h2 className="mt-2 mb-3">
-                  <b>SIGN IN</b>
+                  <b>LOGIN</b>
                 </h2>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>

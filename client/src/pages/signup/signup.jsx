@@ -72,8 +72,10 @@ function Signup() {
           setErrorMessage(`Error! Please try again.`)
         }
       })
-      .catch(err => console.log(err));
-   
+      .catch(err => {
+        console.log("Error:",err);
+        setErrorMessage(`Error! Please try again.`)
+      });
   
   },[reset]);
 
@@ -83,7 +85,7 @@ function Signup() {
         <div className="col-4 justify-content-start">
           <div className="card p-1 mb-0">
             <div className="card-body">
-              <div className="text-left">
+              <div className="text-center">
                 <h2 className="mt-2">
                   <b>SIGN UP</b>
                 </h2>

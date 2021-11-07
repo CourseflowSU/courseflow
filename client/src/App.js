@@ -1,31 +1,42 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import './App.css';
+import Homepage from './pages/homepage/homepage';
 import Login from './pages/login/login';
-import {Route} from "react-router-dom";
-import {Routes} from "react-router-dom";
 import Signup from './pages/signup/signup';
-import Homepage from "./pages/homepage/homepage";
 
 function App() {
   return (
-    <div className="App">
+   
       <React.Suspense fallback={<div>Loading...</div>} >
         <Routes>
-          <Route exact
-                path="/"
-                component={Homepage}
+          <Route 
+              path="/"
+              element={<Login />}
           />
           <Route 
-                path="login"
-                component={Login}
+              path="/login"
+              element={<Login />}
+        />
+          <Route 
+              path="/signup"
+              element={<Signup />}
           />
-          <Route exact
-                path="/signup"
-                component={Signup}
+          <Route 
+              exact
+              path="/home"
+              element={<Homepage />}
           />
+          <Route
+           path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>Error! There's nothing here!</p>
+              </main>
+           }
+    />
         </Routes>
       </React.Suspense>
-    </div>
   );
 
 }
