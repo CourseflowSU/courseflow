@@ -36,5 +36,9 @@
 }
 
 .errorMessage{
-  color:red;
+  color: rgba(39, 39, 194, 0.801);
+}
+
+.error-text{
+  color: red;
 }

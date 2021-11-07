@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from 'axios';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import "../signup/signup.css";
+
 const signUpSchema = z
   .object({
     username: z.string().nonempty(),
@@ -12,7 +13,7 @@ const signUpSchema = z
 
     password: z
       .string()
-      .min(4, { message: "Password must be at least 8 character" })
+      .min(8, { message: "Password must be at least 8 character" })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*';."_)(+,/:>\]<=?@\\^`|[}{~-])/,
         {
@@ -37,6 +38,7 @@ function Signup() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(signUpSchema),
@@ -45,20 +47,34 @@ function Signup() {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  function onSubmit(data) {
-
-    const newperson = {
+  const onSubmit = useCallback((data) => {
+   
+    const newUser = {
       username: data.username,
       university: data.university,
       email: data.email,
       password: data.password
     };
- 
+  
     axios
-      .post("http://localhost:5000/users/add", newperson)
-      .then((res) => {setErrorMessage(res.data.message)})
+      .post("http://localhost:5000/users/add", newUser)
+      .then((res) => { 
+        console.log(res); 
+        if(res.data.message){
+          setErrorMessage(res.data.message)
+        }
+        else if(res.status === 200){
+          setErrorMessage(`You created your account successfully,
+            please login to use`)
+          reset();
+        }else{
+          setErrorMessage(`Error! Please try again.`)
+        }
+      })
       .catch(err => console.log(err));
-  }
+   
+  
+  },[reset]);
 
   return (
     <div className="imge">
@@ -71,7 +87,7 @@ function Signup() {
                   <b>SIGN UP</b>
                 </h2>
               </div>
-              <form onSubmit={handleSubmit(onSubmit)} method={'post'}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <p className="errorMessage">{errorMessage}</p>
                 <div className="mt-4 d-flex flex-column">
                   <input
@@ -80,7 +96,7 @@ function Signup() {
                     placeholder="Username"
                     type="text"
                   ></input>
-                <small className="align-self-start">{errors.username?.message}</small>
+                <small className="align-self-start error-text">{errors.username?.message}</small>
 
                 </div>
                 <div className="mt-4 d-flex flex-column">
@@ -90,7 +106,7 @@ function Signup() {
                     placeholder="University"
                     type="text"
                   ></input>
-                <small className="align-self-start">{errors.university?.message}</small>
+                <small className="align-self-start error-text">{errors.university?.message}</small>
 
                 </div>
                 <div className="mt-4 d-flex flex-column">
@@ -100,7 +116,7 @@ function Signup() {
                     placeholder="E-mail"
                     type="email"
                   ></input>
-                <small className="align-self-start">{errors.email?.message}</small>
+                <small className="align-self-start error-text">{errors.email?.message}</small>
 
                 </div>
                 <div className="mt-3 d-flex flex-column">
@@ -111,7 +127,7 @@ function Signup() {
                     type="password"
 
                   ></input>
-                   <small className="align-self-start">{errors.password?.message}</small>
+                   <small className="align-self-start error-text">{errors.password?.message}</small>
                 </div>
 
                 <div className="mt-3 d-flex flex-column">
@@ -122,7 +138,7 @@ function Signup() {
                     type="password"
 
                   ></input>
-                  <small className="align-self-start">{errors.passwordConfirm?.message}</small>
+                  <small className="align-self-start error-text">{errors.passwordConfirm?.message}</small>
                 </div>
 
                 
@@ -138,13 +154,22 @@ function Signup() {
                   </small>
                   
                 </div>
-                <small className="align-self-start">{errors.privacyAgreement?.message}</small>
+                <small className="align-self-start error-text">{errors.privacyAgreement?.message}</small>
 
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
-                    <button className="btn btn-block btn-warning">
+                    <button 
+                      className="btn btn-block col-6 btn-warning"
+                      type='submit'
+                    >
                       SIGN UP
                     </button>
+                  </div>
+                </div>
+
+                <div className="mt-3 row text-center justify-content-center">
+                  <div className="col-12">
+                   <a href="#"> Already have an account? </a>
                   </div>
                 </div>
               </form>
