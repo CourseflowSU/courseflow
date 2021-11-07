@@ -45,12 +45,18 @@ userRoutes.route("/users/:email").post(function (req, res) {
   db_connect
     .collection("users")
     .findOne(myquery, async (err, result) => {
-      if (err) throw err;
-      const validPassword = await bcrypt.compare(currUser.password, result.password);
-      if (validPassword) {
-        res.status(200).json(result);
-      } else {
-        res.status(200).json({ message: "Invalid Password" });
+      if (err) console.log(err.message);
+      
+      if (result) {
+        const validPassword = await bcrypt.compare(currUser.password, result.password);
+        if (validPassword) {
+          res.status(200).json(result);
+        } else {
+          res.status(200).json({ message: "Invalid Password" });
+        }
+      }
+      else {
+        res.status(200).json({ message: "Invalid E-mail" });
       }
     });
 });
