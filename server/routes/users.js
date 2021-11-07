@@ -38,14 +38,20 @@ userRoutes.route("/users").get(function (req, res) {
 // });
 
 // This section will help you get a single users by email
-userRoutes.route("/users/:email").get(function (req, res) {
+userRoutes.route("/users/:email").post(function (req, res) {
   let db_connect = dbo.getDb("courseflow");
   let myquery = {"email": req.params.email};
+  let currUser = req.body.data.user;
   db_connect
     .collection("users")
-    .findOne(myquery, function (err, result) {
+    .findOne(myquery, async (err, result) => {
       if (err) throw err;
-      res.json(result);
+      const validPassword = await bcrypt.compare(currUser.password, result.password);
+      if (validPassword) {
+        res.status(200).json(result);
+      } else {
+        res.status(200).json({ message: "Invalid Password" });
+      }
     });
 });
 
@@ -53,7 +59,7 @@ userRoutes.route("/users/:email").get(function (req, res) {
 userRoutes.route("/users/add").post(function (req, response) {
 
   let db_connect = dbo.getDb("courseflow");
-
+  
   let user = {
     username: req.body.username,
     university: req.body.university,

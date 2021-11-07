@@ -36,7 +36,7 @@ function Login() {
     };
     console.log(user);
     axios
-      .get(`http://localhost:5000/users/${user.email}`, user)
+      .post(`http://localhost:5000/users/${user.email}`, {data: {user: user}})
       .then((res) => { 
         console.log(res); 
         if(res.status === 200 && res.data.message){
@@ -45,7 +45,7 @@ function Login() {
         else if(res.status === 200){
           setErrorMessage(`You logged in succesfully`);
           console.log("login:", res.data);
-          navigate(`/home`, {state: res.data})
+          navigate(`/home`, {state: {user : res.data}})
         }else{
           setErrorMessage(`Error! Please try again.`)
         }
