@@ -34,3 +34,11 @@
 #checkbox {
   margin-right: 3px;
 }
+
+.errorMessage{
+  color: rgba(39, 39, 194, 0.801);
+}
+
+.error-text{
+  color: red;
+}
