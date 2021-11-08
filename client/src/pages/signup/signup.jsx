@@ -92,7 +92,7 @@ function Signup() {
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <p className="errorMessage">{errorMessage}</p>
-                <div className="mt-4 d-flex flex-column">
+                <div className="mt-3 d-flex flex-column">
                   <input
                     {...register("username")}
                     className="btn-border input-style form-control"
@@ -102,7 +102,7 @@ function Signup() {
                 <small className="align-self-start error-text">{errors.username?.message}</small>
 
                 </div>
-                <div className="mt-4 d-flex flex-column">
+                <div className="mt-3 d-flex flex-column">
                   <input
                     {...register("university")}
                     className="btn-border input-style form-control"
@@ -112,7 +112,7 @@ function Signup() {
                 <small className="align-self-start error-text">{errors.university?.message}</small>
 
                 </div>
-                <div className="mt-4 d-flex flex-column">
+                <div className="mt-3 d-flex flex-column">
                   <input
                     {...register("email")}
                     className="btn-border input-style form-control"
@@ -159,7 +159,7 @@ function Signup() {
                 </div>
                 <small className="align-self-start error-text">{errors.privacyAgreement?.message}</small>
 
-                <div className="mt-3 row text-center justify-content-center">
+                <div className="mt-5 row text-center justify-content-center">
                   <div className="col-12">
                     <button 
                       className="btn btn-block col-6 btn-warning"
@@ -170,7 +170,7 @@ function Signup() {
                   </div>
                 </div>
 
-                <div className="mt-3 row text-center justify-content-center">
+                <div className="mt-2 row text-center justify-content-center">
                   <div className="col-12">
                    <Link to="/login"> <p> Already have an account? </p> </Link>
                   </div>

@@ -65,7 +65,7 @@ function Login() {
             <div className="card-body">
               <div className="text-center">
                 <h2 className="mt-2 mb-3">
-                  <b>LOGIN</b>
+                  <b>SIGN IN</b>
                 </h2>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,8 +95,8 @@ function Login() {
                     </button>
                 </div>
                 <div className="mt-3 row text-center justify-content-center">
-                  <div className="row col-12">
-                    <span>Don't have an account? <Link to="/signup"><p>Create one!</p></Link></span>  
+                  <div className="col-12">
+                    <span className="link-line-gap d-flex justify-content-center">Don't have an account?<Link to="/signup"><p>   Create one!</p></Link></span>  
                   </div>
                 </div>
               </form>

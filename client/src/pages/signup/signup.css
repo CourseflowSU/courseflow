@@ -17,7 +17,7 @@
 }
 
 .imge {
-  background-image: url("../../assets/images.jpeg");
+  background-image: url("../../assets/images.webp");
 
   display: block;
   width: 100vw;
@@ -35,10 +35,10 @@
   margin-right: 3px;
 }
 
-.errorMessage{
+.errorMessage {
   color: rgba(39, 39, 194, 0.801);
 }
 
-.error-text{
+.error-text {
   color: red;
 }

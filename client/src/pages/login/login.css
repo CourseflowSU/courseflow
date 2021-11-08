@@ -2,7 +2,6 @@
   border: black 1px solid !important;
 }
 
-
 .fullscreen {
   position: relative;
   top: 0;
@@ -14,7 +13,7 @@
 }
 
 .imge {
-  background-image: url("../../assets/images.jpeg");
+  background-image: url("../../assets/images.webp");
 
   display: block;
   width: 100vw;
@@ -34,4 +33,9 @@
 
 .error-text {
   color: red;
+}
+
+.link-line-gap {
+  gap: 5px;
+  flex-wrap: wrap;
 }
