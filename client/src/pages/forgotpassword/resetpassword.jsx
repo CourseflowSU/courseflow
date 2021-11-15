@@ -90,6 +90,7 @@ function ResetPassword() {
       }
     } catch (error) {
       console.log(error.response.data);
+      setError(true);
     }
   };
 
