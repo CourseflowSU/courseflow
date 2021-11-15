@@ -1,7 +1,9 @@
 export const USER_LOGIN = "APP/USER/USER_LOGIN";
 
+const currUser = JSON.parse(localStorage.getItem("currentUser"));
+
 export const initialState = {
-  user: null,
+  user: currUser,
 };
 
 export const userLogin = (user) => ({
@@ -10,11 +12,11 @@ export const userLogin = (user) => ({
 });
 
 export const userReducer = (state = initialState, action) => {
-  if(action.tupe === USER_LOGIN){
+  if(action.type === USER_LOGIN){
     return {
       ...state,
-      user: action.user
-    }
+      user: action.user,
+    };
   }
-}
+};
 

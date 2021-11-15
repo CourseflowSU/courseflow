@@ -1,13 +1,10 @@
-import { useLocation } from "react-router-dom";
 import { useStore } from '../../store/store';
 
 
 function Homepage(){
-    const location = useLocation();
-    // const { currentUser } = state;
-   console.log("useLocation:", location.state.user);
-    const currentUser = location.state.user;
-    // const {user } = params.user;
+
+    const [state,] = useStore();
+    const {user:currentUser} = state;
 
     return (
         <div>
