@@ -4,14 +4,13 @@ import { useCallback, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
+
 import '../login/login.css';
 
 const loginSchema = z
   .object({
-    
     email: z.string().email("Please enter a valid email"),
-    password: z.string().nonempty("Password required."),
-      
+    password: z.string().nonempty("Password required."),  
   });
   
 function Login() {
@@ -93,6 +92,11 @@ function Login() {
                     <button type='submit' className="col-6 btn btn-block btn-warning">
                       SIGN IN
                     </button>
+                </div>
+                <div className="mt-3 row text-center justify-content-center">
+                  <div className="col-12">
+                    <span className="link-line-gap d-flex justify-content-center"><Link to="/forgotpassword"><p> Forgot your password?</p></Link></span>  
+                  </div>
                 </div>
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
