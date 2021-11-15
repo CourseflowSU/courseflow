@@ -5,11 +5,15 @@ import { BrowserRouter } from "react-router-dom";
 import App from './App';
 import './index.css';
 import { StoreProvider } from "./store/store";
+import { initialState, userReducer } from "./store/userReducer";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StoreProvider>
+      <StoreProvider 
+        initialState={initialState}
+        reducer={userReducer}
+      >
       <App />
       </StoreProvider>
     </BrowserRouter>

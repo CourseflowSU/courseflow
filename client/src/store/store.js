@@ -5,10 +5,10 @@ Store.displayName = 'Store';
 
 export const useStore = () => React.useContext(Store);
 
-export const StoreProvider = ({children}) => {
-  const val = "I am from store";
+export const StoreProvider = ({children, initialState, reducer}) => {
+  const [globalState, dispatch] = React.useReducer(reducer, initialState);
 
   return(
-    <Store.Provider value={{val}}>{children}</Store.Provider>
+    <Store.Provider value={[globalState, dispatch]}>{children}</Store.Provider>
   );
 };
