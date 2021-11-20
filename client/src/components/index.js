@@ -10,6 +10,5 @@ export {
   // eslint-disable-next-line indent
   LinkButtons,
   SubmitButtons,
-  HeaderBar,
   ButtonStyles,
 };
