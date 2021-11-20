@@ -1,0 +1,31 @@
+.error-page {
+  background-image: url("../../assets/library_md.jpg");
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  color: white;
+}
+
+.error-template {
+  justify-self: center;
+  text-align: center;
+  
+  h1{
+    margin-bottom: 20px;
+  }
+}
+
+.error-actions {
+  margin-top:15px;
+  margin-bottom:15px;
+}
+.error-actions .btn {
+   margin-right:10px;
+ }
