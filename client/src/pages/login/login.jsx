@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from 'axios';
-import { useCallback, useState } from 'react';
+import axios from "axios";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -10,12 +10,12 @@ import '../login/login.css';
 
 const loginSchema = z
   .object({
-    
+
     email: z.string().email("Please enter a valid email"),
     password: z.string().nonempty("Password required."),
-      
+
   });
-  
+
 function Login() {
 
   const {
@@ -35,10 +35,9 @@ function Login() {
 
 
   const onSubmit = useCallback((data) => {
-   
     const user = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
     console.log(user);
     axios
@@ -59,9 +58,9 @@ function Login() {
           setErrorMessage(`Error! Please try again.`)
         }
       })
-      .catch(err => {
-        console.log("Error:",err);
-        setErrorMessage(`Error! Please try again.`)
+      .catch((err) => {
+        console.log("Error:", err);
+        setErrorMessage("Error! Please try again.");
       });
    
   
@@ -78,15 +77,18 @@ function Login() {
                 </h2>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>
-              <p className="errorMessage">{errorMessage}</p>
+                <p className="errorMessage">{errorMessage}</p>
                 <div className="mt-4 d-flex flex-column">
                   <input
                     {...register("email")}
                     className="btn-border input-style form-control"
                     placeholder="E-mail"
                     type="email"
-                  ></input>
-                  <small className="align-self-start error-text">{errors.email?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.email?.message}
+                  </small>
                 </div>
                 <div className="mt-3 d-flex flex-column">
                   <input
@@ -94,18 +96,29 @@ function Login() {
                     className="btn-border input-style form-control"
                     placeholder="Password"
                     type="password"
-                  ></input>
-                  <small className="align-self-start error-text">{errors.password?.message}</small>  
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.password?.message}
+                  </small>
                 </div>
-                
+
                 <div className="mt-5 row text-center justify-content-center">
-                    <button type='submit' className="col-6 btn btn-block btn-warning">
+                  <button
+                    type='submit'
+                    className="col-6 btn btn-block btn-warning"
+                  >
                       SIGN IN
-                    </button>
+                  </button>
                 </div>
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
-                    <span className="link-line-gap d-flex justify-content-center">Don't have an account?<Link to="/signup"><p>   Create one!</p></Link></span>  
+                    <span
+                      className="link-line-gap d-flex justify-content-center"
+                    >
+                      Don&apos;t have an account?
+                      <Link to="/signup"><p>   Create one!</p></Link>
+                    </span>
                   </div>
                 </div>
               </form>
@@ -115,6 +128,6 @@ function Login() {
       </div>
     </div>
   );
-  }
+}
 
-  export default Login;
+export default Login;

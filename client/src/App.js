@@ -1,11 +1,10 @@
 import React from "react";
 import { Navigate } from 'react-router';
 import { Route, Routes } from "react-router-dom";
-import './App.css';
-import Homepage from './pages/homepage/homepage';
-import Login from './pages/login/login';
-import Signup from './pages/signup/signup';
-import { useStore } from "./store/store";
+import "./App.css";
+import Homepage from "./pages/homepage/homepage.jsx";
+import Login from "./pages/login/login.jsx";
+import Signup from "./pages/signup/signup.jsx";
 
 function App() {
 
@@ -13,7 +12,6 @@ function App() {
   const {user:currentUser} = state;
 
   return (
-   
       <React.Suspense fallback={<div>Loading...</div>} >
         <Routes>
         {!currentUser ? 
@@ -64,7 +62,6 @@ function App() {
         </Routes>
       </React.Suspense>
   );
-
 }
 
 export default App;
