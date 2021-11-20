@@ -13,6 +13,7 @@ export const userLogin = (user) => ({
 
 export const userReducer = (state = initialState, action) => {
   if(action.type === USER_LOGIN){
+    localStorage.setItem("currentUser", JSON.stringify(action.user));
     return {
       ...state,
       user: action.user,

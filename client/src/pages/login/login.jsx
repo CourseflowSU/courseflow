@@ -52,7 +52,6 @@ function Login() {
           setErrorMessage(`You logged in succesfully`);
           const dbUser = res.data;
           console.log("login user:", dbUser);
-          localStorage.setItem("currentUser", JSON.stringify(dbUser));
           dispatch(userLogin(dbUser));
           navigate("/home")
 
