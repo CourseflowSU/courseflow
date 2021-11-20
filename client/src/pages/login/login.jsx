@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useStore } from "../../store/store";
 import { userLogin } from "../../store/userReducer";
-import '../login/login.css';
+import "../login/login.css";
 
 const loginSchema = z
   .object({
@@ -17,7 +17,6 @@ const loginSchema = z
   });
 
 function Login() {
-
   const {
     register,
     handleSubmit,
@@ -41,30 +40,26 @@ function Login() {
     };
     console.log(user);
     axios
-      .post(`http://localhost:5000/users/login/${user.email}`, {data: {user: user}})
-      .then((res) => { 
-        console.log(res); 
-        if(res.status === 200 && res.data.message){
-          setErrorMessage(res.data.message)
-        }
-        else if(res.status === 200){
-          setErrorMessage(`You logged in succesfully`);
+      .post(`http://localhost:5000/users/login/${user.email}`, { data: { user: user } })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200 && res.data.message) {
+          setErrorMessage(res.data.message);
+        } else if (res.status === 200) {
+          setErrorMessage("You logged in succesfully");
           const dbUser = res.data;
           console.log("login user:", dbUser);
           dispatch(userLogin(dbUser));
-          navigate("/home")
-
-        }else{
-          setErrorMessage(`Error! Please try again.`)
+          navigate("/home");
+        } else {
+          setErrorMessage("Error! Please try again.");
         }
       })
       .catch((err) => {
         console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
-   
-  
-  },[navigate, dispatch]);
+  }, [navigate, dispatch]);
   return (
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">

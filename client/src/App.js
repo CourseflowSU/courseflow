@@ -1,66 +1,64 @@
 import React from "react";
-import { Navigate } from 'react-router';
+import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Homepage from "./pages/homepage/homepage.jsx";
 import Login from "./pages/login/login.jsx";
 import Signup from "./pages/signup/signup.jsx";
+import { useStore } from "./store/store";
 
 function App() {
-
   const [state] = useStore();
-  const {user:currentUser} = state;
+  const { user: currentUser } = state;
 
   return (
-      <React.Suspense fallback={<div>Loading...</div>} >
-        <Routes>
-        {!currentUser ? 
-        <>
-          <Route 
+    <React.Suspense fallback={<div>Loading...</div>} >
+      <Routes>
+        {!currentUser ?
+          <>
+            <Route
               path="/login"
               element={<Login />}
-          />
-          <Route 
+            />
+            <Route
               path="/signup"
               element={<Signup />}
-          />
-          <Route 
+            />
+            <Route
               path="*"
               element={<Login />}
-          />
-        </>
-          :
+            />
+          </> :
           <>
-          <Route 
-              path="/home" 
+            <Route
+              path="/home"
               element={<Homepage />}
-          />
-          <Route 
+            />
+            <Route
               path="/"
               element={<Homepage />}
-          />
-           <Route 
+            />
+            <Route
               path="/login"
               element={<Navigate to="/home"/>}
-
-          />
-          <Route 
+            />
+            <Route
               path="/signup"
               element={<Navigate to="/home"/>}
-          />
-           <Route
-           path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>Error! There's nothing here!</p>
-              </main>
-           }
+            />
+            <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>Error! There&apos;s nothing here!</p>
+                </main>
+              }
             />
           </>
-          }
-         
-        </Routes>
-      </React.Suspense>
+        }
+
+      </Routes>
+    </React.Suspense>
   );
 }
 

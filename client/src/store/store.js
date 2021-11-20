@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
 const Store = React.createContext();
-Store.displayName = 'Store';
+Store.displayName = "Store";
 
 export const useStore = () => React.useContext(Store);
 
-export const StoreProvider = ({children, initialState, reducer}) => {
+// eslint-disable-next-line react/prop-types
+export const StoreProvider = ({ children, initialState, reducer }) => {
   const [globalState, dispatch] = React.useReducer(reducer, initialState);
 
-  return(
+  return (
     <Store.Provider value={[globalState, dispatch]}>{children}</Store.Provider>
   );
 };
