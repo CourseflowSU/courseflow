@@ -104,7 +104,7 @@ function Login() {
                     <span
                       className="link-line-gap d-flex justify-content-center"
                     >
-                      Don't have an account?
+                      Don&apos;t have an account?
                       <Link to="/signup"><p>   Create one!</p></Link>
                     </span>
                   </div>
