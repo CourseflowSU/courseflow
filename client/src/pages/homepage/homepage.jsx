@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import Footer from "../footer/footer.jsx";
 
 
 function Homepage(){
@@ -12,6 +13,8 @@ function Homepage(){
         <div>
             <h1>Hi {currentUser ? currentUser.username: ""}, Welcome to your page</h1>
 
+
+            <Footer></Footer>
         </div>
     );
 }
