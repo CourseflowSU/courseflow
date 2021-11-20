@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from 'axios';
-import { useCallback, useState } from 'react';
+import axios from "axios";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
@@ -16,19 +16,21 @@ const signUpSchema = z
       .string()
       .min(8, { message: "Password must be at least 8 character" })
       .regex(
+        // eslint-disable-next-line max-len
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*';."_)(+,/:>\]<=?@\\^`|[}{~-])/,
         {
           message:
+            // eslint-disable-next-line max-len
             "Password must contain uppercase, lowercase, numeric and special character",
-        }
+        },
       ),
     passwordConfirm: z.string(),
-    
+
     privacyAgreement: z
       .boolean()
       .refine((val) => val, {
-        message: 'You have to accept privacy policy'
-      })
+        message: "You have to accept privacy policy",
+      }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     message: "Passwords are not the same",
@@ -49,35 +51,32 @@ function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = useCallback((data) => {
-   
     const newUser = {
       username: data.username,
       university: data.university,
       email: data.email,
-      password: data.password
+      password: data.password,
     };
-  
+
     axios
       .post("http://localhost:5000/users/signup/add", newUser)
-      .then((res) => { 
-        console.log(res); 
-        if(res.data.message){
-          setErrorMessage(res.data.message)
-        }
-        else if(res.status === 200){
+      .then((res) => {
+        console.log(res);
+        if (res.data.message) {
+          setErrorMessage(res.data.message);
+        } else if (res.status === 200) {
           setErrorMessage(`You created your account successfully,
-            please login to use`)
+            please login to use`);
           reset();
-        }else{
-          setErrorMessage(`Error! Please try again.`)
+        } else {
+          setErrorMessage("Error! Please try again.");
         }
       })
-      .catch(err => {
-        console.log("Error:",err);
-        setErrorMessage(`Error! Please try again.`)
+      .catch((err) => {
+        console.log("Error:", err);
+        setErrorMessage("Error! Please try again.");
       });
-  
-  },[reset]);
+  }, [reset]);
 
   return (
     <div className="imge">
@@ -98,8 +97,11 @@ function Signup() {
                     className="btn-border input-style form-control"
                     placeholder="Username"
                     type="text"
-                  ></input>
-                <small className="align-self-start error-text">{errors.username?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.username?.message}
+                  </small>
 
                 </div>
                 <div className="mt-3 d-flex flex-column">
@@ -108,8 +110,11 @@ function Signup() {
                     className="btn-border input-style form-control"
                     placeholder="University"
                     type="text"
-                  ></input>
-                <small className="align-self-start error-text">{errors.university?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.university?.message}
+                  </small>
 
                 </div>
                 <div className="mt-3 d-flex flex-column">
@@ -118,8 +123,11 @@ function Signup() {
                     className="btn-border input-style form-control"
                     placeholder="E-mail"
                     type="email"
-                  ></input>
-                <small className="align-self-start error-text">{errors.email?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.email?.message}
+                  </small>
 
                 </div>
                 <div className="mt-3 d-flex flex-column">
@@ -129,8 +137,11 @@ function Signup() {
                     placeholder="Password"
                     type="password"
 
-                  ></input>
-                   <small className="align-self-start error-text">{errors.password?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.password?.message}
+                  </small>
                 </div>
 
                 <div className="mt-3 d-flex flex-column">
@@ -140,28 +151,34 @@ function Signup() {
                     placeholder="Confirm Password"
                     type="password"
 
-                  ></input>
-                  <small className="align-self-start error-text">{errors.passwordConfirm?.message}</small>
+                  >
+                  </input>
+                  <small className="align-self-start error-text">
+                    {errors.passwordConfirm?.message}
+                  </small>
                 </div>
 
-                
                 <div className="mt-3 d-flex flex-row">
                   <input
                     {...register("privacyAgreement")}
                     className="form-check-input"
                     id="checkbox"
                     type="checkbox"
-                  ></input>
+                  >
+                  </input>
                   <small>
                     I have read and accepted <a href="s">Document1</a>
                   </small>
-                  
+
                 </div>
-                <small className="align-self-start error-text">{errors.privacyAgreement?.message}</small>
+                <small className="align-self-start error-text">
+                  {errors.privacyAgreement?.message}
+                </small>
+
 
                 <div className="mt-5 row text-center justify-content-center">
                   <div className="col-12">
-                    <button 
+                    <button
                       className="btn btn-block col-6 btn-warning"
                       type='submit'
                     >
@@ -172,7 +189,7 @@ function Signup() {
 
                 <div className="mt-2 row text-center justify-content-center">
                   <div className="col-12">
-                   <Link to="/login"> <p> Already have an account? </p> </Link>
+                    <Link to="/login"> <p> Already have an account? </p> </Link>
                   </div>
                 </div>
               </form>
