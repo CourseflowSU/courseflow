@@ -1,0 +1,44 @@
+.margin-home {
+  margin-top: 10vh;
+}
+
+.header-location {
+  background-color: #064118;
+  height: 10vh;
+  width: 100vw;
+}
+
+.navbar-location {
+  background-color: #1c9941;
+  width: 5vw;
+  height: 100vh;
+}
+
+.footer-location {
+  background-color: grey;
+  width: 100vw;
+  height: 15vh;
+}
+
+.preview-border {
+  border: 1px solid gray !important;
+}
+
+.preview-margin {
+  margin-left: 1px;
+}
+
+.preview-container {
+  margin-left: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  margin-right: 0px !important;
+}
+
+.preview-button {
+  padding: 0px;
+}
+
+.course-btn {
+  height: 88px;
+}
