@@ -211,10 +211,11 @@ userRoutes.get('/reset', (req, res) => {
        $gt: Date.now(),
      },
   }).then((user) => {
-    if (user == null) {
+    if (user == null || user.resetPasswordExpires == null) {
       console.error('password reset link is invalid or has expired');
-      res.status(403).send('password reset link is invalid or has expired');
-    } else {
+      res.status(401).send('password reset link is invalid or has expired');
+    } 
+    else {
       res.status(200).send({
         username: user.username,
         message: 'password reset link a-ok',
