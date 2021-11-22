@@ -28,7 +28,7 @@
     "web-vitals": "^1.1.2",
     "zod": "^3.11.6"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
