@@ -28,7 +28,6 @@ const Footer = () => {
             <FooterLink href="#">Notes</FooterLink>
             <FooterLink href="#">Exams</FooterLink>
           </Column>
-
           <Column>
             <Heading>Contact Us</Heading>
             <FooterLink href="https://www.linkedin.com/in/mizbah-celik/">Mizbah Celik</FooterLink>
@@ -84,7 +83,6 @@ export const Box = styled.div`
     padding: 70px 30px;
   }
 `;
-
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -99,7 +97,6 @@ export const Column = styled.div`
   flex-direction: column;
   text-align: center;
 `;
-
 export const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 
@@ -111,7 +108,6 @@ export const Row = styled.div`
                            minmax(200px, 1fr));
   }
 `;
-
 export const FooterLink = styled.a`
   color: #4e657e;
   margin-bottom: 20px;
@@ -123,7 +119,6 @@ export const FooterLink = styled.a`
       transition: 200ms ease-in;
   }
 `;
-
 export const Heading = styled.p`
   font-size: 18px;
   color: #4e657e;
