@@ -1,8 +1,8 @@
 import React from "react";
 import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
-import ForgotPassword from "./pages/forgotpassword/forgotpassword";
-import ResetPassword from "./pages/forgotpassword/resetpassword";
+import ForgotPassword from "./pages/forgotpassword/forgotpassword.jsx";
+import ResetPassword from "./pages/forgotpassword/resetpassword.jsx";
 import "./App.css";
 import ErrorPage from "./pages/error-page/error-page.jsx";
 import Homepage from "./pages/homepage/homepage.jsx";
@@ -32,16 +32,16 @@ function App() {
               path="*"
               element={<Login />}
             />
-            <Route 
+            <Route
               exact
               path="/forgotpassword"
               element={<ForgotPassword />}
-          />
-          <Route
-            exact
-            path="/reset/:token"
-            element={<ResetPassword />}
-            component={ResetPassword}
+            />
+            <Route
+              exact
+              path="/reset/:token"
+              element={<ResetPassword />}
+              component={ResetPassword}
             />
           </> :
           <>
