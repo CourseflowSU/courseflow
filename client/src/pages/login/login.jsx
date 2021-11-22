@@ -4,6 +4,8 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { useStore } from "../../store/store";
+import { userLogin } from "../../store/userReducer";
 import "../login/login.css";
 
 const loginSchema = z
@@ -24,6 +26,9 @@ function Login() {
     mode: "all",
   });
 
+  const [, dispatch] = useStore();
+
+
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -42,8 +47,10 @@ function Login() {
           setErrorMessage(res.data.message);
         } else if (res.status === 200) {
           setErrorMessage("You logged in succesfully");
-          console.log("login:", res.data);
-          navigate("/home", { state: { user: res.data } });
+          const dbUser = res.data;
+          console.log("login user:", dbUser);
+          dispatch(userLogin(dbUser));
+          navigate("/home");
         } else {
           setErrorMessage("Error! Please try again.");
         }
@@ -52,7 +59,7 @@ function Login() {
         console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
-  }, [navigate]);
+  }, [navigate, dispatch]);
   return (
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">
