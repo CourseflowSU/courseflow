@@ -10,7 +10,8 @@
   
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd client && npm install && npm run build"
+    "start": "cd server && npm install && npm start",
+    "heroku-postbuild": "cd client && npm install && npm start"
   },
   "repository": {
     "type": "git",
