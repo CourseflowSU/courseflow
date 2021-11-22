@@ -18,6 +18,7 @@ function ForgotPassword() {
   const {
     register,
     handleSubmit,
+    formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
     mode: "all",
@@ -28,14 +29,12 @@ function ForgotPassword() {
 
   const [messageFromServer, setMessageFromServer] = useState('');
   const [showError, setShowError] = useState(false);
-  const [showNullError, setShowNullError] = useState(true);
   const sendEmail = async (data) => {
 
     const { email } = data;
     if (email === '') {
       setShowError(false);
       setMessageFromServer('');
-      setShowNullError(true);
     }
     
     else {
@@ -50,7 +49,6 @@ function ForgotPassword() {
         if (response.data === 'recovery email sent') {
           setShowError(false);
           setMessageFromServer('recovery email sent');
-          setShowNullError(false);
         }
       } catch (error) {
 
@@ -59,7 +57,6 @@ function ForgotPassword() {
         if (error.response.data === 'email not in db') {
           setShowError(true);
           setMessageFromServer('');
-          setShowNullError(false);
         }
       }
     }
@@ -83,7 +80,7 @@ function ForgotPassword() {
                     placeholder="E-mail"
                     type="email"
                   />
-
+                  <small className="align-self-start error-text">{errors.email?.message}</small>
                   <div className="mt-4 col text-center justify-content-center">
                     <button type='submit' className="col-6 btn btn-block btn-warning">
                       Reset Password
@@ -91,11 +88,6 @@ function ForgotPassword() {
                   </div>
 
                 </form>
-                {showNullError && (
-                  <div>
-                    <p>The email address cannot be null.</p>
-                  </div>
-                )}
                 {showError && (
                   <div>
                     <p>

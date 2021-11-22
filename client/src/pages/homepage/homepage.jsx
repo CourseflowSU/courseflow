@@ -1,13 +1,11 @@
 import { useLocation } from "react-router-dom";
 import Footer from "../footer/footer.jsx";
+import { useStore } from "../../store/store";
 
 
-function Homepage(){
-    const location = useLocation();
-    // const { currentUser } = state;
-   console.log("useLocation:", location.state.user);
-    const currentUser = location.state.user;
-    // const {user } = params.user;
+function Homepage() {
+  const [state] = useStore();
+  const { user: currentUser } = state;
 
     return (
         <div>
@@ -18,5 +16,5 @@ function Homepage(){
         </div>
     );
 }
-    
+
 export default Homepage;

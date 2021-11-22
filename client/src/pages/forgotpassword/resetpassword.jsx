@@ -44,29 +44,32 @@ function ResetPassword() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    try {
       axios.get('http://localhost:5000/reset', {
         params: {
           resetPasswordToken: token,
         },
       }).then((response) => {
         if (response.data.message === 'password reset link a-ok') {
-        
+          console.log("a");
           setUsername(response.data.username);
           setUpdated(false);
           setIsLoading(false);
           setError(false);
-        
         }
-      });
-      // console.log(response);
-      
-    } catch (error) {
-          console.log(error);
-          setUpdated(false);
+        else {
+          console.log("b");
           setIsLoading(false);
           setError(true);
-    }
+        }
+      })
+      .catch (error => {
+        console.log("c");
+        console.log(error);
+        setUpdated(false);
+        setIsLoading(false);
+        setError(true);
+      });
+      // console.log(response);
   }, []);
 
   const updatePassword = async (data) => {

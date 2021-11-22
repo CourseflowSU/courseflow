@@ -1,34 +1,38 @@
 import React from "react";
+import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
-import './App.css';
-import Homepage from './pages/homepage/homepage';
-import Login from './pages/login/login';
-import Signup from './pages/signup/signup';
-import ForgotPassword from './pages/forgotpassword/forgotpassword';
+import ForgotPassword from "./pages/forgotpassword/forgotpassword";
 import ResetPassword from "./pages/forgotpassword/resetpassword";
+import "./App.css";
+import ErrorPage from "./pages/error-page/error-page.jsx";
+import Homepage from "./pages/homepage/homepage.jsx";
+import Login from "./pages/login/login.jsx";
+import Signup from "./pages/signup/signup.jsx";
+import { useStore } from "./store/store";
+
+
 function App() {
+  const [state] = useStore();
+  const { user: currentUser } = state;
+
   return (
-   
-      <React.Suspense fallback={<div>Loading...</div>} >
-        <Routes>
-          <Route 
-              path="/"
-              element={<Login />}
-          />
-          <Route 
+    <React.Suspense fallback={<div>Loading...</div>} >
+      <Routes>
+        {!currentUser ?
+          <>
+            <Route
               path="/login"
               element={<Login />}
-        />
-          <Route 
+            />
+            <Route
               path="/signup"
               element={<Signup />}
-          />
-          <Route 
-              exact
-              path="/home"
-              element={<Homepage />}
-          />
-          <Route 
+            />
+            <Route
+              path="*"
+              element={<Login />}
+            />
+            <Route 
               exact
               path="/forgotpassword"
               element={<ForgotPassword />}
@@ -39,18 +43,33 @@ function App() {
             element={<ResetPassword />}
             component={ResetPassword}
             />
-          <Route
-           path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>Error! There's nothing here!</p>
-              </main>
-           }
-    />
-        </Routes>
-      </React.Suspense>
+          </> :
+          <>
+            <Route
+              path="/home"
+              element={<Homepage />}
+            />
+            <Route
+              path="/"
+              element={<Homepage />}
+            />
+            <Route
+              path="/login"
+              element={<Navigate to="/home"/>}
+            />
+            <Route
+              path="/signup"
+              element={<Navigate to="/home"/>}
+            />
+            <Route
+              path="*"
+              element={<ErrorPage />}
+            />
+          </>
+        }
+      </Routes>
+    </React.Suspense>
   );
-
 }
 
 export default App;
