@@ -70,7 +70,7 @@ const Footer = () => {
 export const Box = styled.div`
   padding: 80px 60px 20px 60px;
   background: #f2f3f5;
-  position: absolute;
+  position: flex;
   bottom: 0;
   width: 100%;
   @media (max-width: 1000px) {
