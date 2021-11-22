@@ -9,9 +9,9 @@ function ErrorPage() {
       <div className="row justify-content-center align-items-end">
         <div className="col-md-12 align-items-end">
           <div className="error-template">
-            <h2>
+            <p>
                     404 Not Found
-            </h2>
+            </p>
             <div className="error-details">
                     Sorry, an error has occured, Requested page not found!
             </div>
