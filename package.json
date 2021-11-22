@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm install && npm start",
-    "heroku-postbuild": "DISABLE_ESLINT_PLUGIN=true cd client && npm install && npm run start"
+    "heroku-postbuild": "DISABLE_ESLINT_PLUGIN=true && cd client && npm install && npm run start"
   },
   "repository": {
     "type": "git",
