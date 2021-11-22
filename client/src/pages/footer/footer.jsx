@@ -7,17 +7,17 @@ import React from "react";
 //   FooterLink,
 //   Heading,
 // } from "./FooterStyles";
-
-import styled from 'styled-components';
-import './footer.css';
+import styled from "styled-components";
+import "./footer.css";
 
 const Footer = () => {
   return (
     <Box>
-      <h1 style={{ color: "#1C9941", 
-                   textAlign: "center", 
-                   marginTop: "-50px",
-                   marginBottom: "40px" }}>
+      <h1 style={{ color: "#1C9941",
+        textAlign: "center",
+        marginTop: "-50px",
+        marginBottom: "40px" }}
+      >
         CourseFlow: Course Document Database for Everyone
       </h1>
       <Container>
@@ -28,7 +28,7 @@ const Footer = () => {
             <FooterLink href="#">Notes</FooterLink>
             <FooterLink href="#">Exams</FooterLink>
           </Column>
-          
+
           <Column>
             <Heading>Contact Us</Heading>
             <FooterLink href="https://www.linkedin.com/in/mizbah-celik/">Mizbah Celik</FooterLink>
@@ -58,12 +58,19 @@ const Footer = () => {
                 </span>
               </i>
             </FooterLink>
-         </Column>
+          </Column>
         </Row>
-        <FooterLink style={{ marginTop: "20px", textAlign: "center", justifyContent: "center"}}>Copyright © 2021 Courseflow</FooterLink>
+        <FooterLink
+          style={{
+            marginTop: "20px",
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+        >Copyright © 2021 Courseflow
+        </FooterLink>
 
       </Container>
-      </Box>
+    </Box>
   );
 };
 
@@ -77,7 +84,7 @@ export const Box = styled.div`
     padding: 70px 30px;
   }
 `;
-   
+
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -85,14 +92,14 @@ export const Container = styled.div`
     max-width: 1000px;
     margin: 0 auto;
     /* background: red; */
-`
-   
+`;
+
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
 `;
-   
+
 export const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, 
@@ -104,7 +111,7 @@ export const Row = styled.div`
                            minmax(200px, 1fr));
   }
 `;
-   
+
 export const FooterLink = styled.a`
   color: #4e657e;
   margin-bottom: 20px;
@@ -116,7 +123,7 @@ export const FooterLink = styled.a`
       transition: 200ms ease-in;
   }
 `;
-   
+
 export const Heading = styled.p`
   font-size: 18px;
   color: #4e657e;
