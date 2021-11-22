@@ -13,7 +13,6 @@ const loginSchema = z
 
     email: z.string().email("Please enter a valid email"),
     password: z.string().nonempty("Password required."),
-
   });
 
 function Login() {
@@ -108,6 +107,12 @@ function Login() {
                 </div>
                 <div className="mt-3 row text-center justify-content-center">
                   <div className="col-12">
+                    <span className="link-line-gap d-flex justify-content-center"><Link to="/forgotpassword"><p> Forgot your password?</p></Link></span>  
+                  </div>
+                </div>
+                <div className="mt-3 row text-center justify-content-center">
+                  <div className="col-12">
+                    <span className="link-line-gap d-flex justify-content-center">Don't have an account?<Link to="/signup"><p>   Create one!</p></Link></span>  
                     <span
                       className="link-line-gap d-flex justify-content-center"
                     >

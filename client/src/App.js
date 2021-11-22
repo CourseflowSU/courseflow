@@ -1,12 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
+import ForgotPassword from "./pages/forgotpassword/forgotpassword";
+import ResetPassword from "./pages/forgotpassword/resetpassword";
 import "./App.css";
 import ErrorPage from "./pages/error-page/error-page.jsx";
 import Homepage from "./pages/homepage/homepage.jsx";
 import Login from "./pages/login/login.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import { useStore } from "./store/store";
+
 
 function App() {
   const [state] = useStore();
@@ -28,6 +31,17 @@ function App() {
             <Route
               path="*"
               element={<Login />}
+            />
+            <Route 
+              exact
+              path="/forgotpassword"
+              element={<ForgotPassword />}
+          />
+          <Route
+            exact
+            path="/reset/:token"
+            element={<ResetPassword />}
+            component={ResetPassword}
             />
           </> :
           <>
