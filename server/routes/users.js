@@ -156,8 +156,6 @@ userRoutes.post('/forgotPassword', (req, res) => {
     res.status(400).send('email required');
   }
   console.error(req.body.email);
-  console.log(process.env.EMAIL_ADDRESS);
-  console.log(process.env.EMAIL_PASSWORD);
   db_connect.collection("users").findOne({
       "email": req.body.email,
   }).then((user) => {
