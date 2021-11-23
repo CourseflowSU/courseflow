@@ -34,7 +34,7 @@ function ForgotPassword() {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:5000/forgotPassword",
+          `${process.env.REACT_APP_URL}/forgotPassword`,
           {
             email,
           },

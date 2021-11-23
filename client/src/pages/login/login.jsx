@@ -39,7 +39,7 @@ function Login() {
     };
     console.log(user);
     axios
-      .post(`https://courseflowsu.herokuapp.com/users/login/${user.email}`, { data: { user: user } })
+      .post(`${process.env.REACT_APP_URL}/users/login/${user.email}`, { data: { user: user } })
       .then((res) => {
         console.log(res);
         if (res.status === 200 && res.data.message) {
@@ -68,7 +68,6 @@ function Login() {
               <div className="text-center">
                 <h2 className="mt-2 mb-3">
                   <b>SIGN IN</b>
-                  <p>{process.env.PWD } </p>
                 </h2>
               </div>
               <form onSubmit={handleSubmit(onSubmit)}>

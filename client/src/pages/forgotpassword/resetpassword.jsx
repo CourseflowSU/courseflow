@@ -40,7 +40,7 @@ function ResetPassword() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/reset", {
+    axios.get(`${process.env.REACT_APP_URL}/reset`, {
       params: {
         resetPasswordToken: token,
       },
