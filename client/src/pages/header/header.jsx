@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Container, Nav, NavDropdown } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import "./header.css";
+import { useStore } from "../../store/store";
+import { userLogout } from "../../store/userReducer";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const [, dispatch] = useStore();
+  const navigate = useNavigate();
+
+  const onSubmit = useCallback((data) => {
+    dispatch(userLogout());
+    navigate("/login");
+  }, [dispatch, navigate]);
+
   return (
     <Navbar
       bg="light"
@@ -48,8 +60,12 @@ const Header = () => {
           >
             <NavDropdown.Item href="#action3">Home</NavDropdown.Item>
             <NavDropdown.Item href="#action4">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action5">Settings</NavDropdown.Item>
-            <NavDropdown.Item href="#action5">Sign out</NavDropdown.Item>
+            <NavDropdown.Item>Settings</NavDropdown.Item>
+            <NavDropdown.Item
+              onClick={onSubmit}
+            >
+                Sign out
+            </NavDropdown.Item>
           </NavDropdown>
         </Navbar.Collapse>
       </Container>
