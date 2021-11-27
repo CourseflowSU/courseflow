@@ -1,19 +1,18 @@
 import { useLocation } from "react-router-dom";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
+import Footer from "../footer/footer.jsx";
+import Header from "../header/header.jsx";
+import { useStore } from "../../store/store";
+
 
 function Homepage() {
-  const location = useLocation();
-  // const { currentUser } = state;
-  console.log("useLocation:", location.state.user);
-  const currentUser = location.state.user;
-  // const {user } = params.user;
+  const [state] = useStore();
+  const { user: currentUser } = state;
 
   return (
     <div>
-      <div className="header-location">
-        <h1>HEADER LOCATION</h1>
-      </div>
+      <Header/>
       <div className="row">
         <div className="navbar-location col-3">
           <h1>NAVBAR LOCATION</h1>
@@ -164,9 +163,7 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <div className="footer-location text-center">
-        <h1>FOOTER LOCATION</h1>
-      </div>
+      <Footer/>
     </div>
   );
 }

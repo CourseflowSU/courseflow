@@ -2,16 +2,10 @@
   margin-top: 10vh;
 }
 
-.header-location {
-  background-color: #064118;
-  height: 10vh;
-  width: 100vw;
-}
-
 .navbar-location {
   background-color: #1c9941;
-  width: 5vw;
-  height: 100vh;
+  width: 20vw;
+  height: 80vh;
 }
 
 .footer-location {

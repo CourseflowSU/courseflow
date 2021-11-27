@@ -4,6 +4,8 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { useStore } from "../../store/store";
+import { userLogin } from "../../store/userReducer";
 import "../login/login.css";
 
 const loginSchema = z
@@ -11,7 +13,6 @@ const loginSchema = z
 
     email: z.string().email("Please enter a valid email"),
     password: z.string().nonempty("Password required."),
-
   });
 
 function Login() {
@@ -24,6 +25,9 @@ function Login() {
     mode: "all",
   });
 
+  const [, dispatch] = useStore();
+
+
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -35,15 +39,17 @@ function Login() {
     };
     console.log(user);
     axios
-      .post(`http://localhost:5000/users/login/${user.email}`, { data: { user: user } })
+      .post(`${process.env.REACT_APP_URL}/users/login/${user.email}`, { data: { user: user } })
       .then((res) => {
         console.log(res);
         if (res.status === 200 && res.data.message) {
           setErrorMessage(res.data.message);
         } else if (res.status === 200) {
           setErrorMessage("You logged in succesfully");
-          console.log("login:", res.data);
-          navigate("/home", { state: { user: res.data } });
+          const dbUser = res.data;
+          console.log("login user:", dbUser);
+          dispatch(userLogin(dbUser));
+          navigate("/home");
         } else {
           setErrorMessage("Error! Please try again.");
         }
@@ -52,7 +58,7 @@ function Login() {
         console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
-  }, [navigate]);
+  }, [navigate, dispatch]);
   return (
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">
@@ -104,8 +110,20 @@ function Login() {
                     <span
                       className="link-line-gap d-flex justify-content-center"
                     >
-                      Don&apos;t have an account?
-                      <Link to="/signup"><p>   Create one!</p></Link>
+                      <Link to="/forgotpassword"><p> Forgot your password?</p>
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-3 row text-center justify-content-center">
+                  <div className="col-12">
+                    <span
+                      className="link-line-gap d-flex justify-content-center"
+                    >
+                    Don&apos;t have an account?
+                      <Link to="/signup">
+                        <p>   Create one!</p>
+                      </Link>
                     </span>
                   </div>
                 </div>
