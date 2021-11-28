@@ -59,7 +59,7 @@ const Header = () => {
             className="navbarDropdownRight"
           >
             <NavDropdown.Item href="#action3">Home</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item>Settings</NavDropdown.Item>
             <NavDropdown.Item
               onClick={onSubmit}
