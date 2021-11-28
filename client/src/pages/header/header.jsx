@@ -28,8 +28,8 @@ const Header = () => {
         <Navbar.Brand href="/">
           <img
             className="company-logo"
-            width={"80px"}
-            height={"80px"}
+            width={"160px"}
+            height={"70px"}
             src={logo}
             alt={"logo"}
           />
