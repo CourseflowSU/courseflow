@@ -1,9 +1,7 @@
-import { useLocation } from "react-router-dom";
+import Layout from "../../components/layout/layout.jsx";
+import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
-import Footer from "../footer/footer.jsx";
-import Header from "../header/header.jsx";
-import { useStore } from "../../store/store";
 
 
 function Homepage() {
@@ -11,13 +9,9 @@ function Homepage() {
   const { user: currentUser } = state;
 
   return (
-    <div>
-      <Header/>
+    <Layout>
       <div className="row">
-        <div className="navbar-location col-3">
-          <h1>NAVBAR LOCATION</h1>
-        </div>
-        <div className="col-8">
+        <div className="col">
           <div className="row">
             <h1>
               Hi {currentUser ? currentUser.username: ""},
@@ -163,8 +157,7 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <Footer/>
-    </div>
+    </Layout>
   );
 }
 
