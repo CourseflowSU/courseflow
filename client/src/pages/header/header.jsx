@@ -11,6 +11,9 @@ const Header = () => {
   const [, dispatch] = useStore();
   const navigate = useNavigate();
 
+  const [state] = useStore();
+  const { user: currentUser } = state;
+
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
     navigate("/login");
@@ -24,7 +27,7 @@ const Header = () => {
       style={{ position: "sticky" }}
     >
       <Container fluid>
-        <Navbar.Brand href="#">Courseflow</Navbar.Brand>
+        <Navbar.Brand href="/home">Courseflow</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -34,7 +37,7 @@ const Header = () => {
           >
           </Nav>
           <Nav.Link
-            href="#"
+            href="/upload"
             align="end"
             className="uploadBtn"
           >
@@ -53,7 +56,7 @@ const Header = () => {
             </span>
           </Nav.Link>
           <NavDropdown
-            title={<span className="profileBackground">MT</span>}
+            title={<span className="profileBackground">{currentUser.username.substring(0,2).toUpperCase()}</span>}
             align="end"
             id="navbarScrollingDropdown"
             className="navbarDropdownRight"

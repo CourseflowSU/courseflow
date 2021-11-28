@@ -47,7 +47,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/file-upload">
+            <Link to="/upload">
               <span>
                 <AiOutlineCloudUpload />
               </span>  

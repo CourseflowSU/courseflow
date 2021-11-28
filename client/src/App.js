@@ -10,7 +10,7 @@ import Login from "./pages/login/login.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import { useStore } from "./store/store";
 import Profile from "./pages/profile/profile-page.jsx";
-
+import Upload from "./pages/upload/upload.jsx"
 
 function App() {
   const [state] = useStore();
@@ -58,6 +58,10 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/upload"
+              element={<Upload/>}
             />
             <Route
               path="/login"
