@@ -8,8 +8,8 @@ function Profile() {
 
   return (
     <Layout>
-      <div className="profile-info row align-items-center">
-        <div className="col-2 ml-5 profileImgLocation mt-2">
+      <div className="profile-info row align-items-center mr-0">
+        <div className="col-2 profileImgLocation mt-2">
           {<span className="profileImg">MT</span>}
         </div>
         <div className="col-3">
@@ -31,6 +31,7 @@ function Profile() {
           </button>
         </div>
       </div>
+      <hr className="profile-page-divider mx-5 solid"></hr>
       <div className="row mt-5 mb-5 justify-content-center">
         <div className="document-container col-6">
           <div className="row">

@@ -11,6 +11,8 @@ import logo from "../header/Courseflow.jpeg";
 const Header = () => {
   const [, dispatch] = useStore();
   const navigate = useNavigate();
+  const [state] = useStore();
+  const { user: currentUser } = state;
 
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
@@ -62,12 +64,12 @@ const Header = () => {
             </span>
           </Nav.Link>
           <NavDropdown
-            title={<span className="profileBackground">MT</span>}
+            title={<span className="profileBackground">{currentUser.username[0].toUpperCase()}{currentUser.username[1].toUpperCase()}</span>}
             align="end"
             id="navbarScrollingDropdown"
             className="navbarDropdownRight"
           >
-            <NavDropdown.Item href="#action3">Home</NavDropdown.Item>
+            <NavDropdown.Item href="/">Home</NavDropdown.Item>
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item>Settings</NavDropdown.Item>
             <NavDropdown.Item
