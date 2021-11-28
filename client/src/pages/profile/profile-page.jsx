@@ -1,16 +1,13 @@
-import "../profile/profile-page.css";
-import Footer from "../footer/footer.jsx";
-import Header from "../header/header.jsx";
+import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import "../profile/profile-page.css";
 
 function Profile() {
   const [state] = useStore();
   const { user: currentUser } = state;
 
   return (
-    <div>
-      <Header/>
+    <Layout>
       <div className="profile-info row align-items-center">
         <div className="col-2 ml-5 profileImgLocation mt-2">
           {<span className="profileImg">MT</span>}
@@ -61,8 +58,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <Footer/>
-    </div>
+    </Layout>
   );
 }
 
