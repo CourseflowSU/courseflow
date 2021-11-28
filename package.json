@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "npm": "6.14.14",
+    "node": "14.17.4" 
+  },
+  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && npm ci && npm start",

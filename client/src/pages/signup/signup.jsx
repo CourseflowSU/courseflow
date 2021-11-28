@@ -59,7 +59,7 @@ function Signup() {
     };
 
     axios
-      .post("http://localhost:5000/users/signup/add", newUser)
+      .post(`${process.env.REACT_APP_URL}/users/signup/add`, newUser)
       .then((res) => {
         console.log(res);
         if (res.data.message) {
