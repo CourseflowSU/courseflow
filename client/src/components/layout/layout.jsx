@@ -6,7 +6,7 @@ import Sidebar from "../sidebar/sidebar.jsx";
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
   return (
-    <div className="container">
+    <div className="layout">
       <div className="row">
         <div className="col">
           <Header />
