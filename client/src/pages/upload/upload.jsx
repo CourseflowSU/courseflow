@@ -3,6 +3,7 @@ import { useStore } from "../../store/store";
 import "./upload-page.css";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
+import Button from "@material-ui/core/Button";
 
 function Upload() {
   const [state] = useStore();
@@ -19,6 +20,9 @@ function Upload() {
     const formData = new FormData();
 
     formData.append("File", selectedFile);
+    console.log(formData);
+    console.log(selectedFile);
+    
   };
 
   
@@ -45,11 +49,15 @@ function Upload() {
             onChange={changeHandler}
           />
           <label htmlFor="my-file">
-            <button
-              className="btn browseBtn mb-2 browseBtnText"
+            <Button
+              variant="contained"
+              component="span"
+              className="browseBtn mb-2"
             >
-          Browse my files
-            </button>
+              <span className="browseBtnText"> 
+                    Browse my files 
+              </span>
+            </Button>
           </label>
           {isSelected ? (
             <div>
@@ -65,14 +73,17 @@ function Upload() {
             <p>Select a file to show details</p>
           )}
           
-          <button
-            className="btn uploadBtn"
-            onClick={handleSubmission}
-          >
-            <span className="uploadBtnText"> 
+          {isSelected ? (
+            <button
+              className="btn uploadBtn"
+              styles={{ display: "none" }}
+              onClick={handleSubmission}
+            >
+              <span className="uploadBtnText"> 
                     Upload 
-            </span>
-          </button>
+              </span>
+            </button> 
+          ) : "" }
           
         </div>
       </div>
