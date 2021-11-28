@@ -9,6 +9,7 @@ import Homepage from "./pages/homepage/homepage.jsx";
 import Login from "./pages/login/login.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import { useStore } from "./store/store";
+import Notes from "./pages/notes/notes.jsx";
 
 
 function App() {
@@ -52,6 +53,10 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/notes"
+              element={<Notes />}
             />
             <Route
               path="/login"
