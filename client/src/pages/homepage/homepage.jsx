@@ -122,7 +122,7 @@ function Homepage() {
               </div>
             </div>
           </div>
-          <div className="row mt-4">
+          <div className="row mt-4 mb-5">
             <h4>Recently Viewed Courses</h4>
             <div className="row mt-2">
               <div className="ml-1 col-2">
