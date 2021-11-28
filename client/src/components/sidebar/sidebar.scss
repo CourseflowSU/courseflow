@@ -1,44 +1,32 @@
-.wrapper {
-  display: block;
-  background-color: white;
-}
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* top layer */
-  z-index: 9999;
+  height: 100%;
+  transition: all 0.3s;
+  border-right:0.1em solid rgb(222, 223, 222);
+  padding-left: 15px;
+
+  font-size: 20px;
+  text-decoration: none;
+
+  span {
+    margin-right: 5px;
+  }
+  li {
+    margin-top: 20px;
+  }
+
+  a{
+    text-decoration: none;
+    color: rgb(39, 61, 71);
+  }
+
+  a:hover{
+    color:rgb(85, 116, 138);
+  }
+
 }
 
-.overlay {
-  display: none;
-  position: fixed;
-  /* full screen */
-  width: 100vw;
-  height: 100vh;
-  /* transparent black */
-  background: rgba(0, 0, 0, 0.7);
-  /* middle layer, i.e. appears below the sidebar */
-  z-index: 998;
-  opacity: 0;
-  /* animate the transition */
-  transition: all 0.5s ease-in-out;
-}
-/* display .overlay when it has the .active class */
-.overlay.active {
-  display: block;
-  opacity: 1;
-}
 
-#dismiss {
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  /* top right corner of the sidebar */
-  top: 10px;
-  right: 10px;
-}
+
+
+

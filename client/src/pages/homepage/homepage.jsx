@@ -12,14 +12,15 @@ function Homepage() {
 
   return (
     <div>
-      <Header/>
+     
+      <div className="row"> 
+        <Header/>
+      </div>
       <div className="row">
-        <div className="navbar-location col-3">
-          <h1>NAVBAR LOCATION</h1>
+        <div className="col-3">
           <Sidebar/>
-
         </div>
-        <div className="col-8">
+        <div className="col-9">
           <div className="row">
             <h1>
               Hi {currentUser ? currentUser.username: ""},

@@ -1,52 +1,63 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { AiFillFolder, AiOutlineCloudUpload, AiOutlineFieldTime, AiOutlineFileWord, AiOutlineHome } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import "./sidebar.scss";
 
 function Sidebar() {
   return (
-    <div className="wrapper">
-
-      <nav id="sidebar">
-        <div className="sidebar-header">
-          <h3>Collapsible Sidebar</h3>
-        </div>
+    <>
+      <nav
+        id="sidebar"
+      >
 
         <ul className="list-unstyled components">
-          <li className="active"><Link to="#">Home</Link></li>
-          <li><Link to="#">About</Link></li>
-          <li>
-            <Link
-              to="#homeSubmenu"
-              data-toggle="collapse"
-              aria-expanded="false"
-            >Pages
+          <li className="active">
+            <Link to="/">
+              <span>
+                <AiOutlineHome />
+              </span>
+          Home
             </Link>
-            <ul
-              className="collapse list-unstyled"
-              id="homeSubmenu"
-            >
-              <li><Link to="#">Page</Link></li>
-              <li><Link to="#">Page</Link></li>
-              <li><Link to="#">Page</Link></li>
-            </ul>
           </li>
-          <li><Link to="#">Portfolio</Link></li>
-          <li><Link to="#">Contact</Link></li>
+          <li>
+           
+            <Link to="/courses">
+              <span>
+                <AiFillFolder />
+              </span>
+               Courses
+            </Link>
+            
+            
+          </li>
+          <li>
+            <Link to="/notes"> 
+              <span>
+                <AiOutlineFileWord />
+              </span>
+          Notes
+            </Link>
+          </li>
+          <li>
+            <Link to="/recent-documents">
+              <span>
+                <AiOutlineFieldTime />
+              </span>
+            Recent Documents
+            </Link>
+          </li>
+          <li>
+            <Link to="/file-upload">
+              <span>
+                <AiOutlineCloudUpload />
+              </span>  
+              Upload
+            </Link>
+          </li>
         </ul>
       </nav>
 
-      <div id="content">
-        <button
-          type="button"
-          id="sidebarCollapse"
-          className="navbar-btn"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-
-    </div>
+    </>
   )
 /* eslint-disable */
 //   return (
