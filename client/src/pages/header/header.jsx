@@ -6,6 +6,7 @@ import "./header.css";
 import { useStore } from "../../store/store";
 import { userLogout } from "../../store/userReducer";
 import { useNavigate } from "react-router-dom";
+import logo from "../header/Courseflow.jpeg";
 
 const Header = () => {
   const [, dispatch] = useStore();
@@ -24,7 +25,15 @@ const Header = () => {
       style={{ position: "sticky" }}
     >
       <Container fluid>
-        <Navbar.Brand href="#">Courseflow</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img
+            className="company-logo"
+            width={"160px"}
+            height={"70px"}
+            src={logo}
+            alt={"logo"}
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -59,7 +68,7 @@ const Header = () => {
             className="navbarDropdownRight"
           >
             <NavDropdown.Item href="#action3">Home</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item>Settings</NavDropdown.Item>
             <NavDropdown.Item
               onClick={onSubmit}

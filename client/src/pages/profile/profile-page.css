@@ -1,0 +1,44 @@
+.profile-info {
+  width: 100vw;
+  height: 20vh;
+  background-color: rgb(241, 241, 241);
+  margin: 0;
+  align-items: center;
+  justify-content: start;
+}
+
+.profileImg {
+  background-color: #fee9ec;
+  padding: 50px 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 700;
+  color: #dd4b39;
+}
+
+.profileImgLocation {
+  margin-left: 10vw;
+}
+
+.document-container {
+  border: 1px solid rgb(179, 179, 179);
+}
+
+.document-section {
+  border-top: 1px solid rgb(211, 211, 211);
+  justify-content: center;
+  align-items: center;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.document-section-in {
+  border-right: 1px solid rgb(211, 211, 211);
+  justify-content: center;
+  align-items: center;
+}
+
+.document-section-right {
+  justify-content: center;
+  align-items: center;
+}
