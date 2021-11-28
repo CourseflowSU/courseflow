@@ -1,9 +1,9 @@
-import { useLocation } from "react-router-dom";
-import "../homepage/homepage.css";
-import logo from "../homepage/logo.png";
+import Sidebar from "../../components/sidebar/sidebar.jsx";
+import { useStore } from "../../store/store";
 import Footer from "../footer/footer.jsx";
 import Header from "../header/header.jsx";
-import { useStore } from "../../store/store";
+import "../homepage/homepage.css";
+import logo from "../homepage/logo.png";
 
 
 function Homepage() {
@@ -16,6 +16,8 @@ function Homepage() {
       <div className="row">
         <div className="navbar-location col-3">
           <h1>NAVBAR LOCATION</h1>
+          <Sidebar/>
+
         </div>
         <div className="col-8">
           <div className="row">
