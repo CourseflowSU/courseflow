@@ -1,7 +1,5 @@
-import Sidebar from "../../components/sidebar/sidebar.jsx";
+import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store";
-import Footer from "../footer/footer.jsx";
-import Header from "../header/header.jsx";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
 
@@ -11,16 +9,9 @@ function Homepage() {
   const { user: currentUser } = state;
 
   return (
-    <div>
-     
-      <div className="row"> 
-        <Header/>
-      </div>
+    <Layout>
       <div className="row">
-        <div className="col-3">
-          <Sidebar/>
-        </div>
-        <div className="col-9">
+        <div className="col">
           <div className="row">
             <h1>
               Hi {currentUser ? currentUser.username: ""},
@@ -166,8 +157,7 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <Footer/>
-    </div>
+    </Layout>
   );
 }
 
