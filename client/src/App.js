@@ -12,7 +12,7 @@ import { useStore } from "./store/store";
 import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
 import Landing from "./pages/landing/landing.jsx";
-
+import Upload from "./pages/upload/upload.jsx"
 
 function App() {
   const [state] = useStore();
@@ -64,6 +64,10 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/upload"
+              element={<Upload/>}
             />
             <Route
               path="/notes"

@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 import logo from "../header/Courseflow.jpeg";
 
 const Header = () => {
-  const [, dispatch] = useStore();
+  const [state, dispatch] = useStore();
   const navigate = useNavigate();
-  const [state] = useStore();
   const { user: currentUser } = state;
+
 
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
@@ -27,7 +27,7 @@ const Header = () => {
       style={{ position: "sticky" }}
     >
       <Container fluid>
-        <Navbar.Brand href="/">
+        <Navbar.Brand href="/home">
           <img
             className="company-logo"
             width={"160px"}
@@ -45,7 +45,7 @@ const Header = () => {
           >
           </Nav>
           <Nav.Link
-            href="#"
+            href="/upload"
             align="end"
             className="uploadBtn"
           >
@@ -64,7 +64,7 @@ const Header = () => {
             </span>
           </Nav.Link>
           <NavDropdown
-            title={<span className="profileBackground">{currentUser.username[0].toUpperCase()}{currentUser.username[1].toUpperCase()}</span>}
+            title={<span className="profileBackground">{currentUser.username.substring(0,2).toUpperCase()}</span>}
             align="end"
             id="navbarScrollingDropdown"
             className="navbarDropdownRight"

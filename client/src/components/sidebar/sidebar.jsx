@@ -51,7 +51,7 @@ function Sidebar() {
           </li>
           <hr className="solid sidebar-divider"></hr>
           <li>
-            <Link to="/file-upload">
+            <Link to="/upload">
               <span>
                 <AiOutlineCloudUpload />
               </span>
