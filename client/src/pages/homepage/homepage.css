@@ -2,18 +2,6 @@
   margin-top: 10vh;
 }
 
-.navbar-location {
-  background-color: #1c9941;
-  width: 20vw;
-  height: 80vh;
-}
-
-.footer-location {
-  background-color: grey;
-  width: 100vw;
-  height: 15vh;
-}
-
 .preview-border {
   border: 1px solid gray !important;
 }
@@ -34,5 +22,5 @@
 }
 
 .course-btn {
-  height: 88px;
+  height: 10vw;
 }

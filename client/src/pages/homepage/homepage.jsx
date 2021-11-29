@@ -1,9 +1,7 @@
-import { useLocation } from "react-router-dom";
+import Layout from "../../components/layout/layout.jsx";
+import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
-import Footer from "../footer/footer.jsx";
-import Header from "../header/header.jsx";
-import { useStore } from "../../store/store";
 
 
 function Homepage() {
@@ -11,46 +9,36 @@ function Homepage() {
   const { user: currentUser } = state;
 
   return (
-    <div>
-      <Header/>
-      <div className="row">
-        <div className="navbar-location col-3">
-          <h1>NAVBAR LOCATION</h1>
-        </div>
-        <div className="col-8">
-          <div className="row">
-            <h1>
-              Hi {currentUser ? currentUser.username: ""},
-              Welcome to your page
-            </h1>
-          </div>
+    <Layout>
+      <div className="row homepage-margin">
+        <div className="col">
           <div className="row mt-4">
             <h4>My Courses</h4>
             <div className="row mt-2">
               <div className="ml-1 col-2">
                 <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-danger"
+                  btn btn-block btn-success"
                 >
                   CS308
                 </button>
               </div>
               <div className="ml-1 col-2">
                 <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-danger"
+                  btn btn-block btn-success"
                 >
                   CS308
                 </button>
               </div>
               <div className="ml-1 col-2">
                 <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-danger"
+                  btn btn-block btn-success"
                 >
                   CS308
                 </button>
               </div>
               <div className="ml-1 col-2">
                 <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-danger"
+                  btn btn-block btn-success"
                 >
                   CS308
                 </button>
@@ -115,20 +103,9 @@ function Homepage() {
                   </div>
                 </button>
               </div>
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
             </div>
           </div>
-          <div className="row mt-4">
+          <div className="row mt-4 mb-5">
             <h4>Recently Viewed Courses</h4>
             <div className="row mt-2">
               <div className="ml-1 col-2">
@@ -163,8 +140,7 @@ function Homepage() {
           </div>
         </div>
       </div>
-      <Footer/>
-    </div>
+    </Layout>
   );
 }
 

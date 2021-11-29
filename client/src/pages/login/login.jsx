@@ -63,7 +63,7 @@ function Login() {
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">
         <div className="col-4 justify-content-start">
-          <div className="card p-1 mb-0">
+          <div className="card p-1 mb-0 card-shadow">
             <div className="card-body">
               <div className="text-center">
                 <h2 className="mt-2 mb-3">
@@ -100,7 +100,7 @@ function Login() {
                 <div className="mt-5 row text-center justify-content-center">
                   <button
                     type='submit'
-                    className="col-6 btn btn-block btn-warning"
+                    className="col-6 btn btn-block btn-success"
                   >
                       SIGN IN
                   </button>
@@ -110,7 +110,10 @@ function Login() {
                     <span
                       className="link-line-gap d-flex justify-content-center"
                     >
-                      <Link to="/forgotpassword"><p> Forgot your password?</p>
+                      <Link
+                        className="link-success"
+                        to="/forgotpassword"
+                      ><p> Forgot your password?</p>
                       </Link>
                     </span>
                   </div>
@@ -121,7 +124,10 @@ function Login() {
                       className="link-line-gap d-flex justify-content-center"
                     >
                     Don&apos;t have an account?
-                      <Link to="/signup">
+                      <Link
+                        className="link-success"
+                        to="/signup"
+                      >
                         <p>   Create one!</p>
                       </Link>
                     </span>

@@ -6,14 +6,17 @@ import "./header.css";
 import { useStore } from "../../store/store";
 import { userLogout } from "../../store/userReducer";
 import { useNavigate } from "react-router-dom";
+import logo from "../header/Courseflow.jpeg";
 
 const Header = () => {
-  const [, dispatch] = useStore();
+  const [state, dispatch] = useStore();
   const navigate = useNavigate();
+  const { user: currentUser } = state;
+
 
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
-    navigate("/login");
+    navigate("/landing");
   }, [dispatch, navigate]);
 
   return (
@@ -24,7 +27,15 @@ const Header = () => {
       style={{ position: "sticky" }}
     >
       <Container fluid>
-        <Navbar.Brand href="#">Courseflow</Navbar.Brand>
+        <Navbar.Brand href="/home">
+          <img
+            className="company-logo"
+            width={"160px"}
+            height={"70px"}
+            src={logo}
+            alt={"logo"}
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -34,7 +45,7 @@ const Header = () => {
           >
           </Nav>
           <Nav.Link
-            href="#"
+            href="/upload"
             align="end"
             className="uploadBtn"
           >
@@ -53,13 +64,13 @@ const Header = () => {
             </span>
           </Nav.Link>
           <NavDropdown
-            title={<span className="profileBackground">MT</span>}
+            title={<span className="profileBackground">{currentUser.username.substring(0,2).toUpperCase()}</span>}
             align="end"
             id="navbarScrollingDropdown"
             className="navbarDropdownRight"
           >
-            <NavDropdown.Item href="#action3">Home</NavDropdown.Item>
-            <NavDropdown.Item href="#action4">Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/">Home</NavDropdown.Item>
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item>Settings</NavDropdown.Item>
             <NavDropdown.Item
               onClick={onSubmit}
