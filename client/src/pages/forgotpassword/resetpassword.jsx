@@ -71,7 +71,7 @@ function ResetPassword() {
     const password = data;
     try {
       const response = await axios.put(
-        "http://localhost:5000/updatePasswordViaEmail",
+        `${process.env.REACT_APP_URL}/updatePasswordViaEmail`,
         {
           username,
           password,
