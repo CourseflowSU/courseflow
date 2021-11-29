@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import "../signup/signup.css";
+import { useNavigate } from "react-router";
 
 const signUpSchema = z
   .object({
@@ -49,7 +50,7 @@ function Signup() {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const onSubmit = useCallback((data) => {
     const newUser = {
       username: data.username,
@@ -68,6 +69,7 @@ function Signup() {
           setErrorMessage(`You created your account successfully,
             please login to use`);
           reset();
+          navigate("/login")
         } else {
           setErrorMessage("Error! Please try again.");
         }
@@ -76,7 +78,7 @@ function Signup() {
         console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
-  }, [reset]);
+  }, [reset, navigate]);
 
   return (
     <div className="imge">
