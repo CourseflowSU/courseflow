@@ -9,13 +9,10 @@ import { useNavigate } from "react-router-dom";
 import logo from "../header/Courseflow.jpeg";
 
 const Header = () => {
-  const [, dispatch] = useStore();
+  const [state, dispatch] = useStore();
   const navigate = useNavigate();
-  const [state] = useStore();
   const { user: currentUser } = state;
 
-  const [state] = useStore();
-  const { user: currentUser } = state;
 
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
