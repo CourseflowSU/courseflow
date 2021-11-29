@@ -11,6 +11,7 @@ import Signup from "./pages/signup/signup.jsx";
 import { useStore } from "./store/store";
 import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
+import Landing from "./pages/landing/landing.jsx";
 
 
 function App() {
@@ -27,12 +28,16 @@ function App() {
               element={<Login />}
             />
             <Route
+              path="/landing"
+              element={<Landing />}
+            />
+            <Route
               path="/signup"
               element={<Signup />}
             />
             <Route
               path="*"
-              element={<Login />}
+              element={<Landing />}
             />
             <Route
               exact
