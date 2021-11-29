@@ -16,7 +16,7 @@ const Header = () => {
 
   const onSubmit = useCallback((data) => {
     dispatch(userLogout());
-    navigate("/login");
+    navigate("/landing");
   }, [dispatch, navigate]);
 
   return (
