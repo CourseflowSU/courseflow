@@ -4,13 +4,12 @@
   margin-right: 10px;
 }
 .profileBackground {
-  background-color: #fee9ec;
-
-  padding: 10px 8px;
+  background-color: #1c9941;
+  padding: 8px 8px;
   border-radius: 50%;
   font-size: 12px;
   font-weight: 700;
-  color: #dd4b39;
+  color: #9effbb;
 }
 
 .uploadBtn {
@@ -30,4 +29,8 @@
 
 .company-logo {
   margin: 0px !important;
+}
+
+.homepage-margin {
+  margin-left: 1vw;
 }

@@ -39,3 +39,7 @@
   gap: 5px;
   flex-wrap: wrap;
 }
+
+.card-shadow {
+  border: 2px solid black;
+}
