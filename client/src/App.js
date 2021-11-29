@@ -9,8 +9,10 @@ import Homepage from "./pages/homepage/homepage.jsx";
 import Login from "./pages/login/login.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import { useStore } from "./store/store";
+import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
-
+import Landing from "./pages/landing/landing.jsx";
+import Upload from "./pages/upload/upload.jsx"
 
 function App() {
   const [state] = useStore();
@@ -26,12 +28,16 @@ function App() {
               element={<Login />}
             />
             <Route
+              path="/landing"
+              element={<Landing />}
+            />
+            <Route
               path="/signup"
               element={<Signup />}
             />
             <Route
               path="*"
-              element={<Login />}
+              element={<Landing />}
             />
             <Route
               exact
@@ -58,6 +64,14 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/upload"
+              element={<Upload/>}
+            />
+            <Route
+              path="/notes"
+              element={<Notes />}
             />
             <Route
               path="/login"

@@ -82,7 +82,7 @@ function ForgotPassword() {
                 <div className="mt-4 col text-center justify-content-center">
                   <button
                     type='submit'
-                    className="col-6 btn btn-block btn-warning"
+                    className="col-6 btn btn-block btn-success"
                   >
                       Reset Password
                   </button>

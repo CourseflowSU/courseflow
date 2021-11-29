@@ -1,0 +1,43 @@
+.loginBtn {
+  background-color: #1c9941;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+.loginBtn:hover {
+  background-color: #076e26;
+  border-radius: 3px;
+}
+.uploadBtnText {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.landing-search-container {
+  width: 100vw;
+  height: 40vh;
+  background-color: #136b2d;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    color: white;
+  }
+}
+
+.landing-input {
+  width: 40vw;
+}
+
+.top-document {
+  border: 1px solid grey;
+  font-size: small;
+}
+
+.top-document-text {
+  margin-bottom: 0px !important;
+  padding: 0px !important;
+}
+
+.top-info-text {
+  font-size: 20px;
+}

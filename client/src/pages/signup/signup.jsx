@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import "../signup/signup.css";
+import { useNavigate } from "react-router";
 
 const signUpSchema = z
   .object({
@@ -49,7 +50,7 @@ function Signup() {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const onSubmit = useCallback((data) => {
     const newUser = {
       username: data.username,
@@ -68,6 +69,7 @@ function Signup() {
           setErrorMessage(`You created your account successfully,
             please login to use`);
           reset();
+          navigate("/login")
         } else {
           setErrorMessage("Error! Please try again.");
         }
@@ -76,7 +78,7 @@ function Signup() {
         console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
-  }, [reset]);
+  }, [reset, navigate]);
 
   return (
     <div className="imge">
@@ -167,7 +169,12 @@ function Signup() {
                   >
                   </input>
                   <small>
-                    I have read and accepted <a href="s">Document1</a>
+                    I have read and accepted &nbsp;
+                    <a
+                      className="link-success"
+                      href="s"
+                    >Privacy Policy
+                    </a>
                   </small>
 
                 </div>
@@ -179,7 +186,7 @@ function Signup() {
                 <div className="mt-5 row text-center justify-content-center">
                   <div className="col-12">
                     <button
-                      className="btn btn-block col-6 btn-warning"
+                      className="btn btn-block col-6 btn-success"
                       type='submit'
                     >
                       SIGN UP
@@ -189,7 +196,11 @@ function Signup() {
 
                 <div className="mt-2 row text-center justify-content-center">
                   <div className="col-12">
-                    <Link to="/login"> <p> Already have an account? </p> </Link>
+                    <Link
+                      className="link-success"
+                      to="/login"
+                    > <p> Already have an account? </p>
+                    </Link>
                   </div>
                 </div>
               </form>
