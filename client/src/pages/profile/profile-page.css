@@ -7,7 +7,9 @@
 
 .profileImg {
   background-color: #1c9941;
-  padding: 50px 50px;
+  width: 130px;
+  height: 130px;
+  box-sizing: content-box;
   border-radius: 50%;
   font-size: 24px;
   font-weight: 700;
