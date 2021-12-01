@@ -273,4 +273,60 @@ userRoutes.put('/updatePasswordViaEmail', (req, res) => {
   });
 });
 
+userRoutes.route("/users/change-password").put( function (req, res) {
+  let db_connect = dbo.getDb("courseflow");
+  const BCRYPT_SALT_ROUNDS = 10;
+  const currUser = req.body.user;
+  let myQuery = { "email": currUser.email}
+
+  db_connect.collection("users")
+  .findOne(myQuery, async (err, result) => {
+    if(err){
+      console.log(err.message)
+    } 
+
+    else if(result) {
+      const validPassword = await bcrypt.compare(req.body.currentPassword.toString(), result.password);
+      console.log(validPassword, ""+req.body.password, result.password)
+      if(validPassword){
+        console.log("res:",result)
+
+        bcrypt.genSalt(BCRYPT_SALT_ROUNDS, function (saltError, salt) {
+        if (saltError) {
+          console.log(saltError);
+          return saltError
+        } 
+        else {
+          bcrypt.hash(req.body.password, salt, function (hashError, hash) {
+            if (hashError) {
+              console.log(hashError);
+              return hashError
+            }
+            console.log("updating...");
+            db_connect.collection("users").updateOne({ "email": currUser.email }, {
+              $set: {
+                "password": hash,
+              }
+            })
+              .then(() => {
+                console.log('password changed');
+                res.status(200).json(hash);
+              });
+          });
+        }
+        });
+       
+      }else {
+        res.status(200).json({message: "Current password is invalid"});
+      }
+    
+    }
+    else {
+      res.status(200).json({message: "Error! Please try again"});
+    }
+
+  }
+  );
+});
+
 module.exports = userRoutes;
