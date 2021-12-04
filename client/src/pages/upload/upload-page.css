@@ -116,3 +116,17 @@
     align-items: center;
   }
   
+  .pdf-document {
+    align-items: center;
+    margin-left: 40px;
+  }
+
+  .progessBar{
+    height: 1.65rem;
+    width: 0%;
+    background-color: rgb(68, 212, 231);
+    color: white;
+    padding:2px;
+    margin: 5px 0px 5px 0px;
+  }
+  

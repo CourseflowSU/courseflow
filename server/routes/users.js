@@ -3,8 +3,9 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer');
 const crypto = require("crypto");
 const Sequelize = require("sequelize");
+const fileUpload = require('express-fileupload');
 const Op = Sequelize.Op;
-
+const fs = require('fs');
 
 // userRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -13,10 +14,11 @@ const userRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
-
+var Binary = require('mongodb').Binary;
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require("express");
+userRoutes.use(fileUpload());
 
 // This section will help you get a list of all the users.
 userRoutes.route("/users").get(function (req, res) {
@@ -270,6 +272,23 @@ userRoutes.put('/updatePasswordViaEmail', (req, res) => {
       console.error('no user exists in db to update');
       res.status(401).json('no user exists in db to update');
     }
+  });
+});
+
+userRoutes.post('/upload', (req, res) => {
+  let db_connect = dbo.getDb("courseflow");
+  if (!req.files) {
+      return res.status(500).send({ msg: "file is not found" })
+  }
+      // accessing the file
+  const myFile = req.files.file;
+  const file = {}
+  myFile.data= Binary(myFile.data);
+  file.file = myFile;
+  file.info = req.body;
+  db_connect.collection("files").insertOne(file,  function (err, response) {
+    if (err) throw err;
+    res.json(response);
   });
 });
 
