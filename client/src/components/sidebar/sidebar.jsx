@@ -19,25 +19,28 @@ function Sidebar() {
           Home
             </Link>
           </li>
+          <hr className="sidebar-divider solid"></hr>
           <li>
-           
+
             <Link to="/courses">
               <span>
                 <AiFillFolder />
               </span>
                Courses
             </Link>
-            
-            
+
+
           </li>
+          <hr className="sidebar-divider solid"></hr>
           <li>
-            <Link to="/notes"> 
+            <Link to="/notes">
               <span>
                 <AiOutlineFileWord />
               </span>
           Notes
             </Link>
           </li>
+          <hr className="sidebar-divider solid"></hr>
           <li>
             <Link to="/recent-documents">
               <span>
@@ -46,14 +49,16 @@ function Sidebar() {
             Recent Documents
             </Link>
           </li>
+          <hr className="solid sidebar-divider"></hr>
           <li>
             <Link to="/upload">
               <span>
                 <AiOutlineCloudUpload />
-              </span>  
+              </span>
               Upload
             </Link>
           </li>
+          <hr className="sidebar-divider solid"></hr>
         </ul>
       </nav>
 
