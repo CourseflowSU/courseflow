@@ -2,7 +2,7 @@ import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
-
+import Course from "../../components/course/course.jsx";
 
 function Homepage() {
   const [state] = useStore();
@@ -15,33 +15,21 @@ function Homepage() {
           <div className="row mt-4">
             <h4>My Courses</h4>
             <div className="row mt-2">
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-success"
-                >
-                  CS308
-                </button>
+              <div className="row mt-2">
+                <div className="col-6">
+                  {Course()}
+                </div>
+                <div className="col-6">
+                  {Course()}
+                </div>
               </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-success"
-                >
-                  CS308
-                </button>
-              </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-success"
-                >
-                  CS308
-                </button>
-              </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-success"
-                >
-                  CS308
-                </button>
+              <div className="row mt-2">
+                <div className="col-6">
+                  {Course()}
+                </div>
+                <div className="col-6">
+                  {Course()}
+                </div>
               </div>
             </div>
           </div>
@@ -108,33 +96,21 @@ function Homepage() {
           <div className="row mt-4 mb-5">
             <h4>Recently Viewed Courses</h4>
             <div className="row mt-2">
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-success"
-                >
-                  CS308
-                </button>
+              <div className="row mt-2">
+                <div className="col-6">
+                  {Course()}
+                </div>
+                <div className="col-6">
+                  {Course()}
+                </div>
               </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-success"
-                >
-                  CS308
-                </button>
-              </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-success"
-                >
-                  CS308
-                </button>
-              </div>
-              <div className="ml-1 col-2">
-                <button className="col-12 course-btn ml-1
-                  btn btn-block btn-outline-success"
-                >
-                  CS308
-                </button>
+              <div className="row mt-2">
+                <div className="col-6">
+                  {Course()}
+                </div>
+                <div className="col-6">
+                  {Course()}
+                </div>
               </div>
             </div>
           </div>

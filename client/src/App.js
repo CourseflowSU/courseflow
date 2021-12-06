@@ -13,6 +13,8 @@ import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
 import Landing from "./pages/landing/landing.jsx";
 import Upload from "./pages/upload/upload.jsx"
+import CourseComment from "./pages/course-comment/course-comment.jsx";
+import University from "./pages/university/university-page.jsx";
 
 function App() {
   const [state] = useStore();
@@ -55,6 +57,14 @@ function App() {
             <Route
               path="/home"
               element={<Homepage />}
+            />
+            <Route
+              path="/coursecomments"
+              element={<CourseComment />}
+            />
+            <Route
+              path="/university"
+              element={<University />}
             />
             <Route
               exact
