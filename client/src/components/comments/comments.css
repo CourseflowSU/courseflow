@@ -1,0 +1,21 @@
+.icon-button-like {
+  padding: 0px !important;
+  border: none !important;
+  width: 30px;
+  height: 30px;
+}
+
+.like-count-text {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  text-align: center;
+}
+
+.commenter-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.comment-divider {
+  width: 70vw;
+}
