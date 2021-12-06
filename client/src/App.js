@@ -14,8 +14,6 @@ import Profile from "./pages/profile/profile-page.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import Upload from "./pages/upload/upload.jsx";
 import { useStore } from "./store/store";
-import Landing from "./pages/landing/landing.jsx";
-import Upload from "./pages/upload/upload.jsx"
 import CourseComment from "./pages/course-comment/course-comment.jsx";
 import University from "./pages/university/university-page.jsx";
 
