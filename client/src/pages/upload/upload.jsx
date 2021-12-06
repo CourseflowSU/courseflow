@@ -44,15 +44,17 @@ function Upload() {
   const [isSelected, setIsSelected] = useState(false);
   const [numPages, setNumPages] = useState(null);
   const [progress, setProgress] = useState(0); // progess bar
-  const [courseName, setCourseName] = useState();
-  const [courseCode, setCourseCode] = useState();
-  const [university, setUniversity] = useState();
-
+  const [pdfError, setPdfError] = useState("");
 
   const changeHandler = (event) => {
-    
-    setSelectedFile(event.target.files[0]);
-    setIsSelected(true);
+    if (event.target.files[0].type == "application/pdf") {
+      setSelectedFile(event.target.files[0]);
+      setIsSelected(true);
+    }
+    else {
+      setPdfError("Please only upload PDF files.");
+    }
+
   };
 
   const onSubmit = async (data) => {
@@ -162,7 +164,7 @@ function Upload() {
                   width: "100%",
                 }}
               >
-                    
+                {pdfError}
               </div>
             )}          
           </div>
