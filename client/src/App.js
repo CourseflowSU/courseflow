@@ -1,20 +1,24 @@
 import React from "react";
 import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import ChangePassword from "./pages/change-password/change-password.jsx";
+import ErrorPage from "./pages/error-page/error-page.jsx";
 import ForgotPassword from "./pages/forgotpassword/forgotpassword.jsx";
 import ResetPassword from "./pages/forgotpassword/resetpassword.jsx";
-import "./App.css";
-import ErrorPage from "./pages/error-page/error-page.jsx";
 import Homepage from "./pages/homepage/homepage.jsx";
+import Landing from "./pages/landing/landing.jsx";
 import Login from "./pages/login/login.jsx";
-import Signup from "./pages/signup/signup.jsx";
-import { useStore } from "./store/store";
 import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
+import Signup from "./pages/signup/signup.jsx";
+import Upload from "./pages/upload/upload.jsx";
+import { useStore } from "./store/store";
 import Landing from "./pages/landing/landing.jsx";
 import Upload from "./pages/upload/upload.jsx"
 import CourseComment from "./pages/course-comment/course-comment.jsx";
 import University from "./pages/university/university-page.jsx";
+
 
 function App() {
   const [state] = useStore();
@@ -82,6 +86,10 @@ function App() {
             <Route
               path="/notes"
               element={<Notes />}
+            />
+            <Route
+              path="/change-password"
+              element={<ChangePassword />}
             />
             <Route
               path="/login"
