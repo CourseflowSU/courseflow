@@ -31,7 +31,7 @@ function AboutUs() {
       </div>
       <div className="site_contents">
         <div className="row mt-1 aboutUs_contents">
-          <div className="col-4">
+          <div className="col-4 site_contents_div">
             <IoMdSchool
               className="site_contents_icon"
               style={{ color: "#0088d7" }}
@@ -43,7 +43,7 @@ function AboutUs() {
             </p>
             <p className="site_contents_p">Not only view or download the best study materials, you can also compare thousands of courses.</p>
           </div>
-          <div className="col-4">
+          <div className="col-4 site_contents_div">
             <IoMdSchool
               className="site_contents_icon"
               style={{ color: "#b987ce" }}
@@ -55,7 +55,7 @@ function AboutUs() {
             </p>
             <p className="site_contents_p">Millions of study documents have been shared by students and are accessible to everyone in the world.</p>
           </div>
-          <div className="col-4">
+          <div className="col-4 site_contents_div">
             <IoMdSchool
               className="site_contents_icon"
               style={{ color: "#fabf26" }}

@@ -47,6 +47,10 @@
     background-color: #f2f3f5;
     padding: 25px;
 }
+.site_contents_div {
+  padding-left: 45px !important;
+  padding-right: 45px !important;
+}
 
 .site_contents_p {
     margin: 0 0 10px;
