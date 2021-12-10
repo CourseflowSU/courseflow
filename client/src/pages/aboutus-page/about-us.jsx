@@ -1,15 +1,13 @@
-import "./about-us.css";
+import { IoMdSchool } from "react-icons/io";
+import { HiDocumentText } from "react-icons/hi";
+import { RiNumbersFill } from "react-icons/ri";
+
+import bookImg from "../../assets/aboutUs.jpeg";
 import Mert from "../../assets/mert.jpg";
-import Layout from "../../components/layout/layout.jsx";
-import { Container, Nav, NavDropdown } from "react-bootstrap";
-import Navbar from "react-bootstrap/Navbar";
-import { AiFillBank, AiOutlineBulb, AiOutlineCloudUpload, AiOutlineFileText } from "react-icons/ai";
-import logo from "../header/Courseflow.jpeg";
-import { Link } from "react-router-dom";
+import MPhoto from "../../assets/mizbah.jpg"
 import Footer from "../footer/footer.jsx";
 import Header from "../header/header.jsx";
-import bookImg from "../../assets/aboutUs.jpeg";
-import { IoMdSchool } from "react-icons/io";
+import "./about-us.css";
 function AboutUs() {
   return (
     <div>
@@ -44,7 +42,7 @@ function AboutUs() {
             <p className="site_contents_p">Not only view or download the best study materials, you can also compare thousands of courses.</p>
           </div>
           <div className="col-4 site_contents_div">
-            <IoMdSchool
+            <HiDocumentText
               className="site_contents_icon"
               style={{ color: "#b987ce" }}
             />
@@ -56,7 +54,7 @@ function AboutUs() {
             <p className="site_contents_p">Millions of study documents have been shared by students and are accessible to everyone in the world.</p>
           </div>
           <div className="col-4 site_contents_div">
-            <IoMdSchool
+            <RiNumbersFill
               className="site_contents_icon"
               style={{ color: "#fabf26" }}
             />
@@ -90,13 +88,15 @@ function AboutUs() {
               <div className="col-4 founder_contents_in founder_contents_box">
                 <img
                   className="founder_img" 
-                  src={Mert}
+                  src={MPhoto}
                   alt="imageFounder"
                 >
                 </img>
                 <p className="founder_name">Mizbah Çelik</p>
                 <p className="founder_pos">Software Engineer</p>
-                <p className="founder_info">Please Fill It Mizbahcım</p>
+                <p className="founder_info">Computer Science and Engineering 
+                Student mostly interested in Full-Stack development and Badminton
+                </p>
               </div>
               <div className="col-4 founder_contents_in founder_contents_box">
                 <img
