@@ -329,4 +329,42 @@ userRoutes.route("/users/change-password").put( function (req, res) {
   );
 });
 
+
+
+userRoutes.post('/contactMessage', (req, res) => {
+  let db_connect = dbo.getDb("courseflow");
+  if (req.body.message === '') {
+    res.status(400).send('message required');
+  }
+  console.error(req.body.message);
+
+    
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: `${process.env.EMAIL_ADDRESS}`,
+      pass: `${process.env.EMAIL_PASSWORD}`,
+    },
+  });
+
+  const mailOptions = {
+    from: `${req.body.currentUser.email}`,
+    to: 'courseflowSU@gmail.com',
+    subject: `Contact Us Message From ${req.body.currentUser.username}`,
+    text:
+      `${req.body.message}`,
+  };
+
+  console.log('sending mail');
+
+  transporter.sendMail(mailOptions, (err, response) => {
+    if (err) {
+      console.error('there was an error: ', err);
+    } else {
+      console.log('here is the res: ', response);
+      res.status(200).json('contact email sent');
+    }
+  });
+});
+
 module.exports = userRoutes;

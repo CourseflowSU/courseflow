@@ -17,6 +17,8 @@ import { useStore } from "./store/store";
 import CourseComment from "./pages/course-comment/course-comment.jsx";
 import University from "./pages/university/university-page.jsx";
 import AboutUs from "./pages/aboutus-page/about-us.jsx";
+import ContactUs from "./pages/contactus-page/contact-us.jsx";
+
 
 function App() {
   const [state] = useStore();
@@ -80,6 +82,10 @@ function App() {
             <Route
               path="/aboutUs"
               element={<AboutUs />}
+            />
+            <Route
+              path="/contactUs"
+              element={<ContactUs />}
             />
             <Route
               path="/upload"
