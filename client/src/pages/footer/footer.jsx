@@ -8,6 +8,7 @@ import React from "react";
 //   Heading,
 // } from "./FooterStyles";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import "./footer.css";
 
 const Footer = () => {
@@ -23,7 +24,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Column>
-            <Heading>About Us</Heading>
+            <LinkFooter href="/aboutUs"> About Us </LinkFooter>
             <FooterLink href="#">Courses</FooterLink>
             <FooterLink href="#">Notes</FooterLink>
             <FooterLink href="#">Exams</FooterLink>
@@ -79,6 +80,7 @@ export const Box = styled.div`
   position: flex;
   bottom: 0;
   width: 100%;
+  margin-top: 20px; 
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
@@ -124,6 +126,17 @@ export const Heading = styled.p`
   color: #4e657e;
   margin-bottom: 25px;
   font-weight: bold;
+`;
+export const LinkFooter = styled.a`
+  font-size: 18px;
+  color: #4e657e;
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover {
+    color: green;
+    transition: 200ms ease-in;
+}
 `;
 
 
