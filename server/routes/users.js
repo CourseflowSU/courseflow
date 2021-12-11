@@ -286,10 +286,169 @@ userRoutes.post('/upload', (req, res) => {
   myFile.data= Binary(myFile.data);
   file.file = myFile;
   file.info = req.body;
-  db_connect.collection("files").insertOne(file,  function (err, response) {
+  // "courses": {"courseCode": req.body.courseCode}
+  db_connect.collection("universities").findOne({"universityName": req.body.university, }, function(err, response) {
     if (err) throw err;
-    res.json(response);
+    else if (response == null) {
+      console.log("1");
+      db_connect.collection("universities").insertOne({"universityName": req.body.university, 
+      "courses": [{"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files": [file]}]}, function(err1, response1) {
+        if (err1) throw err1;
+        res.json(response1);
+      })
+    }
+    else {
+      console.log("2");
+      db_connect.collection("universities")
+      .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode, "courses.courseName": req.body.courseName}, function(err2, response2) {
+        if (err2) throw err2;
+        else if (response2 == null) {
+          console.log(response);
+          var new_response = response;
+          new_response.courses.push({"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files": [file]});
+          console.log(new_response);
+          db_connect.collection("universities").updateOne({"universityName": response.universityName}, { $set: {"courses": new_response.courses}},{upsert: true}, function(err3, response3) {
+            if (err3) throw err3;
+            res.json(response3);
+          })
+        }
+        else {
+          console.log("sa");
+          console.log(response2);
+          let new_response = response2;
+          let courseNum;
+          for (let i = 0; i < response2.courses.length; i++) {
+            if (response2.courses[i].courseCode === req.body.courseCode) {
+              new_response.courses[i].files.push(file);
+              courseNum = i;
+            }
+          }
+          db_connect.collection("universities")
+          .updateOne({"universityName": response2.universityName, "courses.courseCode": req.body.courseCode},
+           {$set: { "courses": new_response.courses}}, {upsert: true}, function(err4, response4) {
+             if (err4) throw err4;
+             res.json(response4);
+           })
+        }
+      });
+    
+      
+      
+    }
   });
+
+  // db_connect.collection("universities")
+  // .updateOne({ "universityName": req.body.university} , 
+  // { $set: {"courses": {"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files":file}}},{upsert: true}, function(err, response) {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   else {
+  //     // db_connect.collection("universities").findOne({ "university": req.body.university} , function (err_un, response_un) {
+  //     //   var old_course_query = {courseName: req.body.courseName, courseCode: req.body.courseName};
+  //     //   var new_course_query = { $set: {courseName: req.body.courseName, courseCode: req.body.courseName} };
+  //     //   db_connect.collection("universities").collection("courses").updateOne(old_course_query, new_course_query, function (err_co, response_co) {
+  //     //     if (err_co) {
+  //     //       throw err_co;
+  //     //     }
+  //     //     else {
+  //     //       res.json(response_co);
+  //     //     }
+  //     //   });
+  //     // });
+  //     res.json(response);
+  //   }
+  // })
+
+  // db.getCollection('PetCare')
+  //.update({"userDetails.contactNumber":"12345678989"},{"$set":{"userDetails.address":{"country":"India","city":"Blore"}}})
+  // .collection("courses").updateOne(old_course_query, new_course_query)
+  // .collection("files").updateOne({file: file}, { $set: {file: file}}, function(err, response) {
+  //   if (err) throw err;
+  //   res.json(response);
+  // });
+});
+
+/*
+  universities : {
+    sabancı: {
+      courses: {
+        {
+          cs308,
+          software engineering
+          files: {
+            week1
+          }
+        }, 
+        {
+          cs310,
+          mobile,
+          files: {
+            week10
+          }
+        }
+      }
+    }
+    
+
+  }
+
+*/
+
+userRoutes.route("/users/change-password").put( function (req, res) {
+  let db_connect = dbo.getDb("courseflow");
+  const BCRYPT_SALT_ROUNDS = 10;
+  const currUser = req.body.user;
+  let myQuery = { "email": currUser.email}
+
+  db_connect.collection("users")
+  .findOne(myQuery, async (err, result) => {
+    if(err){
+      console.log(err.message)
+    } 
+
+    else if(result) {
+      const validPassword = await bcrypt.compare(req.body.currentPassword.toString(), result.password);
+      console.log(validPassword, ""+req.body.password, result.password)
+      if(validPassword){
+        console.log("res:",result)
+
+        bcrypt.genSalt(BCRYPT_SALT_ROUNDS, function (saltError, salt) {
+        if (saltError) {
+          console.log(saltError);
+          return saltError
+        } 
+        else {
+          bcrypt.hash(req.body.password, salt, function (hashError, hash) {
+            if (hashError) {
+              console.log(hashError);
+              return hashError
+            }
+            console.log("updating...");
+            db_connect.collection("users").updateOne({ "email": currUser.email }, {
+              $set: {
+                "password": hash,
+              }
+            })
+              .then(() => {
+                console.log('password changed');
+                res.status(200).json(hash);
+              });
+          });
+        }
+        });
+       
+      }else {
+        res.status(200).json({message: "Current password is invalid"});
+      }
+    
+    }
+    else {
+      res.status(200).json({message: "Error! Please try again"});
+    }
+
+  }
+  );
 });
 
 module.exports = userRoutes;

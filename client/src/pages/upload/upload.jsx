@@ -4,7 +4,6 @@ import "./upload-page.css";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import Button from "@material-ui/core/Button";
-import { Viewer , Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import axios from "axios";
 import "@react-pdf-viewer/core/lib/styles/index.css";
@@ -62,9 +61,9 @@ function Upload() {
     setProgress(0);
     const formData = new FormData();
     formData.append("file", selectedFile); // appending file
-    formData.append("courseCode", data.courseCode.replace(" ", ""));
-    formData.append("courseName", data.courseName.replace(" ", ""));
-    formData.append("university", data.university.replace(" ", ""));
+    formData.append("courseCode", data.courseCode.replace(" ", "_"));
+    formData.append("courseName", data.courseName.replace(" ", "_"));
+    formData.append("university", data.university.replace(" ", "_"));
     formData.append("username", currentUser.username);
     await axios.post(`${process.env.REACT_APP_URL}/upload`, formData, {
       onUploadProgress: (ProgressEvent) => {

@@ -10,7 +10,7 @@ function Profile() {
     <Layout>
       <div className="profile-info row align-items-center mr-0">
         <div className="col-2 profileImgLocation mt-2">
-          {<span className="profileImg">MT</span>}
+          <div className="text-center d-flex justify-content-center align-items-center profileImg">{currentUser.username.substring(0,2).toUpperCase()}</div>
         </div>
         <div className="col-3">
           <div className="mt-3" >
