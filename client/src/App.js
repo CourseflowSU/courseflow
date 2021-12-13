@@ -3,6 +3,8 @@ import { Navigate } from "react-router";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import ChangePassword from "./pages/change-password/change-password.jsx";
+import CourseComment from "./pages/course-comment/course-comment.jsx";
+import Courses from "./pages/courses/courses.jsx";
 import ErrorPage from "./pages/error-page/error-page.jsx";
 import ForgotPassword from "./pages/forgotpassword/forgotpassword.jsx";
 import ResetPassword from "./pages/forgotpassword/resetpassword.jsx";
@@ -12,10 +14,9 @@ import Login from "./pages/login/login.jsx";
 import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
 import Signup from "./pages/signup/signup.jsx";
+import University from "./pages/university/university-page.jsx";
 import Upload from "./pages/upload/upload.jsx";
 import { useStore } from "./store/store";
-import CourseComment from "./pages/course-comment/course-comment.jsx";
-import University from "./pages/university/university-page.jsx";
 
 
 function App() {
@@ -84,6 +85,10 @@ function App() {
             <Route
               path="/notes"
               element={<Notes />}
+            />
+            <Route
+              path="/courses"
+              element={<Courses />}
             />
             <Route
               path="/change-password"

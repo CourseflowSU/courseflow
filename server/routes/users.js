@@ -451,4 +451,16 @@ userRoutes.route("/users/change-password").put( function (req, res) {
   );
 });
 
+userRoutes.route("/courses").get(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  db_connect
+    .collection("universities")
+    .find({})
+    .toArray(function (err, result) {
+      if (err) throw err;
+      console.log(result);
+      res.json(result);
+    });
+})
+
 module.exports = userRoutes;
