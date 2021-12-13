@@ -26,7 +26,6 @@ function Courses() {
 
   useEffect(() => {
     getCourses();
-    
   }, [])
   return (
     <Layout>
@@ -36,6 +35,7 @@ function Courses() {
           
           {
             list.map((item) => {
+  
               return(
                 <div 
                   key={item.courseCode}
@@ -45,7 +45,7 @@ function Courses() {
                     className="col-12"
                   >
                     <Course
-                      name={`${item.courseCode} - ${item.courseName}`} 
+                      code={`${item.courseCode}-${item.courseName}`} 
                       university={item.university}
                     >
                     </Course>
