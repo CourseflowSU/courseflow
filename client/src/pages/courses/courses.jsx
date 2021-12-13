@@ -1,15 +1,26 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Course from "../../components/course/course.jsx";
 import Layout from "../../components/layout/layout.jsx";
 
 
 function Courses() {
 
+  const [list, setList] = useState([]);
+
   const getCourses = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/courses`)
       .then(res => {
-        console.log(res);
+        console.log(res.data);
+        const data = res.data;
+        let courseList = [];
+        data.forEach(uni => {
+          courseList = courseList.concat(...uni.courses)
+        });
+       
+        console.log(courseList);
+
+        setList(courseList);
       }).catch(err => console.log(err))
   }
 
@@ -22,28 +33,30 @@ function Courses() {
       <div className="row m-4">
         <h4>Courses</h4>
         <div className="row mt-2">
-          <div className="row mt-2">
-            <div className="col-6">
-              <Course
-                name={"CS308"} 
-                university={"Sabanci University"}
-              >
-              </Course>
-            </div>
-            <div className="col-6">
-              <Course></Course>
-            </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-6">
-              <Course></Course>
-
-            </div>
-            <div className="col-6">
-              <Course></Course>
-
-            </div>
-          </div>
+          
+          {
+            list.map((item) => {
+              return(
+                <div 
+                  key={item.courseCode}
+                  className="row mt-4"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <Course
+                      name={`${item.courseCode} - ${item.courseName}`} 
+                      university={item.university}
+                    >
+                    </Course>
+                  </div>
+                </div>
+              );
+            })
+          }
+    
+      
+        
         </div>
       </div>
     </Layout>

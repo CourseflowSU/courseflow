@@ -35,7 +35,7 @@ function Course({ name, university }) {
           </div>
 
         </div>
-
+        {/* 
         <div className="row">
           <div className="col-6">
             <a
@@ -54,7 +54,7 @@ function Course({ name, university }) {
             </a>
           </div>
 
-        </div>
+        </div> */}
 
 
       </button>
