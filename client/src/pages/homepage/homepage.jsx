@@ -17,18 +17,18 @@ function Homepage() {
             <div className="row mt-2">
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>
@@ -98,18 +98,18 @@ function Homepage() {
             <div className="row mt-2">
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>

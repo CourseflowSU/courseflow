@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useStore } from "../../store/store";
-import "./upload-page.css";
-import Header from "../header/header.jsx";
-import Footer from "../footer/footer.jsx";
-import Button from "@material-ui/core/Button";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import axios from "axios";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Document,Page } from "react-pdf/dist/esm/entry.webpack";
+import Button from "@material-ui/core/Button";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import axios from "axios";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
+import { z } from "zod";
+import { useStore } from "../../store/store";
+import Footer from "../footer/footer.jsx";
+import Header from "../header/header.jsx";
+import "./upload-page.css";
 
 const fileUploadSchema = z
   .object({
@@ -125,48 +125,7 @@ function Upload() {
           ) : (
             <p>Select a file to show details</p>
           )}
-          <div className='pdf-container'>
-            {/* show pdf conditionally (if we have one)  */}
-            
-            {isSelected ? (
-              <div
-                style={{
-                  border: "1px solid rgba(0, 0, 0, 0.3)",
-                  height: "100%",
-                }}
-              >
-                <Document
-                  className="pdf-document"
-                  file={selectedFile}
-                  onLoadSuccess={({ numPages })=>setNumPages(numPages)}
-                >
-                  {Array.apply(null, Array(numPages))
-                    .map((x, i)=>i+1)
-                    .map(page => <Page
-                      
-                      key={page}
-                      pageNumber={page}
-                    />  
-                    )}
-                </Document>
-                <p> {numPages} </p>
-              </div>
-            ) : (
-              <div
-                style={{
-                  alignItems: "center",
-                  border: "2px dashed rgba(0, 0, 0, .3)",
-                  display: "flex",
-                  fontSize: "2rem",
-                  height: "100%",
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                {pdfError}
-              </div>
-            )}          
-          </div>
+          
           <div
             className="progessBar"
             style={{ width: progress }}
@@ -217,7 +176,7 @@ function Upload() {
                 
           
               <button
-                className="btn uploadBtn"
+                className="btn col-2 uploadBtn"
                 styles={{ display: "none" }}
                 onClick={handleSubmit(onSubmit)}
               >
@@ -227,6 +186,49 @@ function Upload() {
               </button> 
             </div>
           ) : "" }
+
+          <div className='pdf-container'>
+            {/* show pdf conditionally (if we have one)  */}
+            
+            {isSelected ? (
+              <div
+                style={{
+                  border: "1px solid rgba(0, 0, 0, 0.3)",
+                  height: "100%",
+                }}
+              >
+                <Document
+                  className="pdf-document"
+                  file={selectedFile}
+                  onLoadSuccess={({ numPages })=>setNumPages(numPages)}
+                >
+                  {Array.apply(null, Array(numPages))
+                    .map((x, i)=>i+1)
+                    .map(page => <Page
+                      
+                      key={page}
+                      pageNumber={page}
+                    />  
+                    )}
+                </Document>
+                <p> {numPages} </p>
+              </div>
+            ) : (
+              <div
+                style={{
+                  alignItems: "center",
+                  border: "2px dashed rgba(0, 0, 0, .3)",
+                  display: "flex",
+                  fontSize: "2rem",
+                  height: "100%",
+                  justifyContent: "center",
+                  width: "100%",
+                }}
+              >
+                {pdfError}
+              </div>
+            )}          
+          </div>
           
         </div>
       </div>
