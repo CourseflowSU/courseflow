@@ -5,6 +5,8 @@ import { RiNumbersFill } from "react-icons/ri";
 import bookImg from "../../assets/aboutUs.jpeg";
 import Mert from "../../assets/mert.jpg";
 import MPhoto from "../../assets/mizbah.jpg"
+import Kerem from "../../assets/kerem.jpg";
+
 import Footer from "../footer/footer.jsx";
 import Header from "../header/header.jsx";
 import "./about-us.css";
@@ -101,13 +103,13 @@ function AboutUs() {
               <div className="col-4 founder_contents_in founder_contents_box">
                 <img
                   className="founder_img" 
-                  src={Mert}
+                  src={Kerem}
                   alt="imageFounder"
                 >
                 </img>
                 <p className="founder_name">Kerem Kör</p>
                 <p className="founder_pos">Software Engineer</p>
-                <p className="founder_info">Please Fill It Keremcim</p>
+                <p className="founder_info">A computer-science student with math background who wants to be working on Game Development</p>
               </div>
             </div>
           </div>
