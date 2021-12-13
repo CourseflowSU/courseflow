@@ -292,7 +292,7 @@ userRoutes.post('/upload', (req, res) => {
     else if (response == null) {
       console.log("1");
       db_connect.collection("universities").insertOne({"universityName": req.body.university, 
-      "courses": [{"courseName": req.body.courseName, "courseCode": req.body.courseCode,"university": req.body.university, "files": [file]}]}, function(err1, response1) {
+      "courses": [{"courseName": req.body.courseName, "courseCode": req.body.courseCode,"university": req.body.university,"files": [file], "comments":[]}]}, function(err1, response1) {
         if (err1) throw err1;
         res.json(response1);
       })
@@ -305,7 +305,7 @@ userRoutes.post('/upload', (req, res) => {
         else if (response2 == null) {
           console.log(response);
           var new_response = response;
-          new_response.courses.push({"courseName": req.body.courseName, "courseCode": req.body.courseCode,"university": req.body.university, "files": [file]});
+          new_response.courses.push({"courseName": req.body.courseName, "courseCode": req.body.courseCode,"university": req.body.university, "files": [file], "comments":[]});
           console.log(new_response);
           db_connect.collection("universities").updateOne({"universityName": response.universityName}, { $set: {"courses": new_response.courses}},{upsert: true}, function(err3, response3) {
             if (err3) throw err3;
