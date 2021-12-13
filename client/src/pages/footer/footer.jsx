@@ -29,7 +29,7 @@ const Footer = () => {
             <FooterLink href="#">Exams</FooterLink>
           </Column>
           <Column>
-            <Heading>Contact Us</Heading>
+            <LinkFooter href="/contactUs" >Contact Us</LinkFooter>
             <FooterLink href="https://www.linkedin.com/in/mizbah-celik/">Mizbah Celik</FooterLink>
             <FooterLink href="https://www.linkedin.com/in/mert-ture/">Mert Ture</FooterLink>
             <FooterLink href="https://www.linkedin.com/in/keremkor/">Kerem Kor</FooterLink>
