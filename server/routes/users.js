@@ -3,8 +3,9 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer');
 const crypto = require("crypto");
 const Sequelize = require("sequelize");
+const fileUpload = require('express-fileupload');
 const Op = Sequelize.Op;
-
+const fs = require('fs');
 
 // userRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -13,10 +14,11 @@ const userRoutes = express.Router();
 
 // This will help us connect to the database
 const dbo = require("../db/conn");
-
+var Binary = require('mongodb').Binary;
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
 const { request } = require("express");
+userRoutes.use(fileUpload());
 
 // This section will help you get a list of all the users.
 userRoutes.route("/users").get(function (req, res) {
@@ -272,6 +274,126 @@ userRoutes.put('/updatePasswordViaEmail', (req, res) => {
     }
   });
 });
+
+userRoutes.post('/upload', (req, res) => {
+  let db_connect = dbo.getDb("courseflow");
+  if (!req.files) {
+      return res.status(500).send({ msg: "file is not found" })
+  }
+      // accessing the file
+  const myFile = req.files.file;
+  const file = {}
+  myFile.data= Binary(myFile.data);
+  file.file = myFile;
+  file.info = req.body;
+  // "courses": {"courseCode": req.body.courseCode}
+  db_connect.collection("universities").findOne({"universityName": req.body.university, }, function(err, response) {
+    if (err) throw err;
+    else if (response == null) {
+      console.log("1");
+      db_connect.collection("universities").insertOne({"universityName": req.body.university, 
+      "courses": [{"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files": [file]}]}, function(err1, response1) {
+        if (err1) throw err1;
+        res.json(response1);
+      })
+    }
+    else {
+      console.log("2");
+      db_connect.collection("universities")
+      .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode, "courses.courseName": req.body.courseName}, function(err2, response2) {
+        if (err2) throw err2;
+        else if (response2 == null) {
+          console.log(response);
+          var new_response = response;
+          new_response.courses.push({"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files": [file]});
+          console.log(new_response);
+          db_connect.collection("universities").updateOne({"universityName": response.universityName}, { $set: {"courses": new_response.courses}},{upsert: true}, function(err3, response3) {
+            if (err3) throw err3;
+            res.json(response3);
+          })
+        }
+        else {
+          console.log("sa");
+          console.log(response2);
+          let new_response = response2;
+          let courseNum;
+          for (let i = 0; i < response2.courses.length; i++) {
+            if (response2.courses[i].courseCode === req.body.courseCode) {
+              new_response.courses[i].files.push(file);
+              courseNum = i;
+            }
+          }
+          db_connect.collection("universities")
+          .updateOne({"universityName": response2.universityName, "courses.courseCode": req.body.courseCode},
+           {$set: { "courses": new_response.courses}}, {upsert: true}, function(err4, response4) {
+             if (err4) throw err4;
+             res.json(response4);
+           })
+        }
+      });
+    
+      
+      
+    }
+  });
+
+  // db_connect.collection("universities")
+  // .updateOne({ "universityName": req.body.university} , 
+  // { $set: {"courses": {"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files":file}}},{upsert: true}, function(err, response) {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //   else {
+  //     // db_connect.collection("universities").findOne({ "university": req.body.university} , function (err_un, response_un) {
+  //     //   var old_course_query = {courseName: req.body.courseName, courseCode: req.body.courseName};
+  //     //   var new_course_query = { $set: {courseName: req.body.courseName, courseCode: req.body.courseName} };
+  //     //   db_connect.collection("universities").collection("courses").updateOne(old_course_query, new_course_query, function (err_co, response_co) {
+  //     //     if (err_co) {
+  //     //       throw err_co;
+  //     //     }
+  //     //     else {
+  //     //       res.json(response_co);
+  //     //     }
+  //     //   });
+  //     // });
+  //     res.json(response);
+  //   }
+  // })
+
+  // db.getCollection('PetCare')
+  //.update({"userDetails.contactNumber":"12345678989"},{"$set":{"userDetails.address":{"country":"India","city":"Blore"}}})
+  // .collection("courses").updateOne(old_course_query, new_course_query)
+  // .collection("files").updateOne({file: file}, { $set: {file: file}}, function(err, response) {
+  //   if (err) throw err;
+  //   res.json(response);
+  // });
+});
+
+/*
+  universities : {
+    sabancı: {
+      courses: {
+        {
+          cs308,
+          software engineering
+          files: {
+            week1
+          }
+        }, 
+        {
+          cs310,
+          mobile,
+          files: {
+            week10
+          }
+        }
+      }
+    }
+    
+
+  }
+
+*/
 
 userRoutes.route("/users/change-password").put( function (req, res) {
   let db_connect = dbo.getDb("courseflow");
