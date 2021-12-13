@@ -16,7 +16,7 @@ import Upload from "./pages/upload/upload.jsx";
 import { useStore } from "./store/store";
 import CourseComment from "./pages/course-comment/course-comment.jsx";
 import University from "./pages/university/university-page.jsx";
-
+import AboutUs from "./pages/aboutus-page/about-us.jsx";
 
 function App() {
   const [state] = useStore();
@@ -76,6 +76,10 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/aboutUs"
+              element={<AboutUs />}
             />
             <Route
               path="/upload"
