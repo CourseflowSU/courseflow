@@ -19,18 +19,18 @@ function University() {
             <div className="row">
               <div className="row">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>
@@ -39,18 +39,18 @@ function University() {
             <div className="row">
               <div className="row">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>
@@ -59,18 +59,18 @@ function University() {
             <div className="row">
               <div className="row">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>
@@ -79,18 +79,18 @@ function University() {
             <div className="row">
               <div className="row">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
               <div className="row mt-2">
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
                 <div className="col-6">
-                  {Course()}
+                  <Course />
                 </div>
               </div>
             </div>

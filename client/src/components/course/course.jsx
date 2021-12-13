@@ -1,16 +1,18 @@
+import PropTypes from "prop-types";
 import "../course/course.scss";
 
-function Course() {
+
+function Course({ name, university }) {
 
   return (
     <div>
       <button className="col-12 mb-1 btn btn-block btn-outline-success course-button">
         <div className="row justify-content-between">
           <div className="col-6">
-            <h4 className="text-start" >Course Name</h4>
+            <h4 className="text-start" >{name}</h4>
           </div>
           <div className="col-4">
-            <p className="text-end text-xsm" >Sabanci University</p>
+            <p className="text-end text-xsm" >{university}</p>
           </div>
         </div>
 
@@ -33,7 +35,7 @@ function Course() {
           </div>
 
         </div>
-
+        {/* 
         <div className="row">
           <div className="col-6">
             <a
@@ -52,7 +54,7 @@ function Course() {
             </a>
           </div>
 
-        </div>
+        </div> */}
 
 
       </button>
@@ -60,4 +62,15 @@ function Course() {
   );
 }
 
+
+
+Course.propTypes = {
+  name:PropTypes.string,
+  university: PropTypes.string
+}
+
+Course.defaultProps = {
+  name:"unknown",
+  university: "unknown"
+} 
 export default Course;
