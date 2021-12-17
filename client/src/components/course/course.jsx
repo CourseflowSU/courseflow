@@ -5,17 +5,17 @@ import { useNavigate } from "react-router";
 import "../course/course.scss";
 
 
-function Course({ code, university }) {
+function Course({ courseCode, name,  university, addToFav }) {
 
   const navigate = useNavigate();
 
   const goToCourse = (e) => {
-    if(code !== "unknown" && university !== "unknown"){
+    if(courseCode !== "unknown" && university !== "unknown"){
       e.preventDefault();
       e.stopPropagation();
-      navigate(`/courses/${university}/${code}`)
+      navigate(`/courses/${university}/${courseCode}`)
     }
-   
+
   }
 
   return (
@@ -28,8 +28,8 @@ function Course({ code, university }) {
           >
             <h4
               className="text-start"
-             
-            >{code}
+
+            >{`${name} - ${courseCode}`}
             </h4>
           </div>
           <div className="col-4">
@@ -56,7 +56,19 @@ function Course({ code, university }) {
           </div>
 
         </div>
-        {/* 
+              
+        <div className="row mt-4">
+          <div
+            className="col-6" 
+            onClick={addToFav}
+          >
+            <p
+              className="text-start course-note-text"
+            >Add to Favourites
+            </p>
+          </div>
+        </div>
+        {/*
         <div className="row">
           <div className="col-6">
             <a
@@ -86,12 +98,16 @@ function Course({ code, university }) {
 
 
 Course.propTypes = {
-  code:PropTypes.string,
-  university: PropTypes.string
+  courseCode:PropTypes.string,
+  name: PropTypes.string,
+  university: PropTypes.string,
+  addToFav:PropTypes.func
 }
 
 Course.defaultProps = {
-  code:"unknown",
-  university: "unknown"
-} 
+  courseCode:"unknown",
+  name: "unknown",
+  university: "unknown",
+  addToFav: () => any,
+}
 export default Course;
