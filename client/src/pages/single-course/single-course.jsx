@@ -7,14 +7,26 @@ import Note from "../../components/note/note.jsx";
 const { default: Layout } = require("../../components/layout/layout");
 
 function SingleCourse() {
+
   const { university, code } = useParams()
 
   const [course, setCourse] = useState();
 
+  const [comment, setComment] = useState({ userName: "kerem", text: "deneme deneme deneme deneme deneme", points: 5 });
+  const request = { university, courseCode, comment };
+
+  const postComment = async () => {
+    await axios
+      .post(`${process.env.REACT_APP_URL}/comments`, request)
+      .then((res) => {
+        console.log(res);
+      })
+  }
+
   const fetchCourse = async () => {
     console.log("fetching");
     axios
-      .post(`${process.env.REACT_APP_URL}/courses/${university}/${code.split("-")[0]}`)
+      .post(`${process.env.REACT_APP_URL}/courses/${university}/${courseCode}`)
       .then((res) => {
         console.log(res);
         setCourse(res);
@@ -39,14 +51,16 @@ function SingleCourse() {
   useEffect(() => {
     fetchCourse();
     
-  }, [university, code])
-  console.log(code, university);
+  }, [university, courseCode])
+
+
   return (
     <Layout>
       <div className="row homepage-margin">
         <div className="col">
           <div className="row mt-4 justify-content-center">
-            <h4>{code}</h4>
+            <h4>{courseCode}</h4>
+            <button onClick={postComment} > BAS LAN BAN</button>
             {/* <div className="row mt-2">
               <div className="row mt-2">
                 <div className="col-6">
@@ -69,7 +83,7 @@ function SingleCourse() {
           <div className="row mt-4">
             <h4>Course Notes</h4>
             <div className="row">
-             
+
               <div className="col-12">
                 {Note("Note Name", "Software Engineering", "Sabanci University")}
               </div>
@@ -81,13 +95,19 @@ function SingleCourse() {
           <div className="row mt-4 mb-5">
             <h4>Comments</h4>
             <div className="row mt-2">
-              <div className="row mt-2">
-                <div className="col-12">
-                  {Comments("keremkor228", "Lorem ipsum dolor sit amet.")}
-                </div>
-                <div className="col-12">
-                  {Comments("keremkor228", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")}
-                </div>
+              <Comments
+                userName="keremkor228"
+                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+              >
+              </Comments>
+              <div className="col-12">
+                <Comments
+                  userName={comment.userName}
+                  text={comment.text}
+                  points={comment.points}
+                >
+                </Comments>
+                {console.log(comment.points)}
               </div>
             </div>
           </div>

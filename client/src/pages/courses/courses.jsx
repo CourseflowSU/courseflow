@@ -17,7 +17,7 @@ function Courses() {
         data.forEach(uni => {
           courseList = courseList.concat(...uni.courses)
         });
-       
+
         console.log(courseList);
 
         setList(courseList);
@@ -32,12 +32,12 @@ function Courses() {
       <div className="row m-4">
         <h4>Courses</h4>
         <div className="row mt-2">
-          
+
           {
             list.map((item) => {
-  
+
               return(
-                <div 
+                <div
                   key={item.courseCode}
                   className="row mt-4"
                 >
@@ -45,8 +45,9 @@ function Courses() {
                     className="col-12"
                   >
                     <Course
-                      code={`${item.courseCode}-${item.courseName}`} 
+                      courseCode={item.courseCode}
                       university={item.university}
+                      name={item.courseName}
                     >
                     </Course>
                   </div>
@@ -54,9 +55,9 @@ function Courses() {
               );
             })
           }
-    
-      
-        
+
+
+
         </div>
       </div>
     </Layout>
