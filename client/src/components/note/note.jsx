@@ -45,7 +45,7 @@ function Note(noteName, courseName, universityName) {
     }
   }
   return (
-    <div className="col-10 mt-3 mb-3 note-button offset-1 row">
+    <div className="col-12 mt-3 mb-3 note-button row">
       <button className="col-12 btn btn-block">
         <div className="row">
           <div className="col-2">

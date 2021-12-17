@@ -53,7 +53,7 @@ userRoutes.route("/users/login/:email").post(function (req, res) {
     .collection("users")
     .findOne(myquery, async (err, result) => {
       if (err) console.log(err.message);
-      
+
       if (result) {
         const validPassword = await bcrypt.compare(currUser.password, result.password);
         if (validPassword) {
@@ -72,7 +72,7 @@ userRoutes.route("/users/login/:email").post(function (req, res) {
 userRoutes.route("/users/signup/add").post(function (req, response) {
 
   let db_connect = dbo.getDb("courseflow");
-  
+
   let user = {
     username: req.body.username,
     university: req.body.university,
@@ -166,7 +166,7 @@ userRoutes.post('/forgotPassword', (req, res) => {
       res.status(403).send('email not in db');
     } else {
       const token = crypto.randomBytes(20).toString('hex');
-      db_connect.collection("users").updateOne({"email": req.body.email}, 
+      db_connect.collection("users").updateOne({"email": req.body.email},
       { $set: {"resetPasswordToken": token, "resetPasswordExpires": Date.now() + 3600000}
       });
       const transporter = nodemailer.createTransport({
@@ -214,7 +214,7 @@ userRoutes.get('/reset', (req, res) => {
     if (user == null || user.resetPasswordExpires == null) {
       console.error('password reset link is invalid or has expired');
       res.status(401).send('password reset link is invalid or has expired');
-    } 
+    }
     else {
       res.status(200).send({
         username: user.username,
@@ -246,7 +246,7 @@ userRoutes.put('/updatePasswordViaEmail', (req, res) => {
         if (saltError) {
           console.log(saltError);
           return saltError
-        } 
+        }
         else {
           bcrypt.hash(req.body.password.password, salt, function (hashError, hash) {
             if (hashError) {
@@ -291,7 +291,7 @@ userRoutes.post('/upload', (req, res) => {
     if (err) throw err;
     else if (response == null) {
       console.log("1");
-      db_connect.collection("universities").insertOne({"universityName": req.body.university, 
+      db_connect.collection("universities").insertOne({"universityName": req.body.university,
       "courses": [{"courseName": req.body.courseName, "courseCode": req.body.courseCode,"university": req.body.university,"files": [file], "comments":[]}]}, function(err1, response1) {
         if (err1) throw err1;
         res.json(response1);
@@ -331,14 +331,14 @@ userRoutes.post('/upload', (req, res) => {
            })
         }
       });
-    
-      
-      
+
+
+
     }
   });
 
   // db_connect.collection("universities")
-  // .updateOne({ "universityName": req.body.university} , 
+  // .updateOne({ "universityName": req.body.university} ,
   // { $set: {"courses": {"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files":file}}},{upsert: true}, function(err, response) {
   //   if (err) {
   //     throw err;
@@ -369,31 +369,6 @@ userRoutes.post('/upload', (req, res) => {
   // });
 });
 
-/*
-  universities : {
-    sabancı: {
-      courses: {
-        {
-          cs308,
-          software engineering
-          files: {
-            week1
-          }
-        }, 
-        {
-          cs310,
-          mobile,
-          files: {
-            week10
-          }
-        }
-      }
-    }
-    
-
-  }
-
-*/
 
 userRoutes.route("/users/change-password").put( function (req, res) {
   let db_connect = dbo.getDb("courseflow");
@@ -405,7 +380,7 @@ userRoutes.route("/users/change-password").put( function (req, res) {
   .findOne(myQuery, async (err, result) => {
     if(err){
       console.log(err.message)
-    } 
+    }
 
     else if(result) {
       const validPassword = await bcrypt.compare(req.body.currentPassword.toString(), result.password);
@@ -417,7 +392,7 @@ userRoutes.route("/users/change-password").put( function (req, res) {
         if (saltError) {
           console.log(saltError);
           return saltError
-        } 
+        }
         else {
           bcrypt.hash(req.body.password, salt, function (hashError, hash) {
             if (hashError) {
@@ -437,11 +412,11 @@ userRoutes.route("/users/change-password").put( function (req, res) {
           });
         }
         });
-       
+
       }else {
         res.status(200).json({message: "Current password is invalid"});
       }
-    
+
     }
     else {
       res.status(200).json({message: "Error! Please try again"});
@@ -469,6 +444,73 @@ userRoutes.route("/courses").get(function(req, res){
     // });
 
     // console.log(result);
+})
+
+userRoutes.route("/comments").post(function(req, res){
+
+  let db_connect = dbo.getDb("courseflow");
+    db_connect.collection("universities")
+    .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode}, function(err, response) {
+      console.log(response);
+      if (err) throw err;
+      else if (response == null) {
+        console.log(err);
+        throw err;
+      }
+      else {
+        console.log(response);
+        let new_response = response;
+        let courseNum;
+        for (let i = 0; i < response.courses.length; i++) {
+          if (response.courses[i].courseCode === req.body.courseCode) {
+            new_response.courses[i].comments.push(req.body.comment);
+            courseNum = i;
+          }
+        }
+        db_connect.collection("universities")
+        .updateOne({"universityName": response.universityName, "courses.courseCode": req.body.courseCode},
+         {$set: { "courses": new_response.courses}}, {upsert: true}, function(err2, response2) {
+           if (err2) throw err2;
+           res.json(response2);
+         })
+      }
+    });
+
+
+
+
+
+})
+
+userRoutes.route("/points").post(function(req, res){
+
+  let db_connect = dbo.getDb("courseflow");
+    db_connect.collection("universities")
+    .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode}, function(err, response) {
+      console.log(response);
+      if (err) throw err;
+      else if (response == null) {
+        console.log(err);
+        throw err;
+      }
+      else {
+        console.log(response);
+        let new_response = response;
+        let courseNum;
+        for (let i = 0; i < response.courses.length; i++) {
+          if (response.courses[i].courseCode === req.body.courseCode) {
+            new_response.courses[i].comments.points.push(req.body.points);
+            courseNum = i;
+          }
+        }
+        db_connect.collection("universities")
+        .updateOne({"universityName": response.universityName, "courses.courseCode": req.body.courseCode},
+         {$set: { "courses": new_response.courses}}, {upsert: true}, function(err2, response2) {
+           if (err2) throw err2;
+           res.json(response2);
+         })
+      }
+    });
 })
 
 module.exports = userRoutes;

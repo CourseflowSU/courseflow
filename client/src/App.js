@@ -92,7 +92,7 @@ function App() {
               element={<Courses />}
             />
             <Route
-              path="/courses/:university/:code"
+              path="/courses/:university/:courseCode"
               element={<SingleCourse />}
             />
             <Route
