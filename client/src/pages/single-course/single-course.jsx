@@ -8,7 +8,7 @@ const { default: Layout } = require("../../components/layout/layout");
 
 function SingleCourse() {
 
-  const { university, code } = useParams()
+  const { university, courseCode } = useParams()
 
   const [course, setCourse] = useState();
 
