@@ -78,6 +78,7 @@ userRoutes.route("/users/signup/add").post(function (req, response) {
     university: req.body.university,
     email: req.body.email,
     password: req.body.password,
+    favouriteCourses: [],
   };
 
   // hashing time
@@ -458,6 +459,38 @@ userRoutes.route("/courses").get(function(req, res){
     .find({}).toArray()
     .then((result) => {
       res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
+    // .toArray(function (err, result) {
+    //   if (err) throw err;
+    //   console.log(res.data);
+    //   res.json(result);
+    // });
+
+    // console.log(result);
+})
+
+userRoutes.route("/courses/:university/:code").post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("hello");
+  console.log(req.params.university, req.params.code);
+  console.log("hello2");
+   db_connect
+    .collection("universities")
+    .findOne({"universityName": req.params.university, "courses.courseCode": req.params.code})
+    .then((result) => {
+      console.log(result);
+      for (let i = 0; i < result.courses.length; i++) {
+        if (result.courses[i].courseCode === req.params.code) {
+          res.json(result.courses[i]);
+          console.log(result.courses[i]);
+          
+          break;
+        }
+      }
+      res.json({});
     })
     .catch((err) => {
       throw err;

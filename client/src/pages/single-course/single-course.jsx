@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Comments from "../../components/comments/comments.jsx";
 import Note from "../../components/note/note.jsx";
@@ -6,6 +8,38 @@ const { default: Layout } = require("../../components/layout/layout");
 
 function SingleCourse() {
   const { university, code } = useParams()
+
+  const [course, setCourse] = useState();
+
+  const fetchCourse = async () => {
+    console.log("fetching");
+    axios
+      .post(`${process.env.REACT_APP_URL}/courses/${university}/${code.split("-")[0]}`)
+      .then((res) => {
+        console.log(res);
+        setCourse(res);
+        // if (res.status === 200 && res.data.message) {
+        //   setErrorMessage(res.data.message);
+        // } else if (res.status === 200) {
+        //   setErrorMessage("You logged in succesfully");
+        //   const dbUser = res.data;
+        //   console.log("login user:", dbUser);
+        //   dispatch(userLogin(dbUser));
+        //   navigate("/home");
+        // } else {
+        //   setErrorMessage("Error! Please try again.");
+        // }
+      })
+      .catch((err) => {
+        console.log("Error:", err);
+        // setErrorMessage("Error! Please try again.");
+      });
+  }
+
+  useEffect(() => {
+    fetchCourse();
+    
+  }, [university, code])
   console.log(code, university);
   return (
     <Layout>
