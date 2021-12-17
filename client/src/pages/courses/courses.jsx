@@ -2,11 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Course from "../../components/course/course.jsx";
 import Layout from "../../components/layout/layout.jsx";
+import { useStore } from "../../store/store.js";
 
 
 function Courses() {
 
   const [list, setList] = useState();
+
+  const [state] = useStore();
+  const { user: currentUser } = state;
 
   const getCourses = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/courses`)
@@ -22,6 +26,16 @@ function Courses() {
 
         setList(courseList);
       }).catch(err => console.log(err))
+  }
+
+  const addToFav = async (course) => {
+    await axios.post(`${process.env.REACT_APP_URL}/courses/favourites/add`,{ currentUser, course })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   useEffect(() => {
@@ -49,10 +63,12 @@ function Courses() {
                         courseCode={item.courseCode}
                         university={item.university}
                         name={item.courseName}
+                        addToFav={() => addToFav(item)}
                       >
                       </Course>
                     </div>
                   </div>
+                  
                 );
               }) :<p>No course yet !!!</p>)            :
             <p>Loading...</p>

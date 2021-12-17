@@ -431,7 +431,7 @@ userRoutes.route("/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("courses page");
    db_connect.collection("universities")
-    .find({}).toArray()
+    .find({}).sort({"universityName.courses.courseCode":1}).limit(1).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -544,6 +544,14 @@ userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
       throw err;
     });
 
-  });
+})
+
+userRoutes.route("/courses/favourites/add").post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("add fav");
+  console.log(req.body.user, req.body.course);
+  // db_connect.collection("users")
+  // .findOne({"email": })
+})
 
 module.exports = userRoutes;

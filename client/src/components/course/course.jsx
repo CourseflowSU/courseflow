@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import "../course/course.scss";
 
 
-function Course({ courseCode, name,  university }) {
+function Course({ courseCode, name,  university, addToFav }) {
 
   const navigate = useNavigate();
 
@@ -56,6 +56,18 @@ function Course({ courseCode, name,  university }) {
           </div>
 
         </div>
+              
+        <div className="row mt-4">
+          <div
+            className="col-6" 
+            onClick={addToFav}
+          >
+            <p
+              className="text-start course-note-text"
+            >Add to Favourites
+            </p>
+          </div>
+        </div>
         {/*
         <div className="row">
           <div className="col-6">
@@ -88,12 +100,14 @@ function Course({ courseCode, name,  university }) {
 Course.propTypes = {
   courseCode:PropTypes.string,
   name: PropTypes.string,
-  university: PropTypes.string
+  university: PropTypes.string,
+  addToFav:PropTypes.func
 }
 
 Course.defaultProps = {
   courseCode:"unknown",
   name: "unknown",
-  university: "unknown"
+  university: "unknown",
+  addToFav: () => any,
 }
 export default Course;
