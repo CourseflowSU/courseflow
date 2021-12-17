@@ -429,8 +429,8 @@ userRoutes.route("/users/change-password").put( function (req, res) {
 
 userRoutes.route("/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
-   db_connect
-    .collection("universities")
+  console.log("courses page");
+   db_connect.collection("universities")
     .find({}).toArray()
     .then((result) => {
       res.json(result);
@@ -452,7 +452,8 @@ userRoutes.route("/courses").get(function(req, res){
 userRoutes.route("/comments").post(function(req, res){
 
   let db_connect = dbo.getDb("courseflow");
-    db_connect.collection("universities")
+  console.log("comments")
+  db_connect.collection("universities")
     .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode}, function(err, response) {
       console.log(response);
       if (err) throw err;
@@ -516,36 +517,32 @@ userRoutes.route("/points").post(function(req, res){
     });
 })
 
-userRoutes.route("/courses/:university/:code").post(function(req, res){
+userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
-  console.log("hello");
   console.log(req.params.university, req.params.courseCode);
-  console.log("hello2");
    db_connect
     .collection("universities")
     .findOne({"universityName": req.params.university, "courses.courseCode": req.params.courseCode})
     .then((result) => {
       console.log(result);
-      for (let i = 0; i < result.courses.length; i++) {
-        if (result.courses[i].courseCode === req.params.courseCode) {
-          res.json(result.courses[i]);
-          console.log(result.courses[i]);
-          
-          break;
+      if(result){
+        for (let i = 0; i < result.courses.length; i++) {
+          if (result.courses[i].courseCode === req.params.courseCode) {
+            res.json(result.courses[i]);
+            console.log(result.courses[i]);
+            
+            break;
+          }
         }
+      }else {
+      res.json(null);
+        
       }
-      res.json({});
+     
     })
     .catch((err) => {
       throw err;
     });
-    // .toArray(function (err, result) {
-    //   if (err) throw err;
-    //   console.log(res.data);
-    //   res.json(result);
-    // });
-
-    // console.log(result);
 
   });
 

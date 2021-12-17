@@ -6,7 +6,7 @@ import Layout from "../../components/layout/layout.jsx";
 
 function Courses() {
 
-  const [list, setList] = useState([]);
+  const [list, setList] = useState();
 
   const getCourses = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/courses`)
@@ -33,27 +33,30 @@ function Courses() {
         <h4>Courses</h4>
         <div className="row mt-2">
 
-          {
-            list.map((item) => {
+          { list ?
+            (list.length > 0 ?
+              list.map((item) => {
 
-              return(
-                <div
-                  key={item.courseCode}
-                  className="row mt-4"
-                >
+                return(
                   <div
-                    className="col-12"
+                    key={item.courseCode}
+                    className="row mt-4"
                   >
-                    <Course
-                      courseCode={item.courseCode}
-                      university={item.university}
-                      name={item.courseName}
+                    <div
+                      className="col-12"
                     >
-                    </Course>
+                      <Course
+                        courseCode={item.courseCode}
+                        university={item.university}
+                        name={item.courseName}
+                      >
+                      </Course>
+                    </div>
                   </div>
-                </div>
-              );
-            })
+                );
+              }) :<p>No course yet !!!</p>)            :
+            <p>Loading...</p>
+
           }
 
 
