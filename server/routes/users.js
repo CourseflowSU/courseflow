@@ -338,36 +338,6 @@ userRoutes.post('/upload', (req, res) => {
     }
   });
 
-  // db_connect.collection("universities")
-  // .updateOne({ "universityName": req.body.university} ,
-  // { $set: {"courses": {"courseName": req.body.courseName, "courseCode": req.body.courseCode, "files":file}}},{upsert: true}, function(err, response) {
-  //   if (err) {
-  //     throw err;
-  //   }
-  //   else {
-  //     // db_connect.collection("universities").findOne({ "university": req.body.university} , function (err_un, response_un) {
-  //     //   var old_course_query = {courseName: req.body.courseName, courseCode: req.body.courseName};
-  //     //   var new_course_query = { $set: {courseName: req.body.courseName, courseCode: req.body.courseName} };
-  //     //   db_connect.collection("universities").collection("courses").updateOne(old_course_query, new_course_query, function (err_co, response_co) {
-  //     //     if (err_co) {
-  //     //       throw err_co;
-  //     //     }
-  //     //     else {
-  //     //       res.json(response_co);
-  //     //     }
-  //     //   });
-  //     // });
-  //     res.json(response);
-  //   }
-  // })
-
-  // db.getCollection('PetCare')
-  //.update({"userDetails.contactNumber":"12345678989"},{"$set":{"userDetails.address":{"country":"India","city":"Blore"}}})
-  // .collection("courses").updateOne(old_course_query, new_course_query)
-  // .collection("files").updateOne({file: file}, { $set: {file: file}}, function(err, response) {
-  //   if (err) throw err;
-  //   res.json(response);
-  // });
 });
 
 
@@ -431,20 +401,13 @@ userRoutes.route("/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("courses page");
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.courseCode":1}).limit(1).toArray()
+    .find({}).sort({"universityName.courses.university":1}).limit(3).toArray()
     .then((result) => {
       res.json(result);
     })
     .catch((err) => {
       throw err;
     });
-    // .toArray(function (err, result) {
-    //   if (err) throw err;
-    //   console.log(res.data);
-    //   res.json(result);
-    // });
-
-    // console.log(result);
 })
 
 
@@ -524,21 +487,16 @@ userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
     .collection("universities")
     .findOne({"universityName": req.params.university, "courses.courseCode": req.params.courseCode})
     .then((result) => {
-      console.log(result);
       if(result){
         for (let i = 0; i < result.courses.length; i++) {
           if (result.courses[i].courseCode === req.params.courseCode) {
             res.json(result.courses[i]);
-            console.log(result.courses[i]);
-            
             break;
           }
         }
       }else {
       res.json(null);
-        
       }
-     
     })
     .catch((err) => {
       throw err;
@@ -546,12 +504,67 @@ userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
 
 })
 
-userRoutes.route("/courses/favourites/add").post(function(req, res){
+userRoutes.route('/courses/addToFav').post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("add fav");
-  console.log(req.body.user, req.body.course);
-  // db_connect.collection("users")
-  // .findOne({"email": })
+  db_connect.collection("users")
+  .findOne({"email": req.body.email}, function(err, response) {
+    if (err) throw err;
+    else if (response == null) {
+      console.log(err);
+      throw err;
+    }
+    else {
+      let new_response = response;
+      const newCourse = {
+        university: req.body.university,
+        courseCode:req.body.courseCode
+      }
+      new_response.favouriteCourses.push(newCourse);
+      
+      db_connect.collection("users")
+      .updateOne({"email": req.body.email},
+       {$set: { "favouriteCourses": new_response.favouriteCourses}}, {upsert: true}, function(err2, response2) {
+         if (err2) throw err2;
+         res.json(new_response);
+       })
+    }
+  });
 })
+
+userRoutes.route('/courses/removeFromFav').post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("remove fav");
+  db_connect.collection("users")
+  .findOne({"email": req.body.email}, function(err, response) {
+    console.log(response);
+    if (err) throw err;
+    else if (response == null) {
+      console.log(err);
+      throw err;
+    }
+    else {
+      let new_response = response;
+
+      for (let i = 0; i < new_response.favouriteCourses.length; i++) {
+        console.log(new_response.favouriteCourses[i], req.body.university, req.body.courseCode);
+
+        if (new_response.favouriteCourses[i].university === req.body.university && 
+          new_response.favouriteCourses[i].courseCode === req.body.courseCode) {
+            new_response.favouriteCourses.splice(i, 1);
+            console.log(new_response.favouriteCourses[i]);
+        }
+      }
+      db_connect.collection("users")
+      .updateOne({"email": req.body.email},
+       {$set: { "favouriteCourses": new_response.favouriteCourses}}, {upsert: true}, function(err2, response2) {
+         if (err2) throw err2;
+         res.json(new_response);
+       })
+    }
+  });
+})
+
+
 
 module.exports = userRoutes;
