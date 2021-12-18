@@ -57,7 +57,7 @@ function Course({ courseCode, name,  university, addToFav }) {
 
         </div>
               
-        <div className="row mt-4">
+        {/* <div className="row mt-4">
           <div
             className="col-6" 
             onClick={addToFav}
@@ -67,7 +67,7 @@ function Course({ courseCode, name,  university, addToFav }) {
             >Add to Favourites
             </p>
           </div>
-        </div>
+        </div> */}
         {/*
         <div className="row">
           <div className="col-6">

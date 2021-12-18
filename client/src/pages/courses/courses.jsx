@@ -9,8 +9,7 @@ function Courses() {
 
   const [list, setList] = useState();
 
-  const [state] = useStore();
-  const { user: currentUser } = state;
+
 
   const getCourses = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/courses`)
@@ -28,15 +27,6 @@ function Courses() {
       }).catch(err => console.log(err))
   }
 
-  const addToFav = async (course) => {
-    await axios.post(`${process.env.REACT_APP_URL}/courses/favourites/add`,{ currentUser, course })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
 
   useEffect(() => {
     getCourses();
@@ -63,7 +53,6 @@ function Courses() {
                         courseCode={item.courseCode}
                         university={item.university}
                         name={item.courseName}
-                        addToFav={() => addToFav(item)}
                       >
                       </Course>
                     </div>
