@@ -25,7 +25,7 @@ function Note({ fileName, courseName, courseCode, university }) {
 
               <div className="col-8">
                 <a
-                  href = {`/courses/${university}/${courseCode}`}
+                  href = {`/notes/${university}/${courseCode}/${fileName}`}
                   className="link-success"
                 >
                   <p className="text-start" >{fileName}</p>
