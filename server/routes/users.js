@@ -504,6 +504,44 @@ userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
 
 })
 
+userRoutes.route("/notes/:university/:courseCode/:fileName").post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("single note");
+  console.log(req.params.university, req.params.courseCode, req.params.fileName);
+   db_connect
+    .collection("universities")
+    .findOne({
+      "universityName": req.params.university, 
+      "courses.courseCode": req.params.courseCode, 
+    })
+    .then((result) => {
+      console.log(result);
+      if(result){
+        console.log("found courses");
+        for (let i = 0; i < result.courses.length; i++) {
+          if (result.courses[i].courseCode === req.params.courseCode) {
+            console.log("course same");
+            for (let j = 0; j < result.courses[i].files.length; j++) {
+              console.log(result.courses[i].files[j].file.name);
+              if(result.courses[i].files[j].file.name === req.params.fileName){
+                console.log("found", result.courses[i].files[j])
+                res.json(result.courses[i].files[j]);
+                 break;
+              }
+              
+            }
+          }
+        }
+      }else {
+      res.json(null);
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+
+})
+
 userRoutes.route('/courses/addToFav').post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("add fav");

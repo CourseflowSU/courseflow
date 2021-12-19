@@ -4,6 +4,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import Comments from "../../components/comments/comments.jsx";
 import { useStore } from "../../store/store.js";
 import { userLogin } from "../../store/userReducer";
@@ -133,6 +134,15 @@ function SingleCourse() {
   }, [fetchCourse])
 
 
+  const goToNote = (e) => {
+    if(courseCode !== "unknown" && university !== "unknown"){
+      e.preventDefault();
+      e.stopPropagation();
+      navigate(`/notes/${university}/${courseCode}/Software Engineering`)
+    }
+
+  }
+
   return (
     <Layout>
       {course ? 
@@ -210,6 +220,13 @@ function SingleCourse() {
                 <p>No file found for this course</p>
               }
               <div className="row">
+                {/* <Link to={`/notes/${university}/${courseCode}/Software Engineering`}>
+                Note demo - click here
+                </Link> */}
+
+                <Link to={"/notes/SabanciUniversity/CS308/SoftwareEngineering"}>
+                Note demo - click here
+                </Link>
 
                 {/* <div className="col-12">
                 {Note("Note Name", "Software Engineering", "Sabanci University")}

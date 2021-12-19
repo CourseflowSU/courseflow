@@ -15,6 +15,7 @@ import Notes from "./pages/notes/notes.jsx";
 import Profile from "./pages/profile/profile-page.jsx";
 import Signup from "./pages/signup/signup.jsx";
 import SingleCourse from "./pages/single-course/single-course.jsx";
+import SingleNote from "./pages/single-note/single-note.jsx";
 import University from "./pages/university/university-page.jsx";
 import Upload from "./pages/upload/upload.jsx";
 import { useStore } from "./store/store";
@@ -94,6 +95,10 @@ function App() {
             <Route
               path="/courses/:university/:courseCode"
               element={<SingleCourse />}
+            />
+            <Route
+              path="/notes/:university/:courseCode/:fileName"
+              element={<SingleNote />}
             />
             <Route
               path="/change-password"
