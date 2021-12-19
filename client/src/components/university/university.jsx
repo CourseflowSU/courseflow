@@ -33,7 +33,7 @@ function University({ universityName, courseNumber }) {
             </h4>
           </div>
           <div className="col-4">
-            <p className="text-end text-xsm" >{courseNumber}</p>
+            <p className="text-end text-xsm" >Number of Courses: {courseNumber}</p>
           </div>
         </div>
 
