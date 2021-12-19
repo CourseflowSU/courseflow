@@ -128,6 +128,46 @@ function SingleCourse() {
     return bytes
   }
 
+
+  useEffect(() => {
+    if (course) {
+      console.log("aa");
+      let courseItem = {
+        courseCode: course.courseCode,
+        name: course.courseName,
+        university: course.university
+      };
+      let recent_courses = localStorage.getItem("recentCourses");
+
+      if (recent_courses) {
+        console.log("bb");
+        let arr_recent_courses = JSON.parse(recent_courses);
+        let flag = false;
+        for (let i = 0; i < arr_recent_courses.length; i++) {
+          if (arr_recent_courses[i].courseCode === courseItem.courseCode &&
+            arr_recent_courses[i].university === courseItem.university && 
+            arr_recent_courses[i].name === courseItem.name) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
+          arr_recent_courses.push(courseItem);
+          if (arr_recent_courses.length == 5) {
+            arr_recent_courses = arr_recent_courses.slice(1,5);
+          }
+        }
+        localStorage.setItem("recentCourses", JSON.stringify(arr_recent_courses));
+      }
+      else {
+        console.log("cc");
+        localStorage.setItem("recentCourses", JSON.stringify([courseItem]));
+        console.log(JSON.stringify([courseItem]));
+      }
+    }
+  }, [course]);
+
+
   useEffect(() => {
     fetchCourse();
     

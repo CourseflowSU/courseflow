@@ -15,6 +15,7 @@ function Homepage() {
 
   const [list, setList] = useState(currentUser.favouriteCourses);
   const [recentNotesList, setRecentNotesList] = useState();
+  const [recentCoursesList, setRecentCoursesList] = useState();
 
 
   useEffect(() => {
@@ -22,6 +23,12 @@ function Homepage() {
 
     if (recentNotes) {
       setRecentNotesList(JSON.parse(recentNotes));
+    }
+
+    let recentCourses = localStorage.getItem("recentCourses");
+
+    if (recentCourses) {
+      setRecentCoursesList(JSON.parse(recentCourses));
     }
   }, []);
 
@@ -111,24 +118,54 @@ function Homepage() {
           </div>
           <div className="row mt-4 mb-5">
             <h4>Recently Viewed Courses</h4>
-            <div className="row mt-2">
+            { recentCoursesList ?
               <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
+                <div className="row mt-2">
+                  <div className="col-6">
+                    {recentCoursesList[0] ?
+                      <Course
+                        courseCode={recentCoursesList[0].courseCode}
+                        university={recentCoursesList[0].university}
+                        name={recentCoursesList[0].name}
+                      >
+                      </Course>  : ""      
+                    }        
+                  </div>
+                  <div className="col-6">
+                    {recentCoursesList[1] ?
+                      <Course
+                        courseCode={recentCoursesList[1].courseCode}
+                        university={recentCoursesList[1].university}
+                        name={recentCoursesList[1].name}
+                      >
+                      </Course> : ""
+                    }
+                  </div>
                 </div>
-                <div className="col-6">
-                  <Course />
+                <div className="row mt-2">
+                  <div className="col-6">
+                    {recentCoursesList[2] ?
+                      <Course
+                        courseCode={recentCoursesList[2].courseCode}
+                        university={recentCoursesList[2].university}
+                        name={recentCoursesList[2].name}
+                      >
+                      </Course> : ""
+                    }               
+                  </div>
+                  <div className="col-6">
+                    {recentCoursesList[3] ?
+                      <Course
+                        courseCode={recentCoursesList[3].courseCode}
+                        university={recentCoursesList[3].university}
+                        name={recentCoursesList[3].name}
+                      >
+                      </Course>   : ""
+                    }     
+                  </div>
                 </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
-                </div>
-                <div className="col-6">
-                  <Course />
-                </div>
-              </div>
-            </div>
+              </div>  : <p>No note has been viewed yet !!!</p>
+            }
           </div>
         </div>
       </div>
