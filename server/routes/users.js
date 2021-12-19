@@ -542,6 +542,23 @@ userRoutes.route('/courses/removeFromFav').post(function(req, res){
   });
 })
 
+userRoutes.route('/search').post(function(req, res) {
+  let db_connect = dbo.getDb("courseflow");
+  console.log("university search page");
+  console.log(req.body.searchQuery);
+  let searchQuery = req.body.searchQuery;
+  db_connect.collection("universities")
+    .find({"universityName": { "$regex": searchQuery, "$options": "i" } }).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+
+});
+
 
 
 module.exports = userRoutes;
