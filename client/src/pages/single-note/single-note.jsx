@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FcLike } from "react-icons/fc";
 import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
 import { useStore } from "../../store/store.js";
-import { AiOutlineHeart } from "react-icons/ai";
-import { FcLike } from "react-icons/fc";
 import { userLogin } from "../../store/userReducer";
 import "./single-note.scss";
 
@@ -67,7 +67,7 @@ function SingleNote() {
       return;
     }
     await axios.post(`${process.env.REACT_APP_URL}/notes/addToFav`,
-      { email:currentUser.email, university:note.university, courseCode:note.courseCode, fileName: note.fileName  })
+      { email:currentUser.email, university:university, courseCode:courseCode, fileName: fileName  })
       .then(res => {
         console.log(res.data);
 
@@ -189,9 +189,14 @@ function SingleNote() {
 
             {note ? 
               <div
+                className='documentContainer'
                 style={{
                   border: "1px solid rgba(0, 0, 0, 0.3)",
                   marginBottom: "10px",
+                  display: "flex",
+	                justifyContent: "center",
+                  // width:"10px",
+                  // height:"20px",
                 }}
               >
               
@@ -214,8 +219,7 @@ function SingleNote() {
                       
                       key={page}
                       pageNumber={page}
-                      // width={500}
-                      // scale={0.92}
+                      width={window.screen.width * 0.65}
                     />  
                     )}
                 </Document>

@@ -399,7 +399,7 @@ userRoutes.route("/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("courses page");
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.university":1}).limit(3).toArray()
+    .find({}).sort({"universityName.courses.university":1}).limit(10).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -673,6 +673,7 @@ userRoutes.route('/search').post(function(req, res) {
 userRoutes.route('/notes/addToFav').post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("add fav");
+  console.log(req.body.fileName);
   db_connect.collection("users")
   .findOne({"email": req.body.email}, function(err, response) {
     if (err) throw err;
@@ -692,7 +693,7 @@ userRoutes.route('/notes/addToFav').post(function(req, res){
 
       db_connect.collection("users")
       .updateOne({"email": req.body.email},
-       {$set: { "favouriteCourses": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
+       {$set: { "favouriteDocuments": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
          if (err2) throw err2;
          res.json(new_response);
        })
@@ -727,7 +728,7 @@ userRoutes.route('/notes/removeFromFav').post(function(req, res){
       }
       db_connect.collection("users")
       .updateOne({"email": req.body.email},
-       {$set: { "favouriteCourses": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
+       {$set: { "favouriteDocuments": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
          if (err2) throw err2;
          res.json(new_response);
        })
