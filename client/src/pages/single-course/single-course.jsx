@@ -224,7 +224,7 @@ function SingleCourse() {
                 Note demo - click here
                 </Link> */}
 
-                <Link to={"/notes/SabanciUniversity/CS308/SoftwareEngineering"}>
+                <Link to={"/notes/SabanciUniversity/CS308/Lecture 5 - Use cases.pdf"}>
                 Note demo - click here
                 </Link>
 

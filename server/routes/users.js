@@ -508,7 +508,6 @@ userRoutes.route("/notes/:university/:courseCode/:fileName").post(function(req, 
             for (let j = 0; j < result.courses[i].files.length; j++) {
               console.log(result.courses[i].files[j].file.name);
               if(result.courses[i].files[j].file.name === req.params.fileName){
-                console.log("found", result.courses[i].files[j])
                 res.json(result.courses[i].files[j]);
                  break;
               }
