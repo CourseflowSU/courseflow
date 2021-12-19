@@ -33,7 +33,12 @@ function Course({ courseCode, name,  university, addToFav }) {
             </h4>
           </div>
           <div className="col-4">
-            <p className="text-end text-xsm" >{university}</p>
+            <a
+              href= {`/universities/${university}`}
+              className="course-link"
+            >
+              <p className="text-end text-xsm" >{university}</p>
+            </a>
           </div>
         </div>
 
@@ -43,7 +48,7 @@ function Course({ courseCode, name,  university, addToFav }) {
               href="#1"
               className="course-link"
             >
-              <p className="text-start course-note-text">Software Engineering (CS308)</p>
+              <p className="text-start course-note-text">Midterm 1</p>
             </a>
           </div>
           <div className="col-6">
@@ -51,15 +56,15 @@ function Course({ courseCode, name,  university, addToFav }) {
               href="#1"
               className="course-link"
             >
-              <p className="text-start course-note-text">Software Engineering (CS308)</p>
+              <p className="text-start course-note-text">Homework 1</p>
             </a>
           </div>
 
         </div>
-              
+
         {/* <div className="row mt-4">
           <div
-            className="col-6" 
+            className="col-6"
             onClick={addToFav}
           >
             <p
