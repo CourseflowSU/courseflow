@@ -539,7 +539,8 @@ userRoutes.route('/courses/addToFav').post(function(req, res){
       let new_response = response;
       const newCourse = {
         university: req.body.university,
-        courseCode:req.body.courseCode
+        courseCode:req.body.courseCode,
+        courseName: req.body.courseName
       }
       new_response.favouriteCourses.push(newCourse);
 

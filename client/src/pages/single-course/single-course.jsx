@@ -2,10 +2,10 @@ import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
-import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
+import { pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
 import Comments from "../../components/comments/comments.jsx";
+import Note from "../../components/note/note.jsx";
 import { useStore } from "../../store/store.js";
 import { userLogin } from "../../store/userReducer";
 import "./single-course.scss";
@@ -89,7 +89,7 @@ function SingleCourse() {
       return;
     }
     await axios.post(`${process.env.REACT_APP_URL}/courses/addToFav`,
-      { email:currentUser.email, university:course.university, courseCode:course.courseCode })
+      { email:currentUser.email, university:course.university, courseCode:course.courseCode, courseName:course.courseName })
       .then(res => {
         console.log(res.data);
 
@@ -175,7 +175,7 @@ function SingleCourse() {
               </div>
             </div>
             <div className="row mt-4 justify-content-center">
-              <button onClick={postComment} > BAS LAN BAN</button>
+              <button onClick={postComment} > Leave a comment</button>
               {/* <div className="row mt-2">
               <div className="row mt-2">
                 <div className="col-6">
@@ -199,42 +199,26 @@ function SingleCourse() {
             <div className="row mt-4">
               <h4>Course Notes</h4>
               {course ?
-                course.files.map((file,index) => {
+                course.files.map((item,index) => {
                   return (
                     <div
                       key={index}
                       className="row"
                     >
-                  
-                      <p>{file.info.courseName}</p>
-
-                      {/* <div className="col-12">
-                      {Note("Note Name", "Software Engineering", "Sabanci University")}
-                    </div>
-                    <div className="col-12">
-                      {Note("Note Name", "Software Engineering", "Sabanci University")}
-                    </div> */}
+                      <Note
+                        courseCode={item.info.courseCode}
+                        university={item.info.university}
+                        courseName={item.info.courseName}
+                        fileName={item.file.name}
+                      >
+                      </Note>
+                
                     </div>
                   );
                 })              :
                 <p>No file found for this course</p>
               }
-              <div className="row">
-                {/* <Link to={`/notes/${university}/${courseCode}/Software Engineering`}>
-                Note demo - click here
-                </Link> */}
-
-                <Link to={"/notes/SabanciUniversity/CS308/Lecture 5 - Use cases.pdf"}>
-                Note demo - click here
-                </Link>
-
-                {/* <div className="col-12">
-                {Note("Note Name", "Software Engineering", "Sabanci University")}
-              </div>
-              <div className="col-12">
-                {Note("Note Name", "Software Engineering", "Sabanci University")}
-              </div> */}
-              </div>
+         
             </div>
             <div className="row mt-4 mb-5">
               <h4>Comments</h4>
@@ -256,42 +240,7 @@ function SingleCourse() {
               </div>
             </div>
 
-            {course ? 
-              <div
-                style={{
-                  border: "1px solid rgba(0, 0, 0, 0.3)",
-                  marginBottom: "10px",
-                }}
-              >
-              
-                <Document
-                  className="pdf-document"
-                  options={{
-                    // outerWidth: "700",
-                    // innerWidth: { 700 },
-                    cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
-                    cMapPacked: true,
-                  }}
-                  //file={window.URL.createObjectURL(new Blob([course.files[0].file.data],  { type: "application/pdf" }))}
-                  // file={{ data: toArray(course.files[0].file.data) }}
-                  //file={testPdf}
-                >
-                  <Page
-                    key={1}
-                    pageNumber={1}
-                  />  
-                  {/* {Array.apply(null, Array(numPages))
-                .map((x, i)=>i+1)
-                .map(page => <Page
-                      
-                  key={page}
-                  pageNumber={page}
-                />  
-                )} */}
-                </Document>
-              </div>          :
-              <p></p>
-            }
+         
 
          
           </div>
