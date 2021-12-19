@@ -13,7 +13,7 @@ function Homepage() {
   const [state] = useStore();
   const { user: currentUser } = state;
 
-  const [list, setList] = useState(currentUser.favouriteCourses);
+  const [list, setList] = useState();
   const [recentNotesList, setRecentNotesList] = useState();
   const [recentCoursesList, setRecentCoursesList] = useState();
 
@@ -30,6 +30,15 @@ function Homepage() {
     if (recentCourses) {
       setRecentCoursesList(JSON.parse(recentCourses));
     }
+  }, []);
+
+  useEffect(() => {
+    let favCoursesList = currentUser.favouriteCourses;
+
+    if (favCoursesList) {
+      setList(favCoursesList);
+    }
+
   }, []);
 
   const navigate = useNavigate();
