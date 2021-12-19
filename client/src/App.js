@@ -17,8 +17,8 @@ import Signup from "./pages/signup/signup.jsx";
 import SingleCourse from "./pages/single-course/single-course.jsx";
 import University from "./pages/university/university-page.jsx";
 import Upload from "./pages/upload/upload.jsx";
+import UniversitySearch from "./pages/university-search/university-search.jsx";
 import { useStore } from "./store/store";
-
 
 function App() {
   const [state] = useStore();
@@ -94,6 +94,10 @@ function App() {
             <Route
               path="/courses/:university/:courseCode"
               element={<SingleCourse />}
+            />
+            <Route
+              path="/universitySearch/:searchQuery"
+              element={<UniversitySearch />}
             />
             <Route
               path="/change-password"
