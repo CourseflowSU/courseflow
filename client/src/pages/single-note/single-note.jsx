@@ -3,6 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
 import { useStore } from "../../store/store.js";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FcLike } from "react-icons/fc";
+import { userLogin } from "../../store/userReducer";
 import "./single-note.scss";
 
 
@@ -35,13 +38,14 @@ function SingleNote() {
           console.log(res.data);
           if(res.data !== null){
             setNote(res.data)
-            // for (let i = 0; i < currentUser.favouriteNotes.length; i++) {
-            //   if (currentUser.favouriteNotes[i].university === res.data.university && 
-            //     currentUser.favouriteNotes[i].courseCode === res.data.courseCode) {
-            //     setIsFav(true);
-            //   }
-            // }
-            // console.log(currentUser.favouriteCourses)
+            for (let i = 0; i < currentUser.favouriteDocuments.length; i++) {
+              if (currentUser.favouriteDocuments[i].university === res.data.university && 
+                currentUser.favouriteDocuments[i].courseCode === res.data.courseCode &&
+                currentUser.favouriteDocuments[i].fileName === res.data.fileName) {
+                setIsFav(true);
+              }
+            }
+            console.log(currentUser.favouriteCourses)
             console.log("got note :", res.data)
           }
           else{
@@ -58,49 +62,38 @@ function SingleNote() {
   )
 
 
-  // const addToFav = async () => {
-  //   if(isFav) {
-  //     return;
-  //   }
-  //   await axios.post(`${process.env.REACT_APP_URL}/courses/addToFav`,
-  //     { email:currentUser.email, university:course.university, courseCode:course.courseCode })
-  //     .then(res => {
-  //       console.log(res.data);
+  const addToFav = async () => {
+    if(isFav) {
+      return;
+    }
+    await axios.post(`${process.env.REACT_APP_URL}/notes/addToFav`,
+      { email:currentUser.email, university:note.university, courseCode:note.courseCode, fileName: note.fileName  })
+      .then(res => {
+        console.log(res.data);
 
-  //       setIsFav(true);
-  //       dispatch(userLogin(res.data))
+        setIsFav(true);
+        dispatch(userLogin(res.data))
 
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
 
-  // const removeFromFav = async () => {
-  //   await axios.post(`${process.env.REACT_APP_URL}/courses/removeFromFav`,
-  //     { email:currentUser.email, university:course.university, courseCode:course.courseCode })
-  //     .then(res => {
-  //       console.log(res);
-  //       setIsFav(false);
-  //       dispatch(userLogin(res.data))
+  const removeFromFav = async () => {
+    await axios.post(`${process.env.REACT_APP_URL}/courses/removeFromFav`,
+      { email:currentUser.email, university:note.university, courseCode:note.courseCode, fileName: note.fileName  })
+      .then(res => {
+        console.log(res);
+        setIsFav(false);
+        dispatch(userLogin(res.data))
 
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // const toArray = (pdfBin) => {
-  //   if (!pdfBin) { return new Uint8Array(0) }
-  //   const len = pdfBin.length;
-  //   const bytes = new Uint8Array(len);
-  //   for (var i = 0; i < len; i++) {
-  //     bytes[i] = pdfBin.charCodeAt(i);
-  //   }
-    
-  //   return bytes
-  // }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
 
   const toPdfFileUrl = () => {
@@ -130,7 +123,7 @@ function SingleNote() {
           <div className="col">
             <div className="row mt-4">
         
-              {/* <div
+              <div
                 className="col-4" 
               >
                 {isFav ? <FcLike 
@@ -146,7 +139,7 @@ function SingleNote() {
                   />
                 }
               
-              </div> */}
+              </div>
               <div
                 className="col-8" 
               >

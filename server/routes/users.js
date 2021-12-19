@@ -604,6 +604,71 @@ userRoutes.route('/search').post(function(req, res) {
 
 });
 
+userRoutes.route('/notes/addToFav').post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("add fav");
+  db_connect.collection("users")
+  .findOne({"email": req.body.email}, function(err, response) {
+    if (err) throw err;
+    else if (response == null) {
+      console.log(err);
+      throw err;
+    }
+    else {
+      let new_response = response;
+      const newNote = {
+        university: req.body.university,
+        courseCode:req.body.courseCode,
+        fileName: req.body.fileName
+
+      }
+      new_response.favouriteDocuments.push(newNote);
+
+      db_connect.collection("users")
+      .updateOne({"email": req.body.email},
+       {$set: { "favouriteCourses": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
+         if (err2) throw err2;
+         res.json(new_response);
+       })
+    }
+  });
+})
+
+userRoutes.route('/notes/removeFromFav').post(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log("remove fav");
+  db_connect.collection("users")
+  .findOne({"email": req.body.email}, function(err, response) {
+    console.log(response);
+    if (err) throw err;
+    else if (response == null) {
+      console.log(err);
+      throw err;
+    }
+    else {
+      let new_response = response;
+
+      for (let i = 0; i < new_response.favouriteDocuments.length; i++) {
+        console.log(new_response.favouriteDocuments[i], req.body.university, req.body.courseCode);
+
+        if (new_response.favouriteDocuments[i].university === req.body.university &&
+          new_response.favouriteDocuments[i].courseCode === req.body.courseCode && 
+          new_response.favouriteDocuments[i].fileName === req.body.fileName
+          ) {
+            new_response.favouriteDocuments.splice(i, 1);
+            console.log(new_response.favouriteDocuments[i]);
+        }
+      }
+      db_connect.collection("users")
+      .updateOne({"email": req.body.email},
+       {$set: { "favouriteCourses": new_response.favouriteDocuments}}, {upsert: true}, function(err2, response2) {
+         if (err2) throw err2;
+         res.json(new_response);
+       })
+    }
+  });
+})
+
 
 
 module.exports = userRoutes;
