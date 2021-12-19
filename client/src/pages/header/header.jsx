@@ -22,7 +22,7 @@ const Header = () => {
 
 
   async function handleSearch() {
-    navigate("/universitySearch", { state: { id: 1,  searchQuery: searchQuery } });
+    navigate(`/universitySearch/${searchQuery}`);
   }
 
   return (

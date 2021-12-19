@@ -96,7 +96,7 @@ function App() {
               element={<SingleCourse />}
             />
             <Route
-              path="/universitysearch"
+              path="/universitySearch/:searchQuery"
               element={<UniversitySearch />}
             />
             <Route

@@ -2,13 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store.js";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import University from "../../components/university/university.jsx";
 
 function UniversitySearch(props) {
   
-  const { state } = useLocation();
-  const { id, searchQuery } = state;
+  const { searchQuery } = useParams();
 
   const [list, setList] = useState();
 
