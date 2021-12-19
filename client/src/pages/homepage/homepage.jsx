@@ -3,7 +3,8 @@ import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
 import Course from "../../components/course/course.jsx";
-import { useState } from "react";
+import Note from "../../components/note/note.jsx";
+import { useState, useEffect } from "react";
 
 
 function Homepage() {
@@ -11,7 +12,17 @@ function Homepage() {
   const { user: currentUser } = state;
 
   const [list, setList] = useState(currentUser.favouriteCourses);
+  const [recentNotesList, setRecentNotesList] = useState();
 
+  useEffect(() => {
+    let recentNotes = localStorage.getItem("recentNotes");
+
+    if (recentNotes) {
+      setRecentNotesList(JSON.parse(recentNotes));
+    }
+  }, []);
+
+  console.log(recentNotesList);
   return (
     <Layout>
       <div className="row homepage-margin">
@@ -48,63 +59,26 @@ function Homepage() {
             </div>
           </div>
           <div className="row mt-4">
-            <h4>Recently Viewed Documents</h4>
+            <h4>Recently Viewed Notes</h4>
             <div className="row">
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
-              <div className="col-2">
-                <button className="preview-button">
-                  <div className="preview-container">
-                    <img
-                      className="img-thumbnail preview-border"
-                      src={logo}
-                      alt={"logo"}
-                    />
-                  </div>
-                </button>
-              </div>
+              { recentNotesList ?
+                recentNotesList.map((item, index) => {
+                  return(
+                    <div
+                      key={index}
+                      className="row mt-4"
+                    >
+                      <Note
+                        courseCode={item.info.courseCode}
+                        university={item.info.university}
+                        courseName={item.info.courseName}
+                        fileName={item.fileName}
+                      >
+                      </Note>
+                    </div>
+                  );
+                }) :<p>No note has been viewed yet !!!</p>
+              }
             </div>
           </div>
           <div className="row mt-4 mb-5">
