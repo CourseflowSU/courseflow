@@ -420,6 +420,18 @@ userRoutes.route("/notes").get(function(req, res){
     });
 })
 
+userRoutes.route("/comments").get(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+   db_connect.collection("universities")
+    .find({}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
+})
+
 userRoutes.route("/comments").post(function(req, res){
 
   let db_connect = dbo.getDb("courseflow");
@@ -439,6 +451,47 @@ userRoutes.route("/comments").post(function(req, res){
         for (let i = 0; i < response.courses.length; i++) {
           if (response.courses[i].courseCode === req.body.courseCode) {
             new_response.courses[i].comments.push(req.body.comment);
+            courseNum = i;
+          }
+        }
+        db_connect.collection("universities")
+        .updateOne({"universityName": response.universityName, "courses.courseCode": req.body.courseCode},
+         {$set: { "courses": new_response.courses}}, {upsert: true}, function(err2, response2) {
+           if (err2) throw err2;
+           res.json(response2);
+         })
+      }
+    });
+})
+
+userRoutes.route("/comments/update").post(function(req, res){
+
+  let db_connect = dbo.getDb("courseflow");
+  console.log("comments")
+  db_connect.collection("universities")
+    .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode}, function(err, response) {
+      console.log(response);
+      if (err) throw err;
+      else if (response == null) {
+        console.log(err);
+        throw err;
+      }
+      else {
+        console.log(response);
+        let new_response = response;
+        let courseNum;
+        for (let i = 0; i < response.courses.length; i++) {
+          if (response.courses[i].courseCode === req.body.courseCode) {
+            for (let j = 0; j < response.courses[i].comments.length; j++)
+            {
+              console.log(req.body.comment);
+              if(response.courses[i].comments[j].userName === req.body.comment.userName)
+              {
+                new_response.courses[i].comments[j] = req.body.comment;
+                console.log("55");
+                console.log(new_response.courses[i].comments[j]);
+              }
+            }
             courseNum = i;
           }
         }

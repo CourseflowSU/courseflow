@@ -1,5 +1,8 @@
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { pdfjs } from "react-pdf/dist/esm/entry.webpack";
@@ -15,27 +18,68 @@ import "./single-course.scss";
 const { default: Layout } = require("../../components/layout/layout");
 
 function SingleCourse() {
+
+  const [list, setList] = useState();
+
+  const getNotes = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/comments`)
+      .then(res => {
+        console.log(res.data);
+        const data = res.data;
+        let commentList = [];
+        data.forEach(uni => {
+          uni.courses.forEach(course => {
+            commentList = commentList.concat(...course.comments)
+          })
+        });
+        console.log(commentList);
+        setList(commentList);
+      }).catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getNotes();
+  }, [])
+
+  const [state, dispatch] = useStore();
+  const { user: currentUser } = state;
+
+
+  const messageSchema = z
+    .object({
+      message: z.string().nonempty("Please enter a message."),
+    });
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(messageSchema),
+    mode: "all",
+  });
+
+
   pdfjs.GlobalWorkerOptions.workerSrc =
 `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
   const { university, courseCode } = useParams()
 
   const [course, setCourse] = useState();
-
-  const [state, dispatch] = useStore();
-  const { user: currentUser } = state;
-
   const [isFav, setIsFav] = useState(false);
 
-  const [comment, setComment] = useState({ userName: "kerem", text: "deneme deneme deneme deneme deneme", points: 5 });
-  const request = { university, courseCode, comment };
   const navigate = useNavigate()
 
-  const postComment = async () => {
+  const postComment = async (data) => {
+    const comment =  { userName: currentUser.username, text: data.message, points: 0 }
+    const request = { university, courseCode, comment };
+    console.log(comment);
     await axios
       .post(`${process.env.REACT_APP_URL}/comments`, request)
       .then((res) => {
         console.log(res);
+        navigate(`/courses/${university}/${courseCode}`)
       })
   }
 
@@ -51,7 +95,7 @@ function SingleCourse() {
           if(res.data !== null){
             setCourse(res.data)
             for (let i = 0; i < currentUser.favouriteCourses.length; i++) {
-              if (currentUser.favouriteCourses[i].university === res.data.university && 
+              if (currentUser.favouriteCourses[i].university === res.data.university &&
                 currentUser.favouriteCourses[i].courseCode === res.data.courseCode) {
                 setIsFav(true);
               }
@@ -62,17 +106,6 @@ function SingleCourse() {
           else{
             navigate("/error");
           }
-          // if (res.status === 200 && res.data.message) {
-          //   setErrorMessage(res.data.message);
-          // } else if (res.status === 200) {
-          //   setErrorMessage("You logged in succesfully");
-          //   const dbUser = res.data;
-          //   console.log("login user:", dbUser);
-          //   dispatch(userLogin(dbUser));
-          //   navigate("/home");
-          // } else {
-          //   setErrorMessage("Error! Please try again.");
-          // }
         })
         .catch((err) => {
           console.log("Error:", err);
@@ -82,7 +115,6 @@ function SingleCourse() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [university, courseCode, navigate],
   )
-
 
   const addToFav = async () => {
     if(isFav) {
@@ -101,7 +133,6 @@ function SingleCourse() {
         console.log(err);
       })
   }
-
 
   const removeFromFav = async () => {
     await axios.post(`${process.env.REACT_APP_URL}/courses/removeFromFav`,
@@ -124,7 +155,7 @@ function SingleCourse() {
     for (var i = 0; i < len; i++) {
       bytes[i] = pdfBin.charCodeAt(i);
     }
-    
+
     return bytes
   }
 
@@ -170,7 +201,7 @@ function SingleCourse() {
 
   useEffect(() => {
     fetchCourse();
-    
+
   }, [fetchCourse])
 
 
@@ -185,57 +216,36 @@ function SingleCourse() {
 
   return (
     <Layout>
-      {course ? 
+      {course ?
         <div className="row homepage-margin">
           <div className="col">
             <div className="row mt-4">
-        
+
               <div
-                className="col-4" 
+                className="col-4"
               >
-                {isFav ? <FcLike 
+                {isFav ? <FcLike
                   onClick={removeFromFav}
                   className='favIcon'
                   size={32}
                 />                      :
-              
-                  <AiOutlineHeart 
+
+                  <AiOutlineHeart
                     className='favIcon'
                     onClick={addToFav}
                     size={32}
                   />
                 }
-              
+
               </div>
               <div
-                className="col-8" 
+                className="col-8"
               >
                 <h1 >{course ? course.courseName : ""}
                 </h1>
               </div>
             </div>
-            <div className="row mt-4 justify-content-center">
-              <button onClick={postComment} > Leave a comment</button>
-              {/* <div className="row mt-2">
-              <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
-                </div>
-                <div className="col-6">
-                  <Course />
-                </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
-                </div>
-                <div className="col-6">
-                  <Course />
-                </div>
-              </div>
-            </div> */}
-            </div>
-          
+
             <div className="row mt-4">
               <h4>Course Notes</h4>
               {course ?
@@ -252,37 +262,71 @@ function SingleCourse() {
                         fileName={item.file.name}
                       >
                       </Note>
-                
+
                     </div>
                   );
                 })              :
                 <p>No file found for this course</p>
               }
-         
+
             </div>
             <div className="row mt-4 mb-5">
               <h4>Comments</h4>
               <div className="row mt-2">
-                <Comments
-                  userName="keremkor228"
-                  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-                >
-                </Comments>
-                <div className="col-12">
-                  <Comments
-                    userName={comment.userName}
-                    text={comment.text}
-                    points={comment.points}
-                  >
-                  </Comments>
-                  {console.log(comment.points)}
-                </div>
+
+                { course ?
+                  (course.comments.length > 0 ?
+                    course.comments.map((item, index) => {
+                      return(
+                        <div
+                          key={index}
+                          className="row mt-4"
+                        >
+                          <Comments
+                            points = {item.points}
+                            university = {university}
+                            courseCode = {courseCode}
+                            text = {item.text}
+                            userName = {item.userName}
+                          >
+                          </Comments>
+                        </div>
+                      );
+                    }) :<p>No comment</p>)            :
+                  <p>Loading...</p>
+                }
               </div>
             </div>
+            <div className="row">
+              <div>
+                <form
+                  onSubmit={handleSubmit(postComment)}
+                >
+                  <div className="col-10">
+                    <div className="form-group">
+                      <div className="form-group">
 
-         
-
-         
+                        <textarea
+                          {...register("message")}
+                          placeholder="Your Comment"
+                          id="textarea-message"
+                          className="form-control"
+                          name="message"
+                          rows="5"
+                        >
+                        </textarea>
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="col-4 btn btn-block btn-success mt-2 mb-5"
+                    >
+                      <span>Send</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>     :
         <p>Loading...</p>

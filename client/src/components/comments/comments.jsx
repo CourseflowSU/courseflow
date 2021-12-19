@@ -1,5 +1,5 @@
 import "../comments/comments.css";
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import PropTypes from "prop-types";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import axios from "axios";
@@ -8,62 +8,59 @@ function Comments({ userName, text, points, university, courseCode }) {
   const [count, setCount] = useState(points);
   const [likeClicked, setLikeClicked] = useState(0);
   const [dislikeClicked, setDislikeClicked] = useState(0);
-  const [comment, setComment] = useState({ userName: userName, text: text, points: points });
-  const pointRequest = { university, courseCode, comment }
 
-  console.log("saaa")
-  console.log(university);
-  console.log(courseCode);
-  console.log("asss")
   const postPoint = async () => {
-    console.log(pointRequest);
+
+    const comment = { userName: userName, text: text, points: count }
+    const pointRequest = { university, courseCode, comment }
+    console.log(comment);
+    console.log(count);
     await axios
-      .post(`${process.env.REACT_APP_URL}/comments`, pointRequest)
+      .post(`${process.env.REACT_APP_URL}/comments/update`, pointRequest)
       .then((res) => {
         console.log(res);
       })
   }
+  useEffect(() => {
+    postPoint();
+  }, [count])
 
   const likeButton = () => {
     if(likeClicked == 0 && dislikeClicked == 0)
     {
-      setCount(count + 1),
-      setLikeClicked(likeClicked + 1),
-      setComment(userName, text, count);
-      postPoint();
+      setCount(oldCount => oldCount + 1);
+      setLikeClicked(likeClicked + 1);
     }
     else if (likeClicked == 1 && dislikeClicked == 0)
     {
-      setCount(count - 1),
-      setLikeClicked(likeClicked - 1),
-      postPoint();
+      setCount(oldCount => oldCount - 1);
+      setLikeClicked(likeClicked - 1);
     }
     else if(likeClicked == 0 && dislikeClicked == 1)
     {
-      setCount(count + 2),
-      setLikeClicked(likeClicked + 1),
-      setDislikeClicked(dislikeClicked - 1),
-      postPoint();
+      setCount(oldCount => oldCount + 2);
+      setLikeClicked(likeClicked + 1);
+      setDislikeClicked(dislikeClicked - 1);
     }
   }
   const disLikeButton = () => {
     if(likeClicked == 0 && dislikeClicked == 0)
     {
-      setCount(count - 1),
-      setDislikeClicked(dislikeClicked + 1),
-      postPoint();
+      setCount(oldCount => oldCount - 1);
+      setDislikeClicked(dislikeClicked + 1);
+
     }
     else if(likeClicked == 1 && dislikeClicked == 0)
     {
-      setCount(count - 2),
-      setLikeClicked(likeClicked - 1),
-      setDislikeClicked(dislikeClicked + 1),
+      setCount(oldCount => oldCount - 2);
+      setLikeClicked(likeClicked - 1);
+      setDislikeClicked(dislikeClicked + 1);
       postPoint();
     }
     else if(likeClicked == 0 && dislikeClicked == 1)
     {
-      setCount(count + 1),
-      setDislikeClicked(dislikeClicked - 1),
+      setCount(oldCount => oldCount + 1);
+      setDislikeClicked(dislikeClicked - 1);
       postPoint();
     }
   }
