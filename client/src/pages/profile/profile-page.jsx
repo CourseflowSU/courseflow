@@ -2,15 +2,32 @@ import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store";
 import "../profile/profile-page.css";
 import { useNavigate } from "react-router";
+import Note from "../../components/note/note.jsx";
+import { useState , useEffect } from "react";
+
 
 function Profile() {
   const [state] = useStore();
   const { user: currentUser } = state;
   const navigate = useNavigate();
+  const [favoriteNotes, setFavoriteNotes] = useState();
+
 
   const goToChangePassword = (e) => {
     navigate("/change-password")
   }
+
+  
+  useEffect(() => {
+    let arr_favoriteNotes = JSON.parse(localStorage.getItem("currentUser")).favouriteDocuments;
+
+    if (arr_favoriteNotes) {
+      setFavoriteNotes(arr_favoriteNotes);
+    }
+
+    
+  }, []);
+
 
   return (
     <Layout>
@@ -41,34 +58,34 @@ function Profile() {
         </div>
       </div>
       <hr className="profile-page-divider mx-5 solid"></hr>
-      <div className="row mt-5 mb-5 justify-content-center">
-        <div className="document-container col-6">
-          <div className="row">
-            <h3 className="mt-2 mb-2 text-center">Your Documents</h3>
-          </div>
-          <div className="row">
-            <div className="document-section col-4">
-              <div className="document-section-in mr-0 pr-0">
-                <h6 className="text-center mb-1 mt-3">Uploads</h6>
-                <p className="text-center">0</p>
-              </div>
-            </div>
-            <div className="document-section col-4">
-              <div className="document-section-in">
-                <h6 className="text-center mb-1 mt-3">Points</h6>
-                <p className="text-center">0</p>
-              </div>
-            </div>
-            <div className="document-section col-4">
-              <div className="document-section-right">
-                <h6 className="text-center mb-1 mt-3">Comments</h6>
-                <p className="text-center">0</p>
-              </div>
-            </div>
-          </div>
+
+      <div className="row m-4">
+        <h4>Favorite Notes</h4>
+        <div className="row mt-2">
+          { favoriteNotes ?
+            (favoriteNotes.length > 0 ?
+              favoriteNotes.map((item, index) => {
+                return(
+                  <div
+                    key={index}
+                    className="row mt-4"
+                  >
+                    <Note
+                      courseCode={item.courseCode}
+                      university={item.university}
+                      fileName={item.file.name}
+                    >
+                    </Note>
+                  </div>
+                );
+              }) :<p>No note has been uploaded yet !!!</p>)            :
+            <p>Loading...</p>
+          }
         </div>
       </div>
     </Layout>
+
+    
   );
 }
 
