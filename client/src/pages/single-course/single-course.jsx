@@ -176,7 +176,7 @@ function SingleCourse() {
         let flag = false;
         for (let i = 0; i < arr_recent_courses.length; i++) {
           if (arr_recent_courses[i].courseCode === courseItem.courseCode &&
-            arr_recent_courses[i].university === courseItem.university && 
+            arr_recent_courses[i].university === courseItem.university &&
             arr_recent_courses[i].name === courseItem.name) {
             flag = true;
             break;
@@ -222,7 +222,7 @@ function SingleCourse() {
             <div className="row mt-4">
 
               <div
-                className="col-4"
+                className="col-1"
               >
                 {isFav ? <FcLike
                   onClick={removeFromFav}
@@ -239,9 +239,9 @@ function SingleCourse() {
 
               </div>
               <div
-                className="col-8"
+                className="col-9 align-self-center"
               >
-                <h1 >{course ? course.courseName : ""}
+                <h1 className="text-center">{course ? course.courseName : ""}
                 </h1>
               </div>
             </div>

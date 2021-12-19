@@ -41,26 +41,6 @@ function Course({ courseCode, name,  university, addToFav }) {
             </a>
           </div>
         </div>
-
-        <div className="row">
-          <div className="col-6">
-            <a
-              href="#1"
-              className="course-link"
-            >
-              <p className="text-start course-note-text">Midterm 1</p>
-            </a>
-          </div>
-          <div className="col-6">
-            <a
-              href="#1"
-              className="course-link"
-            >
-              <p className="text-start course-note-text">Homework 1</p>
-            </a>
-          </div>
-
-        </div>
       </button>
     </div>
   );
