@@ -112,7 +112,6 @@ function SingleNote() {
   
   useEffect(() => {
     if (note) {
-      console.log("aa");
       let noteItem = {
         info: note.info,
         fileName: note.file.name
@@ -120,9 +119,20 @@ function SingleNote() {
       let recent_notes = localStorage.getItem("recentNotes");
       console.log(recent_notes);
       if (recent_notes) {
-        console.log("bb");
         let arr_recent_notes = JSON.parse(recent_notes);
-        if (arr_recent_notes.indexOf(noteItem) == -1) {
+        let flag = false;
+
+        for (let i = 0; i < arr_recent_notes.length; i++) {
+          if (arr_recent_notes[i].info.courseName === noteItem.info.courseName &&
+            arr_recent_notes[i].info.university === noteItem.info.university &&
+            arr_recent_notes[i].info.username === noteItem.info.username &&
+            arr_recent_notes[i].info.courseCode === noteItem.info.courseCode &&
+            arr_recent_notes[i].fileName === noteItem.fileName ) {
+            flag = true;
+            break;
+          }
+        }
+        if (!flag) {
           arr_recent_notes.push(noteItem);
           if (arr_recent_notes.length == 6) {
             arr_recent_notes = arr_recent_notes.slice(1,6);
@@ -131,7 +141,6 @@ function SingleNote() {
         localStorage.setItem("recentNotes", JSON.stringify(arr_recent_notes));
       }
       else {
-        console.log("cc");
         localStorage.setItem("recentNotes", JSON.stringify([noteItem]));
         console.log(JSON.stringify([noteItem]));
       }

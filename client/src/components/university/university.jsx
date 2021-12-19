@@ -8,12 +8,12 @@ import "../university/university.scss";
 function University({ universityName, courseNumber }) {
 
   const navigate = useNavigate();
-
+  let clearUniversityName = universityName.replace("_", " ");
   const goToUniversity = (e) => {
     if(universityName !== "unknown" && courseNumber !== 0){
       e.preventDefault();
       e.stopPropagation();
-      navigate(`/courses/${universityName}`)
+      navigate(`/universities/${universityName}`)
     }
 
   }
@@ -29,7 +29,7 @@ function University({ universityName, courseNumber }) {
             <h4
               className="text-start"
 
-            >{`${universityName}`}
+            >{`${clearUniversityName}`}
             </h4>
           </div>
           <div className="col-4">
