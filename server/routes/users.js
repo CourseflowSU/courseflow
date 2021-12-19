@@ -442,43 +442,8 @@ userRoutes.route("/comments").post(function(req, res){
          })
       }
     });
-
-
-
-
-
 })
 
-userRoutes.route("/points").post(function(req, res){
-
-  let db_connect = dbo.getDb("courseflow");
-    db_connect.collection("universities")
-    .findOne({"universityName": req.body.university, "courses.courseCode": req.body.courseCode}, function(err, response) {
-      console.log(response);
-      if (err) throw err;
-      else if (response == null) {
-        console.log(err);
-        throw err;
-      }
-      else {
-        console.log(response);
-        let new_response = response;
-        let courseNum;
-        for (let i = 0; i < response.courses.length; i++) {
-          if (response.courses[i].courseCode === req.body.courseCode) {
-            new_response.courses[i].comments.points.push(req.body.points);
-            courseNum = i;
-          }
-        }
-        db_connect.collection("universities")
-        .updateOne({"universityName": response.universityName, "courses.courseCode": req.body.courseCode},
-         {$set: { "courses": new_response.courses}}, {upsert: true}, function(err2, response2) {
-           if (err2) throw err2;
-           res.json(response2);
-         })
-      }
-    });
-})
 
 userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
@@ -501,7 +466,19 @@ userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
     .catch((err) => {
       throw err;
     });
+})
 
+userRoutes.route("/courses/:university").get(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log(req.params.university);
+   db_connect.collection("universities")
+    .find({"universityName": req.params.university}).sort({"universityName.courses.university":1}).limit(3).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
 })
 
 userRoutes.route("/notes/:university/:courseCode/:fileName").post(function(req, res){
@@ -559,7 +536,7 @@ userRoutes.route('/courses/addToFav').post(function(req, res){
         courseCode:req.body.courseCode
       }
       new_response.favouriteCourses.push(newCourse);
-      
+
       db_connect.collection("users")
       .updateOne({"email": req.body.email},
        {$set: { "favouriteCourses": new_response.favouriteCourses}}, {upsert: true}, function(err2, response2) {
@@ -587,7 +564,7 @@ userRoutes.route('/courses/removeFromFav').post(function(req, res){
       for (let i = 0; i < new_response.favouriteCourses.length; i++) {
         console.log(new_response.favouriteCourses[i], req.body.university, req.body.courseCode);
 
-        if (new_response.favouriteCourses[i].university === req.body.university && 
+        if (new_response.favouriteCourses[i].university === req.body.university &&
           new_response.favouriteCourses[i].courseCode === req.body.courseCode) {
             new_response.favouriteCourses.splice(i, 1);
             console.log(new_response.favouriteCourses[i]);
@@ -602,6 +579,23 @@ userRoutes.route('/courses/removeFromFav').post(function(req, res){
     }
   });
 })
+
+userRoutes.route('/search').post(function(req, res) {
+  let db_connect = dbo.getDb("courseflow");
+  console.log("university search page");
+  console.log(req.body.searchQuery);
+  let searchQuery = req.body.searchQuery;
+  db_connect.collection("universities")
+    .find({"universityName": { "$regex": searchQuery, "$options": "i" } }).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+
+});
 
 
 
