@@ -13,23 +13,23 @@ import "./footer.css";
 const Footer = () => {
   return (
     <Box>
-      <h1 style={{ color: "#1C9941",
+      <h3 style={{ color: "#1C9941",
         textAlign: "center",
         marginTop: "-50px",
-        marginBottom: "40px" }}
+        marginBottom: "30px" }}
       >
         CourseFlow: Course Document Database for Everyone
-      </h1>
+      </h3>
       <Container>
         <Row>
           <Column>
-            <Heading>About Us</Heading>
+            <LinkFooter href="/aboutUs"> About Us </LinkFooter>
             <FooterLink href="#">Courses</FooterLink>
             <FooterLink href="#">Notes</FooterLink>
             <FooterLink href="#">Exams</FooterLink>
           </Column>
           <Column>
-            <Heading>Contact Us</Heading>
+            <LinkFooter href="/contactUs" >Contact Us</LinkFooter>
             <FooterLink href="https://www.linkedin.com/in/mizbah-celik/">Mizbah Celik</FooterLink>
             <FooterLink href="https://www.linkedin.com/in/mert-ture/">Mert Ture</FooterLink>
             <FooterLink href="https://www.linkedin.com/in/keremkor/">Kerem Kor</FooterLink>
@@ -79,6 +79,7 @@ export const Box = styled.div`
   position: flex;
   bottom: 0;
   width: 100%;
+  margin-top: 20px; 
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
@@ -110,7 +111,7 @@ export const Row = styled.div`
 `;
 export const FooterLink = styled.a`
   color: #4e657e;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   font-size: 14px;
   text-decoration: none;
    
@@ -122,8 +123,19 @@ export const FooterLink = styled.a`
 export const Heading = styled.p`
   font-size: 18px;
   color: #4e657e;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   font-weight: bold;
+`;
+export const LinkFooter = styled.a`
+  font-size: 18px;
+  color: #4e657e;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  &:hover {
+    color: green;
+    transition: 200ms ease-in;
+}
 `;
 
 
