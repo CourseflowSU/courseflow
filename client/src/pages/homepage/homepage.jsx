@@ -3,10 +3,14 @@ import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
 import logo from "../homepage/logo.png";
 import Course from "../../components/course/course.jsx";
+import { useState } from "react";
+
 
 function Homepage() {
   const [state] = useStore();
   const { user: currentUser } = state;
+
+  const [list, setList] = useState(currentUser.favouriteCourses);
 
   return (
     <Layout>
@@ -15,22 +19,32 @@ function Homepage() {
           <div className="row mt-4">
             <h4>My Courses</h4>
             <div className="row mt-2">
-              <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
-                </div>
-                <div className="col-6">
-                  <Course />
-                </div>
-              </div>
-              <div className="row mt-2">
-                <div className="col-6">
-                  <Course />
-                </div>
-                <div className="col-6">
-                  <Course />
-                </div>
-              </div>
+              { list ?
+                (list.length > 0 ?
+                  list.map((item) => {
+
+                    return(
+                      <div
+                        key={item.courseCode}
+                        className="row mt-4"
+                      >
+                        <div
+                          className="col-12"
+                        >
+                          <Course
+                            courseCode={item.courseCode}
+                            university={item.university}
+                            name={item.courseName}
+                          >
+                          </Course>
+                        </div>
+                      </div>
+
+                    );
+                  }) :<p>No course yet !!!</p>)            :
+                <p>Loading...</p>
+
+              }
             </div>
           </div>
           <div className="row mt-4">

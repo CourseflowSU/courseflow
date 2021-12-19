@@ -79,6 +79,7 @@ userRoutes.route("/users/signup/add").post(function (req, response) {
     email: req.body.email,
     password: req.body.password,
     favouriteCourses: [],
+    favouriteDocuments: [],
   };
 
   // hashing time
@@ -203,7 +204,6 @@ userRoutes.post('/forgotPassword', (req, res) => {
   });
 });
 
-
 userRoutes.get('/reset', (req, res) => {
   let db_connect = dbo.getDb("courseflow");
   db_connect.collection("users").findOne({
@@ -224,7 +224,6 @@ userRoutes.get('/reset', (req, res) => {
     }
   });
 });
-
 
 userRoutes.put('/updatePasswordViaEmail', (req, res) => {
   let db_connect = dbo.getDb("courseflow");
@@ -340,7 +339,6 @@ userRoutes.post('/upload', (req, res) => {
 
 });
 
-
 userRoutes.route("/users/change-password").put( function (req, res) {
   let db_connect = dbo.getDb("courseflow");
   const BCRYPT_SALT_ROUNDS = 10;
@@ -410,7 +408,17 @@ userRoutes.route("/courses").get(function(req, res){
     });
 })
 
-
+userRoutes.route("/notes").get(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+   db_connect.collection("universities")
+    .find({}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
+})
 
 userRoutes.route("/comments").post(function(req, res){
 
@@ -443,7 +451,6 @@ userRoutes.route("/comments").post(function(req, res){
       }
     });
 })
-
 
 userRoutes.route("/courses/:university/:courseCode").post(function(req, res){
   let db_connect = dbo.getDb("courseflow");
@@ -488,8 +495,8 @@ userRoutes.route("/notes/:university/:courseCode/:fileName").post(function(req, 
    db_connect
     .collection("universities")
     .findOne({
-      "universityName": req.params.university, 
-      "courses.courseCode": req.params.courseCode, 
+      "universityName": req.params.university,
+      "courses.courseCode": req.params.courseCode,
     })
     .then((result) => {
       console.log(result);
@@ -504,7 +511,7 @@ userRoutes.route("/notes/:university/:courseCode/:fileName").post(function(req, 
                 res.json(result.courses[i].files[j]);
                  break;
               }
-              
+
             }
           }
         }

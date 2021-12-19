@@ -11,9 +11,12 @@ function Comments({ userName, text, points, university, courseCode }) {
   const [comment, setComment] = useState({ userName: userName, text: text, points: points });
   const pointRequest = { university, courseCode, comment }
 
+  console.log("saaa")
+  console.log(university);
+  console.log(courseCode);
+  console.log("asss")
   const postPoint = async () => {
-    setComment( userName, text, count);
-    console.log(count)
+    console.log(pointRequest);
     await axios
       .post(`${process.env.REACT_APP_URL}/comments`, pointRequest)
       .then((res) => {
@@ -25,42 +28,43 @@ function Comments({ userName, text, points, university, courseCode }) {
     if(likeClicked == 0 && dislikeClicked == 0)
     {
       setCount(count + 1),
-      setLikeClicked(likeClicked + 1)
-      postPoint()
+      setLikeClicked(likeClicked + 1),
+      setComment(userName, text, count);
+      postPoint();
     }
     else if (likeClicked == 1 && dislikeClicked == 0)
     {
       setCount(count - 1),
-      setLikeClicked(likeClicked - 1)
-      postPoint()
+      setLikeClicked(likeClicked - 1),
+      postPoint();
     }
     else if(likeClicked == 0 && dislikeClicked == 1)
     {
       setCount(count + 2),
       setLikeClicked(likeClicked + 1),
-      setDislikeClicked(dislikeClicked - 1)
-      postPoint()
+      setDislikeClicked(dislikeClicked - 1),
+      postPoint();
     }
   }
   const disLikeButton = () => {
     if(likeClicked == 0 && dislikeClicked == 0)
     {
       setCount(count - 1),
-      setDislikeClicked(dislikeClicked + 1)
-      postPoint
+      setDislikeClicked(dislikeClicked + 1),
+      postPoint();
     }
     else if(likeClicked == 1 && dislikeClicked == 0)
     {
       setCount(count - 2),
       setLikeClicked(likeClicked - 1),
-      setDislikeClicked(dislikeClicked + 1)
-      postPoint
+      setDislikeClicked(dislikeClicked + 1),
+      postPoint();
     }
     else if(likeClicked == 0 && dislikeClicked == 1)
     {
       setCount(count + 1),
-      setDislikeClicked(dislikeClicked - 1)
-      postPoint
+      setDislikeClicked(dislikeClicked - 1),
+      postPoint();
     }
   }
   return (

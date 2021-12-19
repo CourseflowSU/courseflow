@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import logo from "../../pages/homepage/logo.png";
 import { useStore } from "../../store/store";
 import "../note/note.css";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { useState } from "react";
 
-function Note(noteName, courseName, universityName) {
+function Note({ fileName, courseName, courseCode, university }) {
   const [count, setCount] = useState(0);
   const [likeClicked, setLikeClicked] = useState(0);
   const [dislikeClicked, setDislikeClicked] = useState(0);
@@ -60,18 +61,22 @@ function Note(noteName, courseName, universityName) {
           <div className="col-10 justify-content-start mb-2">
             <div className="row">
               <div className="col-8">
-                <h5 className="text-start" >{noteName}</h5>
                 <a
-                  href="#deneme"
+                  href = {`/notes/${university}/${courseCode}/${fileName}`}
+                  className="text-start"
+                >{fileName}
+                </a>
+                <a
+                  href = {`/courses/${university}/${courseCode}`}
                   className="link-success"
                 >
                   <p className="text-start" >{courseName}</p>
                 </a>
                 <a
-                  href="#deneme"
+                  href= {`/universities/${university}`}
                   className="link-success"
                 >
-                  <p className="text-start" >{universityName}</p>
+                  <p className="text-start" >{university}</p>
                 </a>
               </div>
               <div className="col-4">
