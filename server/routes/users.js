@@ -479,7 +479,20 @@ userRoutes.route("/courses/:university").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log(req.params.university);
    db_connect.collection("universities")
-    .find({"universityName": req.params.university}).sort({"universityName.courses.university":1}).limit(3).toArray()
+    .find({"universityName": req.params.university}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
+})
+
+userRoutes.route("/landingUni").get(function(req, res){
+  let db_connect = dbo.getDb("courseflow");
+  console.log(req.params.university);
+   db_connect.collection("universities")
+    .find({}).sort({"universityName.courses.university":1}).limit(5).toArray()
     .then((result) => {
       res.json(result);
     })

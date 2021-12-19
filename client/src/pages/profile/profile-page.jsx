@@ -1,10 +1,16 @@
 import Layout from "../../components/layout/layout.jsx";
 import { useStore } from "../../store/store";
 import "../profile/profile-page.css";
+import { useNavigate } from "react-router";
 
 function Profile() {
   const [state] = useStore();
   const { user: currentUser } = state;
+  const navigate = useNavigate();
+
+  const goToChangePassword = (e) => {
+    navigate("/change-password")
+  }
 
   return (
     <Layout>
@@ -26,8 +32,11 @@ function Profile() {
           </div>
         </div>
         <div className="col-2 offset-3 mt-0">
-          <button className="col-12 btn btn-block btn-danger">
-            Edit Profile
+          <button
+            onClick = {goToChangePassword}
+            className="col-12 btn btn-block btn-danger"
+          >
+            Change Password
           </button>
         </div>
       </div>

@@ -5,8 +5,50 @@ import { AiFillBank, AiOutlineBulb, AiOutlineCloudUpload, AiOutlineFileText } fr
 import logo from "../header/Courseflow.jpeg";
 import { Link } from "react-router-dom";
 import Footer from "../footer/footer.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Landing() {
+
+  const [list, setList] = useState();
+  const [uniList, setUniList] = useState();
+
+  const getNotes = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/notes`)
+      .then(res => {
+        console.log(res.data);
+        const data = res.data;
+        let noteList = [];
+        data.forEach(uni => {
+          uni.courses.forEach(course => {
+            noteList = noteList.concat(...course.files)
+          })
+        });
+        console.log(noteList);
+        setList(noteList);
+      }).catch(err => console.log(err))
+  }
+
+  const getUniversities = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/landingUni`)
+      .then(res => {
+        console.log(res.data);
+        const data = res.data;
+        let universityList = [];
+        data.forEach(uni => {
+          universityList.push(uni)
+        });
+        console.log("6666");
+        console.log(universityList);
+        setUniList(universityList);
+      }).catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    getNotes();
+    getUniversities();
+  }, [])
+
   return (
     <div>
       <Navbar
@@ -103,42 +145,41 @@ function Landing() {
             Top Universities
           </span>
           <hr></hr>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >University Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-          </button>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >University Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-          </button>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >University Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-          </button>
-          <button className="col-12 mb-5 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >University Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-          </button>
+          { uniList ?
+            (uniList.length > 0 ?
+              uniList.map((item, index) => {
+                return(
+                  <div
+                    key={index}
+                  >
+                    {console.log("555")}
+                    {console.log(item)}
+                    <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
+                      <div className="row">
+                        <div className="col-8">
+                          <h5 className="text-start" >{item.universityName}</h5>
+                        </div>
+                      </div>
+                      <p
+                        className="text-start top-document-text"
+                        key={index}
+                      >
+                        {item.courses[0] ?  item.courses[0].courseName : "No Course"}
+                      </p>
+                      <p
+                        className="text-start top-document-text"
+                        key={index}
+                      >
+                        {item.courses[1] ?  item.courses[1].courseName : "No Course"}
+                      </p>
+                    </button>
+                  </div>
+
+                );
+              }) :<p>No course yet !!!</p>)            :
+            <p>Loading...</p>
+
+          }
         </div>
         <div className="col-4 mt-3">
           <span
@@ -155,42 +196,28 @@ function Landing() {
             Top Documents
           </span>
           <hr></hr>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >Note Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Sabanci University</p>
-          </button>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >Note Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Sabanci University</p>
-          </button>
-          <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >Note Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Sabanci University</p>
-          </button>
-          <button className="col-12 mb-5 btn btn-block btn-outline-success top-document">
-            <div className="row">
-              <div className="col-8">
-                <h5 className="text-start" >Note Name</h5>
-              </div>
-            </div>
-            <p className="text-start top-document-text" >Software Engineering (CS308)</p>
-            <p className="text-start top-document-text" >Sabanci University</p>
-          </button>
+          { list ?
+            (list.length > 0 ?
+              list.map((item, index) => {
+                return(
+                  <div
+                    key={index}
+                    className="mb-1"
+                  >
+                    <button className="col-12 btn btn-block btn-outline-success top-document">
+                      <div className="row">
+                        <div className="col-8">
+                          <h5 className="text-start" >{item.file.name}</h5>
+                        </div>
+                      </div>
+                      <p className="text-start top-document-text" >{item.info.courseName}</p>
+                      <p className="text-start top-document-text" >{item.info.university}</p>
+                    </button>
+                  </div>
+                );
+              }) :<p>No note has been uploaded yet !!!</p>)            :
+            <p>Loading...</p>
+          }
         </div>
       </div>
 
