@@ -5,6 +5,8 @@ import logo from "../homepage/logo.png";
 import Course from "../../components/course/course.jsx";
 import Note from "../../components/note/note.jsx";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+
 
 
 function Homepage() {
@@ -14,6 +16,7 @@ function Homepage() {
   const [list, setList] = useState(currentUser.favouriteCourses);
   const [recentNotesList, setRecentNotesList] = useState();
 
+
   useEffect(() => {
     let recentNotes = localStorage.getItem("recentNotes");
 
@@ -22,7 +25,18 @@ function Homepage() {
     }
   }, []);
 
-  console.log(recentNotesList);
+  const navigate = useNavigate();
+
+  const goToCourse = (e) => {
+    if(courseCode !== "unknown" && university !== "unknown"){
+      e.preventDefault();
+      e.stopPropagation();
+      navigate(`/courses/${university}/${courseCode}`)
+    }
+
+  }
+
+
   return (
     <Layout>
       <div className="row homepage-margin">
@@ -37,20 +51,33 @@ function Homepage() {
                     return(
                       <div
                         key={item.courseCode}
-                        className="row mt-4"
+                        className="row mb-3"
                       >
-                        <div
-                          className="col-12"
+                        <button
+                          className = "col-6 btn btn-block btn-outline-success course-button"
                         >
-                          <Course
-                            courseCode={item.courseCode}
-                            university={item.university}
-                            name={item.courseName}
-                          >
-                          </Course>
-                        </div>
+                          <div className="row justify-content-between">
+                            <div
+                              className="col-8 courseName"
+                            >
+                              <a
+                                href = {`/courses/${item.university}/${item.courseCode}`}
+                                className="text-start course-link"
+                              >
+                                <h4>{`${item.courseName} - ${item.courseCode}`}</h4>
+                              </a>
+                            </div>
+                            <div className="col-4">
+                              <a
+                                href= {`/universities/${item.university}`}
+                                className="course-link"
+                              >
+                                <p className="text-end text-xsm" >{item.university}</p>
+                              </a>
+                            </div>
+                          </div>
+                        </button>
                       </div>
-
                     );
                   }) :<p>No course yet !!!</p>)            :
                 <p>Loading...</p>
@@ -60,6 +87,7 @@ function Homepage() {
           </div>
           <div className="row mt-4">
             <h4>Recently Viewed Notes</h4>
+
             <div className="row">
               { recentNotesList ?
                 recentNotesList.map((item, index) => {

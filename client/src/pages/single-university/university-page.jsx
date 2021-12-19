@@ -38,7 +38,7 @@ function University() {
   return (
     <Layout>
       <div className="row m-4">
-        <h4>Courses</h4>
+        <h4>Courses of {university.replace("_", " ")}</h4>
         <div className="row mt-2">
 
           { list ?
@@ -51,7 +51,7 @@ function University() {
                     className="row mt-4"
                   >
                     <div
-                      className="col-12"
+                      className="col-6"
                     >
                       <Course
                         courseCode={item.courseCode}
