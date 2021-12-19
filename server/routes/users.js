@@ -283,7 +283,7 @@ userRoutes.post('/upload', (req, res) => {
       // accessing the file
   const myFile = req.files.file;
   const file = {}
-  myFile.data= Binary(myFile.data);
+  // myFile.data= Binary(myFile.data);
   file.file = myFile;
   file.info = req.body;
   // "courses": {"courseCode": req.body.courseCode}

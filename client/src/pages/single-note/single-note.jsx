@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
 import { useStore } from "../../store/store.js";
+import "./single-note.scss";
 
 
 const { default: Layout } = require("../../components/layout/layout");
@@ -10,6 +11,9 @@ const { default: Layout } = require("../../components/layout/layout");
 function SingleNote() {
   pdfjs.GlobalWorkerOptions.workerSrc =
 `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+  const [numPages, setNumPages] = useState(null);
+
 
   const { university, courseCode, fileName } = useParams()
 
@@ -38,7 +42,7 @@ function SingleNote() {
             //   }
             // }
             // console.log(currentUser.favouriteCourses)
-            console.log("got course")
+            console.log("got note :", res.data)
           }
           else{
             navigate("/error");
@@ -87,21 +91,36 @@ function SingleNote() {
   //     })
   // }
 
-  const toArray = (pdfBin) => {
-    if (!pdfBin) { return new Uint8Array(0) }
-    const len = pdfBin.length;
-    const bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = pdfBin.charCodeAt(i);
-    }
+  // const toArray = (pdfBin) => {
+  //   if (!pdfBin) { return new Uint8Array(0) }
+  //   const len = pdfBin.length;
+  //   const bytes = new Uint8Array(len);
+  //   for (var i = 0; i < len; i++) {
+  //     bytes[i] = pdfBin.charCodeAt(i);
+  //   }
     
-    return bytes
+  //   return bytes
+  // }
+
+
+  const toPdfFileUrl = () => {
+    var byteCharacters = atob(note.file.data);
+    var byteNumbers = new Array(byteCharacters.length);
+    for (var i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+    var file = new Blob([byteArray], { type: "application/pdf;base64" });
+    var fileURL = URL.createObjectURL(file);
+    return fileURL;
   }
+
 
   useEffect(() => {
     fetchNote();
     
   }, [fetchNote])
+
 
 
   return (
@@ -146,32 +165,31 @@ function SingleNote() {
               >
               
                 <Document
-                  className="pdf-document"
+                  // className="pdf-document"
                   options={{
-                    // outerWidth: "700",
-                    // innerWidth: { 700 },
+                    // outerWidth: 600,
+                    // innerWidth: 500 ,
                     cMapUrl: `//cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/cmaps/`,
                     cMapPacked: true,
                   }}
-                  //file={window.URL.createObjectURL(new Blob([course.files[0].file.data],  { type: "application/pdf" }))}
-                  // file={{ data: toArray(course.files[0].file.data) }}
-                  //file={testPdf}
+                  // file={window.URL.createObjectURL(new Blob([note.file.data],  { type: "application/pdf" }))}
+                  // file={{ data: toArray(note.file.data) }}
+                  file={toPdfFileUrl()}
+                  onLoadSuccess={({ numPages })=>setNumPages(numPages)}
                 >
-                  <Page
-                    key={1}
-                    pageNumber={1}
-                  />  
-                  {/* {Array.apply(null, Array(numPages))
-                .map((x, i)=>i+1)
-                .map(page => <Page
+                  {Array.apply(null, Array(numPages))
+                    .map((x, i)=>i+1)
+                    .map(page => <Page
                       
-                  key={page}
-                  pageNumber={page}
-                />  
-                )} */}
+                      key={page}
+                      pageNumber={page}
+                      // width={500}
+                      // scale={0.92}
+                    />  
+                    )}
                 </Document>
               </div>          :
-              <p></p>
+              <p>Error while loading, try again</p>
             }
 
          
