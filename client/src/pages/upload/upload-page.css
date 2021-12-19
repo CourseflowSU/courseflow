@@ -81,6 +81,8 @@
     background-color: #0088d7;
     border-radius: 3px;
     margin-right: 10px;
+    margin: 20px;
+
 }
 
 .uploadBtn:hover {
@@ -114,5 +116,19 @@
   .document-section-right {
     justify-content: center;
     align-items: center;
+  }
+  
+  .pdf-document {
+    align-items: center;
+    margin-left: 40px;
+  }
+
+  .progessBar{
+    height: 1.65rem;
+    width: 0%;
+    background-color: rgb(68, 212, 231);
+    color: white;
+    padding:2px;
+    margin: 5px 0px 5px 0px;
   }
   

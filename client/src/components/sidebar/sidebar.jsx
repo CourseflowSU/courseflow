@@ -40,15 +40,6 @@ function Sidebar() {
           Notes
             </Link>
           </li>
-          <hr className="sidebar-divider solid"></hr>
-          <li>
-            <Link to="/recent-documents">
-              <span>
-                <AiOutlineFieldTime />
-              </span>
-            Recent Documents
-            </Link>
-          </li>
           <hr className="solid sidebar-divider"></hr>
           <li>
             <Link to="/upload">
