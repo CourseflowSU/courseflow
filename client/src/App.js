@@ -20,6 +20,9 @@ import University from "./pages/single-university/university-page.jsx";
 import UniversitySearch from "./pages/university-search/university-search.jsx";
 import Upload from "./pages/upload/upload.jsx";
 import { useStore } from "./store/store";
+import CourseComment from "./pages/course-comment/course-comment.jsx";
+import AboutUs from "./pages/aboutus-page/about-us.jsx";
+import ContactUs from "./pages/contactus-page/contact-us.jsx";
 
 
 function App() {
@@ -80,6 +83,14 @@ function App() {
             <Route
               path="/"
               element={<Homepage />}
+            />
+            <Route
+              path="/aboutUs"
+              element={<AboutUs />}
+            />
+            <Route
+              path="/contactUs"
+              element={<ContactUs />}
             />
             <Route
               path="/upload"

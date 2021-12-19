@@ -1,0 +1,231 @@
+.about-info {
+    background-color: #fff;
+    margin-bottom: 30px !important;
+    align-items: center;
+    justify-content: start;
+  }
+.about-headInfo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #fff;
+    margin-bottom: 10px !important;
+    min-height: 180px;
+    text-align: left;
+    font-weight:400;
+}
+
+.h2_about {
+    margin-top: 60px;
+    margin-right: 80px;
+    margin-left: 80px;
+    text-align: left;
+    line-height: 60px;
+}
+
+.aboutUsImg {
+    margin: 75px 100px 75px 45px;
+    max-width:100%;
+    width: 344px;
+    height: 367px;
+}
+
+.aboutUs_contents{
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 80px;
+    padding-left: 80px;
+    width: 100%;
+}
+
+.site_contents {
+    display: flex;
+    flex-direction: column;
+    background-color: #f2f3f5;
+    padding: 25px;
+}
+.site_contents_div {
+  padding-left: 45px !important;
+  padding-right: 45px !important;
+}
+
+.site_contents_p {
+    margin: 0 0 10px;
+}
+
+.site_contents_icon {
+    width: 34px;
+    height: 34px;
+}
+
+.founder {
+    max-width: 970px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+
+}
+.founder_contents{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.founder_contents_in {
+    padding: 0;
+    width: 220px;
+}
+.founder_contents_box {
+    padding: 24px 15px;
+    text-align: center;
+    margin: 0;
+}
+
+.founder_contents_p {
+    margin: 0 0 10px;
+}
+
+.founder_contents_icon {
+    width: 34px;
+    height: 34px;
+}
+
+.founder_img {
+    vertical-align: middle;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 24px;
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+.founder_name{
+    color: #0088d7;
+    margin: 0 0 10px;
+
+}
+.founder_pos {
+    font-style: italic;
+    margin: 0 0 10px;
+
+}
+.founder_info {
+    text-align: center;
+    margin: 0 0 10px;
+}
+.founder_h2 {
+    text-align: center;
+    color: #0088d7;
+    font-weight: lighter;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+.dashedBorder {
+  margin: 20px;
+  position: relative;
+  border: 2px dashed #0088d7;
+  border-radius: 3px;
+  padding:20px
+}
+
+.uploadContent {
+  align-items: center;
+  text-align: center;
+}
+
+.appearContent1 {
+  position: relative;
+  left: -4px;
+  color: #4e657e;
+  font-weight:300
+}
+
+.appearContent1 .appearContent2 {
+  animation:cursor-blink .75s linear infinite
+}
+
+.appearContentColor {
+  color:#0088d7
+}
+.appearContentFont {
+  font-weight:700 !important
+}
+  
+  .uploadImg {
+    background-color: #fee9ec;
+    padding: 50px 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 700;
+    color: #dd4b39;
+  }
+  
+  .uploadImgLocation {
+    margin-left: 10vw;
+  }
+
+  .browseBtn {
+    background-color: #1C9941 !important;
+    border-radius: 3px !important;
+    margin-right: 10px !important;
+  }
+  .browseBtn:hover {
+    background-color: #22b44e !important;
+    border-radius: 3px !important;
+    color: #fff !important;
+  }
+  .browseBtnText {
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+  }
+
+  .uploadBtn {
+    background-color: #0088d7;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.uploadBtn:hover {
+  background-color: #007ec8;
+  border-radius: 3px;
+}
+.uploadBtnText {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}
+  
+  .document-container {
+    border: 1px solid rgb(179, 179, 179);
+  }
+  
+  .document-section {
+    border-top: 1px solid rgb(211, 211, 211);
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+  
+  .document-section-in {
+    border-right: 1px solid rgb(211, 211, 211);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .document-section-right {
+    justify-content: center;
+    align-items: center;
+  }
+  
