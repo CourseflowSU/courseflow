@@ -51,7 +51,7 @@ function University() {
                     className="row mt-4"
                   >
                     <div
-                      className="col-6"
+                      className="col-8"
                     >
                       <Course
                         courseCode={item.courseCode}
