@@ -3,12 +3,12 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
 import "../course/course.scss";
-
+import { useEffect, useState } from "react";
 
 function Course({ courseCode, name,  university, addToFav }) {
 
   const navigate = useNavigate();
-
+  let clearCourseName = name.replace("_", " ");
   const goToCourse = (e) => {
     if(courseCode !== "unknown" && university !== "unknown"){
       e.preventDefault();
@@ -29,7 +29,7 @@ function Course({ courseCode, name,  university, addToFav }) {
             <h4
               className="text-start"
 
-            >{`${name} - ${courseCode}`}
+            >{`${clearCourseName} - ${courseCode}`}
             </h4>
           </div>
           <div className="col-4">
