@@ -243,7 +243,7 @@ function SingleCourse() {
               <div
                 style={{
                   border: "1px solid rgba(0, 0, 0, 0.3)",
-                  height: "100%",
+                  marginBottom: "10px",
                 }}
               >
               
