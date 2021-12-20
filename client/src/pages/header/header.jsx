@@ -76,7 +76,7 @@ const Header = () => {
             >
               <input
                 type="search"
-                placeholder="Search for courses, books or documents"
+                placeholder="Search for universities"
                 onChange={(e) => setSearchQuery(e.target.value)}
                 value={searchQuery}
                 data-hj-whitelist="true"

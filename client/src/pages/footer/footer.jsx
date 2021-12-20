@@ -24,8 +24,8 @@ const Footer = () => {
         <Row>
           <Column>
             <LinkFooter href="/aboutUs"> About Us </LinkFooter>
-            <FooterLink href="/courses">Courses</FooterLink>
-            <FooterLink href="/notes">Notes</FooterLink>
+            <FooterLink href="#">Courses</FooterLink>
+            <FooterLink href="#">Notes</FooterLink>
           </Column>
           <Column>
             <LinkFooter href="/contactUs" >Contact Us</LinkFooter>
