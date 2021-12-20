@@ -39,9 +39,10 @@ function SingleNote() {
           if(res.data !== null){
             setNote(res.data)
             for (let i = 0; i < currentUser.favouriteDocuments.length; i++) {
-              if (currentUser.favouriteDocuments[i].university === res.data.university && 
-                currentUser.favouriteDocuments[i].courseCode === res.data.courseCode &&
-                currentUser.favouriteDocuments[i].fileName === res.data.fileName) {
+              if (currentUser.favouriteDocuments[i].university === university && 
+                currentUser.favouriteDocuments[i].courseCode === courseCode &&
+                currentUser.favouriteDocuments[i].fileName === fileName) {
+                console.log("found a fav document");
                 setIsFav(true);
               }
             }
@@ -83,7 +84,7 @@ function SingleNote() {
 
   const removeFromFav = async () => {
     await axios.post(`${process.env.REACT_APP_URL}/courses/removeFromFav`,
-      { email:currentUser.email, university:note.university, courseCode:note.courseCode, fileName: note.fileName  })
+      { email:currentUser.email, university:university, courseCode:courseCode, fileName: fileName  })
       .then(res => {
         console.log(res);
         setIsFav(false);

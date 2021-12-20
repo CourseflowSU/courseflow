@@ -604,6 +604,8 @@ userRoutes.route('/courses/addToFav').post(function(req, res){
     }
     else {
       let new_response = response;
+      console.log("new response");
+      console.log(new_response);
       const newCourse = {
         university: req.body.university,
         courseCode:req.body.courseCode,
@@ -684,6 +686,8 @@ userRoutes.route('/notes/addToFav').post(function(req, res){
     }
     else {
       let new_response = response;
+      console.log("new response");
+      console.log(new_response);
       const newNote = {
         university: req.body.university,
         courseCode:req.body.courseCode,

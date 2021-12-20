@@ -121,7 +121,7 @@ function SingleCourse() {
       return;
     }
     await axios.post(`${process.env.REACT_APP_URL}/courses/addToFav`,
-      { email:currentUser.email, university:course.university, courseCode:course.courseCode, courseName:course.courseName })
+      { email:currentUser.email, university:university, courseCode:courseCode, courseName:course.courseName })
       .then(res => {
         console.log(res.data);
 
@@ -136,7 +136,7 @@ function SingleCourse() {
 
   const removeFromFav = async () => {
     await axios.post(`${process.env.REACT_APP_URL}/courses/removeFromFav`,
-      { email:currentUser.email, university:course.university, courseCode:course.courseCode })
+      { email:currentUser.email, university:university, courseCode:courseCode })
       .then(res => {
         console.log(res);
         setIsFav(false);
