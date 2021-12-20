@@ -59,7 +59,7 @@ function Profile() {
     // for (let i = 0; i < arr_favoriteNotes.length; i++) {
     //   fetchCourse(arr_favoriteNotes[i].university, arr_favoriteNotes[i].courseCode);
     // }
-    
+
   }, []);
 
 
@@ -69,7 +69,7 @@ function Profile() {
         <div className="col-2 profileImgLocation mt-2">
           <div className="text-center d-flex justify-content-center align-items-center profileImg">{currentUser.username.substring(0,2).toUpperCase()}</div>
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <div className="mt-3" >
             <p>
               Username: {currentUser ? currentUser.username: ""}
@@ -147,7 +147,7 @@ function Profile() {
       </div>
     </Layout>
 
-    
+
   );
 }
 

@@ -33,7 +33,7 @@ function Note({ fileName, courseName, courseCode, university }) {
               href= {`/universities/${university}`}
               className="course-link"
             >
-              <p className="text-end text-xsm" >{university}</p>
+              <p className="text-end text-xsm" >{university.replace("_", " ")}</p>
             </a>
           </div>
         </div>
