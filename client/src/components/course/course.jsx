@@ -15,7 +15,6 @@ function Course({ courseCode, name,  university, addToFav }) {
       e.stopPropagation();
       navigate(`/courses/${university}/${courseCode}`)
     }
-
   }
 
   return (

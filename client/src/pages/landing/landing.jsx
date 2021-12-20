@@ -110,30 +110,6 @@ function Landing() {
       </Navbar>
       <div className="landing-search-container justify-content-center align-items-center">
         <h1>Find the Best Notes for your Studies</h1>
-        <div className="input-group landing-input">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search for courses"
-            aria-describedby="basic-addon2"
-          />
-          <div className="input-group-append">
-            <button
-              className="btn uploadBtn"
-              type="button"
-            >
-              <AiOutlineBulb
-                style={{
-                  height: "25px",
-                  width: "25px",
-                  marginLeft: "0px",
-                  marginRight: "2px",
-                  color: "white",
-                }}
-              />
-            </button>
-          </div>
-        </div>
       </div>
       <div className="row">
         <div className="offset-2 col-4 mt-3">
