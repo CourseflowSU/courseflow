@@ -47,7 +47,7 @@ function Courses() {
                     className="row mt-4"
                   >
                     <div
-                      className="col-12"
+                      className="col-6"
                     >
                       <Course
                         courseCode={item.courseCode}
@@ -57,7 +57,7 @@ function Courses() {
                       </Course>
                     </div>
                   </div>
-                  
+
                 );
               }) :<p>No course yet !!!</p>)            :
             <p>Loading...</p>

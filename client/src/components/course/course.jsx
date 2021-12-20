@@ -23,14 +23,16 @@ function Course({ courseCode, name,  university, addToFav }) {
       <button className="col-12 mb-1 btn btn-block btn-outline-success course-button">
         <div className="row justify-content-between">
           <div
-            className="col-6 courseName"
+            className="col-8 courseName"
             onClick={(e) => goToCourse(e)}
           >
-            <h4
-              className="text-start"
-
-            >{`${clearCourseName} - ${courseCode}`}
-            </h4>
+            <a
+              href = {`/courses/${university}/${courseCode}`}
+              className="text-start course-link"
+            >
+              <h4>{`${name.replace("_", " ")}`}</h4>
+              <h5>{`${courseCode.replace("_", " ")}`}</h5>
+            </a>
           </div>
           <div className="col-4">
             <a

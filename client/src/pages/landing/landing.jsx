@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 import Footer from "../footer/footer.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Landing() {
 
   const [list, setList] = useState();
   const [uniList, setUniList] = useState();
+  const navigate = useNavigate();
 
   const getNotes = async () => {
     await axios.get(`${process.env.REACT_APP_URL}/notes`)
@@ -48,6 +50,10 @@ function Landing() {
     getNotes();
     getUniversities();
   }, [])
+
+  const goToSignup = (e) => {
+    navigate("/signup")
+  }
 
   return (
     <div>
@@ -154,7 +160,10 @@ function Landing() {
                   >
                     {console.log("555")}
                     {console.log(item)}
-                    <button className="col-12 mb-1 btn btn-block btn-outline-success top-document">
+                    <button
+                      onClick={goToSignup}
+                      className="col-12 mb-1 btn btn-block btn-outline-success top-document"
+                    >
                       <div className="row">
                         <div className="col-8">
                           <h5 className="text-start" >{item.universityName}</h5>
@@ -204,9 +213,12 @@ function Landing() {
                     key={index}
                     className="mb-1"
                   >
-                    <button className="col-12 btn btn-block btn-outline-success top-document">
+                    <button
+                      onClick={goToSignup}
+                      className="col-12 btn btn-block btn-outline-success top-document"
+                    >
                       <div className="row">
-                        <div className="col-8">
+                        <div className="col-12">
                           <h5 className="text-start" >{item.file.name}</h5>
                         </div>
                       </div>

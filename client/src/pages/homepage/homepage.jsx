@@ -80,7 +80,8 @@ function Homepage() {
                                 href = {`/courses/${item.university}/${item.courseCode}`}
                                 className="text-start course-link"
                               >
-                                <h4>{`${item.courseName} - ${item.courseCode}`}</h4>
+                                <h4>{`${item.courseName.replace("_", " ")}`}</h4>
+                                <h5>{`${item.courseCode.replace("_", " ")}`}</h5>
                               </a>
                             </div>
                             <div className="col-4">
@@ -110,7 +111,7 @@ function Homepage() {
                   return(
                     <div
                       key={index}
-                      className="row mt-4"
+                      className="row col-6 mt-4"
                     >
                       <Note
                         courseCode={item.info.courseCode}
@@ -137,8 +138,8 @@ function Homepage() {
                         university={recentCoursesList[0].university}
                         name={recentCoursesList[0].name}
                       >
-                      </Course>  : ""      
-                    }        
+                      </Course>  : ""
+                    }
                   </div>
                   <div className="col-6">
                     {recentCoursesList[1] ?
@@ -160,7 +161,7 @@ function Homepage() {
                         name={recentCoursesList[2].name}
                       >
                       </Course> : ""
-                    }               
+                    }
                   </div>
                   <div className="col-6">
                     {recentCoursesList[3] ?
@@ -170,7 +171,7 @@ function Homepage() {
                         name={recentCoursesList[3].name}
                       >
                       </Course>   : ""
-                    }     
+                    }
                   </div>
                 </div>
               </div>  : <p>No note has been viewed yet !!!</p>
