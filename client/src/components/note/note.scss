@@ -4,9 +4,14 @@
   }
 }
 
-.course-link {
-  color: #1c9941;
+.note-link {
+  color: white;
   text-decoration: none !important;
+}
+
+.note-link:hover {
+  color: white;
+  text-decoration: underline !important;
 }
 
 .course-link:hover {

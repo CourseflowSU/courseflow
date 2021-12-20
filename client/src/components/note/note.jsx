@@ -8,20 +8,20 @@ function Note({ fileName, courseName, courseCode, university }) {
 
   return (
     <div>
-      <button className="col-12 mb-1 btn btn-block btn-outline-success course-button">
+      <button className="col-12 mb-1 btn btn-block btn-success course-button">
         <div className="row justify-content-between">
           <div
             className="col-8 courseName"
           >
             <a
               href = {`/notes/${university}/${courseCode}/${fileName}`}
-              className="text-start course-link"
+              className="text-start note-link"
             >
               <h4>{`${fileName.replace("_", " ")}`}</h4>
             </a>
             <a
               href= {`/courses/${university}/${courseCode}`}
-              className="course-link"
+              className="note-link"
             >
 
               <h5 className="text-start">{`${courseName.replace("_", " ")} - ${courseCode.replace("_", " ")}`}</h5>
@@ -31,7 +31,7 @@ function Note({ fileName, courseName, courseCode, university }) {
           <div className="col-4">
             <a
               href= {`/universities/${university}`}
-              className="course-link"
+              className="note-link"
             >
               <p className="text-end text-xsm" >{university.replace("_", " ")}</p>
             </a>
