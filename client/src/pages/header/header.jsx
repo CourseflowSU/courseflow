@@ -120,7 +120,6 @@ const Header = () => {
           >
             <NavDropdown.Item href="/">Home</NavDropdown.Item>
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item>Settings</NavDropdown.Item>
             <NavDropdown.Item
               onClick={onSubmit}
             >
