@@ -396,7 +396,7 @@ userRoutes.route("/users/change-password").put( function (req, res) {
 });
 
 
-userRoutes.route("api/courses").get(function(req, res){
+userRoutes.route("/api/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("courses page");
    db_connect.collection("universities")
@@ -409,7 +409,7 @@ userRoutes.route("api/courses").get(function(req, res){
     });
 })
 
-userRoutes.route("api/notes").get(function(req, res){
+userRoutes.route("/api/notes").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
    db_connect.collection("universities")
     .find({}).sort({"universityName.courses.university":1}).toArray()
