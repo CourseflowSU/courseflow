@@ -10,7 +10,7 @@ function Notes() {
   const [list, setList] = useState();
 
   const getNotes = async () => {
-    await axios.get(`${process.env.REACT_APP_URL}/notes`)
+    await axios.get(`${process.env.REACT_APP_URL}/api/notes`)
       .then(res => {
         console.log(res.data);
         const data = res.data;

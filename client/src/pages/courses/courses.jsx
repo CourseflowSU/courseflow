@@ -12,7 +12,7 @@ function Courses() {
 
 
   const getCourses = async () => {
-    await axios.get(`${process.env.REACT_APP_URL}/courses`)
+    await axios.get(`${process.env.REACT_APP_URL}/api/courses`)
       .then(res => {
         console.log(res.data);
         const data = res.data;
