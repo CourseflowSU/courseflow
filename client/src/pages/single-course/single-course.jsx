@@ -1,12 +1,12 @@
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { pdfjs } from "react-pdf/dist/esm/entry.webpack";
 import { useNavigate, useParams } from "react-router";
+import { z } from "zod";
 import Comments from "../../components/comments/comments.jsx";
 import Note from "../../components/note/note.jsx";
 import { useStore } from "../../store/store.js";
@@ -79,7 +79,8 @@ function SingleCourse() {
       .post(`${process.env.REACT_APP_URL}/comments`, request)
       .then((res) => {
         console.log(res);
-        navigate(`/courses/${university}/${courseCode}`)
+        // navigate(`/courses/${university}/${courseCode}`)
+        window.location.reload();
       })
   }
 

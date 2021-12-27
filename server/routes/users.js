@@ -400,7 +400,7 @@ userRoutes.route("/courses").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log("courses page");
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.university":1}).limit(10).toArray()
+    .find({}).sort({"universityName.courses.university":1}).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -412,7 +412,7 @@ userRoutes.route("/courses").get(function(req, res){
 userRoutes.route("/notes").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .find({}).sort({"universityName.courses.university":1}).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -424,7 +424,7 @@ userRoutes.route("/notes").get(function(req, res){
 userRoutes.route("/comments").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .find({}).sort({"universityName.courses.university":1}).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -533,7 +533,7 @@ userRoutes.route("/courses/:university").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log(req.params.university);
    db_connect.collection("universities")
-    .find({"universityName": req.params.university}).sort({"universityName.courses.university":1}).limit(2).toArray()
+    .find({"universityName": req.params.university}).sort({"universityName.courses.university":1}).toArray()
     .then((result) => {
       res.json(result);
     })
@@ -546,7 +546,7 @@ userRoutes.route("/landingUni").get(function(req, res){
   let db_connect = dbo.getDb("courseflow");
   console.log(req.params.university);
    db_connect.collection("universities")
-    .find({}).sort({"universityName.courses.university":1}).limit(5).toArray()
+    .find({}).sort({"universityName.courses.university":1}).toArray()
     .then((result) => {
       res.json(result);
     })
