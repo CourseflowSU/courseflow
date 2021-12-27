@@ -182,7 +182,7 @@ function SingleNote() {
               <div
                 className="col-8" 
               >
-                <h1 >{note ? note.file.name : "Not not found"}
+                <h1 >{note ? (note.file.name).replace("_", " ") : "Note not found"}
                 </h1>
               </div>
             </div>
