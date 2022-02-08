@@ -242,7 +242,7 @@ function SingleCourse() {
               <div
                 className="col-9 align-self-center"
               >
-                <h1 className="text-center">{course ? course.courseName : ""}
+                <h1 className="text-center">{course ? (course.courseName).replace("_", " ") : ""}
                 </h1>
               </div>
             </div>

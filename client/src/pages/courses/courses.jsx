@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Course from "../../components/course/course.jsx";
 import Layout from "../../components/layout/layout.jsx";
-import { useStore } from "../../store/store.js";
 
 
 function Courses() {
@@ -12,7 +11,7 @@ function Courses() {
 
 
   const getCourses = async () => {
-    await axios.get(`${process.env.REACT_APP_URL}/courses`)
+    await axios.get(`${process.env.REACT_APP_URL}/api/courses`)
       .then(res => {
         console.log(res.data);
         const data = res.data;
@@ -47,7 +46,7 @@ function Courses() {
                     className="row mt-4"
                   >
                     <div
-                      className="col-6"
+                      className="col-10 col-lg-6"
                     >
                       <Course
                         courseCode={item.courseCode}

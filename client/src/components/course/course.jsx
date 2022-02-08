@@ -3,7 +3,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
 import "../course/course.scss";
-import { useEffect, useState } from "react";
 
 function Course({ courseCode, name,  university, addToFav }) {
 
