@@ -24,7 +24,6 @@ module.exports = {
     "sourceType": "module",
   },
   "plugins": [
-    "react",
   ],
   "rules": {
     "object-curly-spacing": [
