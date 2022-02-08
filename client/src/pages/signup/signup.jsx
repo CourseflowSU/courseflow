@@ -2,10 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import "../signup/signup.css";
+import { useNavigate } from "react-router";
 
 const signUpSchema = z
   .object({
@@ -83,7 +83,7 @@ function Signup() {
   return (
     <div className="imge">
       <div className="fullscreen row justify-content-center align-items-center">
-        <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
+        <div className="col-4 justify-content-start">
           <div className="card p-1 mb-0">
             <div className="card-body">
               <div className="text-center">

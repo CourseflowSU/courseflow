@@ -27,8 +27,6 @@ function SingleNote() {
 
   const [isFav, setIsFav] = useState(false);
 
-  const [fileWidth, setFileWidth] = useState(window.innerWidth*0.7)
-
   const navigate = useNavigate()
 
   const fetchNote = useCallback(
@@ -155,17 +153,6 @@ function SingleNote() {
     
   }, [fetchNote])
 
-  const handleResize = () => {
-    setFileWidth(window.innerWidth*0.7)
-  }
-
-  useEffect(()=> {
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    }
-  }, [window.innerWidth])
 
 
   return (
@@ -233,7 +220,7 @@ function SingleNote() {
                       
                       key={page}
                       pageNumber={page}
-                      width={fileWidth}
+                      width={window.screen.width * 0.65}
                     />  
                     )}
                 </Document>

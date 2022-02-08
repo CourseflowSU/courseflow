@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import Course from "../../components/course/course.jsx";
 import Layout from "../../components/layout/layout.jsx";
-import Note from "../../components/note/note.jsx";
 import { useStore } from "../../store/store";
 import "../homepage/homepage.css";
+import logo from "../homepage/logo.png";
+import Course from "../../components/course/course.jsx";
+import Note from "../../components/note/note.jsx";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 
 
@@ -67,7 +68,7 @@ function Homepage() {
                       key={item.courseCode}
                       className="row mb-3"
                     >
-                      <div className="col-10 col-lg-6">
+                      <div className="col-6">
                         <Course
                           courseCode={item.courseCode}
                           university={item.university}
@@ -94,7 +95,7 @@ function Homepage() {
                     key={index}
                     className="row mt-4"
                   >
-                    <div className="col-10 col-lg-6">
+                    <div className="col-6">
                       <Note
                         courseCode={item.info.courseCode}
                         university={item.info.university}
@@ -114,7 +115,7 @@ function Homepage() {
           { recentCoursesList ?
             <div className="row mt-2">
               <div className="row mt-2">
-                <div className="col-10 col-lg-6">
+                <div className="col-6">
                   {recentCoursesList[0] ?
                     <Course
                       courseCode={recentCoursesList[0].courseCode}
@@ -124,7 +125,7 @@ function Homepage() {
                     </Course>  : ""
                   }
                 </div>
-                <div className="col-10 col-lg-6">
+                <div className="col-6">
                   {recentCoursesList[1] ?
                     <Course
                       courseCode={recentCoursesList[1].courseCode}
@@ -136,7 +137,7 @@ function Homepage() {
                 </div>
               </div>
               <div className="row mt-2">
-                <div className="col-10 col-lg-6">
+                <div className="col-6">
                   {recentCoursesList[2] ?
                     <Course
                       courseCode={recentCoursesList[2].courseCode}
@@ -146,7 +147,7 @@ function Homepage() {
                     </Course> : ""
                   }
                 </div>
-                <div className="col-10 col-lg-6">
+                <div className="col-6">
                   {recentCoursesList[3] ?
                     <Course
                       courseCode={recentCoursesList[3].courseCode}

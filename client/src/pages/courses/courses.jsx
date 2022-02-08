@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Course from "../../components/course/course.jsx";
 import Layout from "../../components/layout/layout.jsx";
+import { useStore } from "../../store/store.js";
 
 
 function Courses() {
@@ -46,7 +47,7 @@ function Courses() {
                     className="row mt-4"
                   >
                     <div
-                      className="col-10 col-lg-6"
+                      className="col-6"
                     >
                       <Course
                         courseCode={item.courseCode}

@@ -23,5 +23,7 @@
     "url": "https://github.com/CourseflowSU/courseflow/issues"
   },
   "homepage": "https://github.com/CourseflowSU/courseflow#readme",
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap-icons": "^1.7.1"
+  }
 }

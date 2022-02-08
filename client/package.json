@@ -27,7 +27,7 @@
     "react-pdf": "^5.5.0",
     "react-router": "^6.0.1",
     "react-router-dom": "^6.0.1",
-    "react-scripts": "^5.0.0",
+    "react-scripts": "4.0.3",
     "sass": "^1.43.4",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2",
