@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
 import {
-  forgotButton, homeButton, LinkButtons, loginButton,
+  forgotButton, homeButton, LinkButtons, loginButton
 } from "../../components";
 import "../login/login.css";
 
@@ -99,7 +99,7 @@ function ResetPassword() {
         <div
           className="fullscreen row justify-content-center align-items-center"
         >
-          <div className="col-4 justify-content-start">
+          <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
             <div className="card p-1 mb-0">
               <div className="card-body">
                 <div className="text-center">
