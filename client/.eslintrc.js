@@ -29,7 +29,7 @@ module.exports = {
   },
  
   "plugins": [
-    "react",
+   
   ],
   "rules": {
     "object-curly-spacing": [
