@@ -9,21 +9,19 @@ module.exports = {
     },
   },
   "extends": [
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
   ],
-  "parser": "babel-eslint",
+ 
   "parserOptions": {
+    
     "ecmaFeatures": {
       "jsx": true,
     },
     "ecmaVersion": 13,
     "sourceType": "module",
   },
+ 
   "plugins": [
+   
   ],
   "rules": {
     "object-curly-spacing": [

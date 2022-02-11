@@ -60,7 +60,6 @@ function SingleNote() {
           // setErrorMessage("Error! Please try again.");
         });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [university, courseCode, navigate],
   )
 
