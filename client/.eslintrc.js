@@ -15,14 +15,19 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaFeatures": {
       "jsx": true,
     },
     "ecmaVersion": 13,
     "sourceType": "module",
   },
+ 
   "plugins": [
     "react",
   ],
